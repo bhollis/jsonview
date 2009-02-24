@@ -1,0 +1,68 @@
+body {
+  font-family: sans-serif;
+}
+
+.prop {
+  font-weight: bold;
+}
+
+.null {
+  color: red;
+}
+
+.bool {
+  color: blue;
+}
+
+.num {
+  color: blue;
+}
+
+.string {
+  color: green;
+}
+
+.collapser {
+  position: absolute;
+  left: -1em;
+  cursor: pointer;
+}
+
+li {
+  position: relative;
+}
+
+li:after {
+  content: ',';
+}
+
+li:last-child:after {
+  content: '';
+}
+
+#error {
+  -moz-border-radius: 8px;
+  border: 1px solid #970000;
+  background-color: #F7E8E8;
+  margin: .5em;
+  padding: .5em;
+}
+
+.errormessage {
+  font-family: monospace;  
+}
+
+#json {
+  font-family: monospace;
+  font-size: 1.1em;
+}
+
+ul {
+  list-style: none;
+  margin: 0 0 0 2em;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.2em;
+}

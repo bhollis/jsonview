@@ -1,0 +1,3 @@
+content jsonview content/ contentaccessible=yes
+locale jsonview en-US locale/en-US/
+skin jsonview default skin/default/

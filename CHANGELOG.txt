@@ -1,0 +1,3 @@
+JSONView 0.1b1:
+
+* First beta release
