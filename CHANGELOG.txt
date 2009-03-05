@@ -1,3 +1,7 @@
+JSONView 0.1b2:
+
+* Compatible with FF 3.1 Beta 2
+
 JSONView 0.1b1:
 
 * First beta release

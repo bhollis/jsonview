@@ -9,9 +9,6 @@
 // Import XPCOMUtils to help set up our JSONView XPCOM component (new to FF3)
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-// Import the JSON Parser (new to FF3)
-Components.utils.import("resource://gre/modules/JSON.jsm");
-
 // Let us use FUEL
 var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
 
