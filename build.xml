@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="jsonview" default="createxpi">
+  <property name="build.version" value="0.1b2"/>
+  <property name="xpi.name" value="${ant.project.name}-${build.version}.xpi"/>
+
+  <target name="createxpi">
+    <delete file="${xpi.name}"/>
+    <zip destfile="${xpi.name}">
+      <zipfileset dir="src" excludes="**.svn"/>
+    </zip>
+  </target>
+</project>
