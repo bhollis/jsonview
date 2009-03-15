@@ -1,3 +1,6 @@
 content jsonview content/ contentaccessible=yes
-locale jsonview en-US locale/en-US/
 skin jsonview default skin/default/
+locale jsonview en-US locale/en-US/
+locale jsonview cs-CZ locale/cs-CZ/
+locale jsonview fr-FR locale/fr-FR/
+locale jsonview nl-NL locale/nl-NL/

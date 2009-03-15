@@ -4,19 +4,43 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>jsonview@brh.numbera.com</em:id>
-    <em:version>0.1b2</em:version>
+    <em:version>0.1b3</em:version>
 
     <em:name>JSONView</em:name>
     <em:description>Views JSON in the browser.</em:description>
     <em:creator>Benjamin Hollis</em:creator>
 		<em:homepageURL>http://brh.numbera.com/software/jsonview/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
-		    
+       
+    <em:translator>markh van BabelZilla.org</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>nl-NL</em:locale>
+        <em:description>Bekijk JSON-documenten in de browser.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:translator>Goofy</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>fr-FR</em:locale>
+        <em:description>Afficher les documents JSON dans le navigateur.</em:description>
+      </Description>
+    </em:localized>
+        
+    <em:translator>funTomas</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>cs-CZ</em:locale>
+        <em:description>Prohlédněte si dokumenty JSON v prohlížeči.</em:description>
+      </Description>
+    </em:localized>
+    		    
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>3.0</em:minVersion>
-        <em:maxVersion>3.1b2</em:maxVersion>
+        <em:maxVersion>3.1b3</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>

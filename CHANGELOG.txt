@@ -1,3 +1,10 @@
+JSONView 0.1b3:
+
+* Compatible with FF 3.1 Beta 3
+* Fixed a bug where documents >8KB wouldn't be parsed.
+* Added Czech, French, and Dutch translations. Thanks to funTomas, Goofy, and markh at babelzilla.org.
+* Removed dependency on jQuery - extension is smaller, faster, no more warnings in strict mode.
+
 JSONView 0.1b2:
 
 * Compatible with FF 3.1 Beta 2

@@ -66,7 +66,7 @@ JSONFormatter.prototype = {
   
   // Convert an array into an HTML fragment
   arrayToHTML: function(json) {
-    var output = '[<ul class="array">';
+    var output = '[<ul class="array collapsible">';
     for ( var prop in json ) {
       output += '<li>';      
       output += this.valueToHTML(json[prop]);
@@ -78,7 +78,7 @@ JSONFormatter.prototype = {
   
   // Convert a JSON object to an HTML fragment
   objectToHTML: function(json) {
-    var output = '{<ul class="obj">';
+    var output = '{<ul class="obj collapsible">';
     for ( var prop in json ) {
       output += '<li>';
       output += '<span class="prop">' + this.htmlEncode(prop) + '</span>: '
@@ -110,7 +110,6 @@ JSONFormatter.prototype = {
     return '<doctype html>' + 
       '<html><head><title>' + title + '</title>' +
       '<link rel="stylesheet" type="text/css" href="chrome://jsonview/content/default.css">' + 
-      '<script type="text/javascript" src="chrome://jsonview/content/jquery-1.2.6.js"></script>' + 
       '<script type="text/javascript" src="chrome://jsonview/content/default.js"></script>' + 
       '</head><body>' +
       content + 
@@ -185,9 +184,10 @@ JSONView.prototype = {
     is.init(aInputStream, this.charset, -1, Components.interfaces.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
   
     var str = {};
-    var numChars = is.readString(aCount, str);
-
-    this.data += str.value;
+    // -1 here says to use whatever the default buffer size is
+    while (is.readString(-1, str) != 0) {
+      this.data += str.value;
+    }
   },
   
   // nsIRequestObserver::onStartRequest
