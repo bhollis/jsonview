@@ -1,3 +1,7 @@
+JSONView 0.1 (in development)
+
+* String values which contain only a URL are displayed as a clickable link. Props to stig.murberg for the patch.
+
 JSONView 0.1b3:
 
 * Compatible with FF 3.1 Beta 3

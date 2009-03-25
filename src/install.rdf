@@ -35,7 +35,15 @@
         <em:description>Prohlédněte si dokumenty JSON v prohlížeči.</em:description>
       </Description>
     </em:localized>
-    		    
+    
+    <em:translator>Fani Kozolchyk</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>es</em:locale>
+        <em:description>Ve el documento de JSON en el navegador.</em:description>
+      </Description>
+    </em:localized>
+       
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>

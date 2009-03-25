@@ -55,7 +55,11 @@ JSONFormatter.prototype = {
       output += this.decorateWithSpan(value, 'num');
     }
     else if (valueType == 'string') {
-      output += this.decorateWithSpan('"' + value + '"', 'string');
+      if (/^(http|https):\/\/[^\s]+$/.test(value)) {
+        output += '<a href="' + value + '">' + this.htmlEncode(value) + '</a>';
+      } else {
+        output += this.decorateWithSpan('"' + value + '"', 'string');
+      }
     }
     else if (valueType == 'boolean') {
       output += this.decorateWithSpan(value, 'bool');
