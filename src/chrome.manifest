@@ -4,4 +4,9 @@ locale jsonview en-US locale/en-US/
 locale jsonview cs-CZ locale/cs-CZ/
 locale jsonview fr-FR locale/fr-FR/
 locale jsonview nl-NL locale/nl-NL/
-locale jsonview es locale/es/
+locale jsonview es-ES locale/es-ES/
+locale jsonview ca-AD locale/ca-AD/
+locale jsonview ja-JP locale/ja-JP/
+locale jsonview pt-BR locale/pt-BR/
+locale jsonview ru-RU locale/ru-RU/
+locale jsonview zh-CN locale/zh-CN/

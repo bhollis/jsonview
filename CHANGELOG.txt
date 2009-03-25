@@ -1,6 +1,9 @@
-JSONView 0.1 (in development)
+JSONView 0.1
 
 * String values which contain only a URL are displayed as a clickable link. Props to stig.murberg for the patch.
+* Added Catalan, Spanish, Japanese, Portugese (Brazil), Russian, and Simplified Chinese translations. Thanks to 
+	Fani Kozolchyk, and Xavi Ivars - Softcatalà, hoolooday, drry, Marcelo Ghelman (ghelman.net), Пирятинский Виталий, 
+	and urko from BabelZilla.org.
 
 JSONView 0.1b3:
 

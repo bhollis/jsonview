@@ -4,15 +4,15 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>jsonview@brh.numbera.com</em:id>
-    <em:version>0.1b3</em:version>
+    <em:version>0.1</em:version>
 
     <em:name>JSONView</em:name>
     <em:description>Views JSON in the browser.</em:description>
     <em:creator>Benjamin Hollis</em:creator>
-		<em:homepageURL>http://brh.numbera.com/software/jsonview/</em:homepageURL>
+		<em:homepageURL>http://jsonview.com/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
        
-    <em:translator>markh van BabelZilla.org</em:translator>
+    <em:translator>markh van BabelZilla.org (nl-NL)</em:translator>
     <em:localized>
       <Description>
         <em:locale>nl-NL</em:locale>
@@ -20,7 +20,7 @@
       </Description>
     </em:localized>
 
-    <em:translator>Goofy</em:translator>
+    <em:translator>Goofy (fr-FR)</em:translator>
     <em:localized>
       <Description>
         <em:locale>fr-FR</em:locale>
@@ -28,19 +28,60 @@
       </Description>
     </em:localized>
         
-    <em:translator>funTomas</em:translator>
+    <em:translator>funTomas (cs-CZ)</em:translator>
     <em:localized>
       <Description>
         <em:locale>cs-CZ</em:locale>
-        <em:description>Prohlédněte si dokumenty JSON v prohlížeči.</em:description>
+        <em:description>Dokumenty JSON přímo v prohlížeči.</em:description>
       </Description>
     </em:localized>
-    
-    <em:translator>Fani Kozolchyk</em:translator>
+ 
+    <em:translator>Fani Kozolchyk (es-ES)</em:translator>
+    <em:translator>urko (es-ES)</em:translator>
     <em:localized>
       <Description>
         <em:locale>es</em:locale>
-        <em:description>Ve el documento de JSON en el navegador.</em:description>
+        <em:description>Permite abrir documentos JSON en el navegador.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>Xavi Ivars - Softcatalà (ca-AD)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>ca-AD</em:locale>
+        <em:description>Visualitza els documents JSON al navegador.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>drry (ja-JP)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>ja-JP</em:locale>
+        <em:description>JSON ドキュメントをブラウザー内で表示します。</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>Marcelo Ghelman (ghelman.net) (pt-BR)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>pt-BR</em:locale>
+        <em:description>Veja documentos JSON no navegador.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>Пирятинский Виталий (ru-RU)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>ru-RU</em:locale>
+        <em:description>Просмотр документов в формате JSON прямо в браузере.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>hoolooday (zh-CN)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>zh-CN</em:locale>
+        <em:description>在浏览器中查看JSON 文件.</em:description>
       </Description>
     </em:localized>
        
