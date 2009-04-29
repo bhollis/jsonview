@@ -6,11 +6,16 @@
  * to Firefox 3.
  */
 
+// Save some tedious typing
+const Ci = Components.interfaces;
+const Cc = Components.classes;
+
 // Import XPCOMUtils to help set up our JSONView XPCOM component (new to FF3)
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 // Let us use FUEL
-var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
+var Application = Cc["@mozilla.org/fuel/application;1"].getService(Ci.fuelIApplication);
+
 
 /* 
  * The JSONFormatter helper object. This contains two major functions, jsonToHTML and errorPage, 
@@ -18,14 +23,10 @@ var Application = Components.classes["@mozilla.org/fuel/application;1"].getServi
  */ 
 function JSONFormatter() {
   var src = 'chrome://jsonview/locale/jsonview.properties';
-  var localeService =
-      Components.classes["@mozilla.org/intl/nslocaleservice;1"]
-      .getService(Components.interfaces.nsILocaleService);
+  var localeService = Cc["@mozilla.org/intl/nslocaleservice;1"].getService(Ci.nsILocaleService);
 
   var appLocale = localeService.getApplicationLocale();
-  var stringBundleService =
-      Components.classes["@mozilla.org/intl/stringbundle;1"]
-      .getService(Components.interfaces.nsIStringBundleService);
+  var stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
   this.stringbundle = stringBundleService.createBundle(src, appLocale);
 }
 JSONFormatter.prototype = {
@@ -135,7 +136,7 @@ function JSONView() {
   this.wrappedJSObject = this;
   
   // Native JSON implementation, new to FF3
-  this.nativeJSON = Components.classes["@mozilla.org/dom/json;1"].createInstance(Components.interfaces.nsIJSON);
+  this.nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
   this.jsonFormatter = new JSONFormatter();
 };
 
@@ -154,10 +155,10 @@ JSONView.prototype = {
   }],
   
   QueryInterface: XPCOMUtils.generateQI([
-      Components.interfaces.nsISupports,
-      Components.interfaces.nsIStreamConverter,
-      Components.interfaces.nsIStreamListener,
-      Components.interfaces.nsIRequestObserver
+      Ci.nsISupports,
+      Ci.nsIStreamConverter,
+      Ci.nsIStreamListener,
+      Ci.nsIRequestObserver
   ]),
   
   /*
@@ -183,9 +184,8 @@ JSONView.prototype = {
   // nsIStreamListener::onDataAvailable
   onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
     // From https://developer.mozilla.org/en/Reading_textual_data
-    var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
-                   .createInstance(Components.interfaces.nsIConverterInputStream);
-    is.init(aInputStream, this.charset, -1, Components.interfaces.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+    var is = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
+    is.init(aInputStream, this.charset, -1, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
   
     var str = {};
     // -1 here says to use whatever the default buffer size is
@@ -197,11 +197,11 @@ JSONView.prototype = {
   // nsIRequestObserver::onStartRequest
   onStartRequest: function (aRequest, aContext) {
     this.data = '';
-    this.uri = aRequest.QueryInterface(Components.interfaces.nsIChannel).URI.spec;
+    this.uri = aRequest.QueryInterface(Ci.nsIChannel).URI.spec;
 
     // Sets the charset if it is available. (For documents loaded from the
     // filesystem, this is not set.)
-    this.charset = aRequest.QueryInterface(Components.interfaces.nsIChannel).contentCharset || 'UTF-8';
+    this.charset = aRequest.QueryInterface(Ci.nsIChannel).contentCharset || 'UTF-8';
 
     this.channel = aRequest;
     this.channel.contentType = "text/html";
@@ -223,7 +223,7 @@ JSONView.prototype = {
     
     var converter = Components
         .classes["@mozilla.org/intl/scriptableunicodeconverter"]
-        .createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+        .createInstance(Ci.nsIScriptableUnicodeConverter);
     converter.charset = this.charset;
 
     var outputDoc = "";
@@ -239,15 +239,15 @@ JSONView.prototype = {
     // I don't really understand this part, but basically it's a way to get our UTF-8 stuff
     // spit back out as a byte stream
     // See http://www.mail-archive.com/mozilla-xpcom@mozilla.org/msg04194.html
-    var storage = Components.classes["@mozilla.org/storagestream;1"]
-    .createInstance(Components.interfaces.nsIStorageStream);
+    var storage = Cc["@mozilla.org/storagestream;1"]
+    .createInstance(Ci.nsIStorageStream);
     
     // I have no idea what to pick for the first parameter (segments)
     storage.init(4, 0xffffffff, null);
     var out = storage.getOutputStream(0);
     
-    var binout = Components.classes["@mozilla.org/binaryoutputstream;1"]
-    .createInstance(Components.interfaces.nsIBinaryOutputStream);
+    var binout = Cc["@mozilla.org/binaryoutputstream;1"]
+    .createInstance(Ci.nsIBinaryOutputStream);
     binout.setOutputStream(out);
     binout.writeUtf8Z(outputDoc);
     binout.close();
@@ -268,5 +268,16 @@ var components = [JSONView];
 
 // The actual hook into XPCOM
 function NSGetModule(compMgr, fileSpec) {
-  return XPCOMUtils.generateModule(components);
+  function postRegister() {
+     var catMgr = XPCOMUtils.categoryManager;
+     catMgr.addCategoryEntry('ext-to-type-mapping','json','application/json',true,true);  
+  }
+  
+  
+  function preUnregister() {
+     var catMgr = XPCOMUtils.categoryManager;
+     catMgr.addCategoryEntry('ext-to-type-mapping','json',true); 
+  }
+  
+  return XPCOMUtils.generateModule(components, postRegister, preUnregister);
 }
