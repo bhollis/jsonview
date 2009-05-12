@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>jsonview@brh.numbera.com</em:id>
-    <em:version>0.1</em:version>
+    <em:version>0.2</em:version>
 
     <em:name>JSONView</em:name>
     <em:description>Views JSON in the browser.</em:description>
@@ -84,6 +84,39 @@
         <em:description>在浏览器中查看JSON 文件.</em:description>
       </Description>
     </em:localized>
+    
+    <em:translator>Стоян Димитров (bg-BG)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>bg-BG</em:locale>
+        <em:description>Директен преглед на JSON документи.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>Archaeopteryx, Team erweiterungen.de (de-DE)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>de-DE</em:locale>
+        <em:description>JSON-Dokumente im Browser anzeigen.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>MIKES KASZMÁN István (hu-HU)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>hu-HU</em:locale>
+        <em:description>JSON dokumentumok megtekintése a böngészőben.</em:description>
+      </Description>
+    </em:localized>
+    
+    <em:translator>Ersen Yoldaç (tr-TR)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>tr-TR</em:locale>
+        <em:description>JSON belgelerini tarayıcınızda açın.</em:description>
+      </Description>
+    </em:localized>
+       
        
     <em:targetApplication>
       <Description>

@@ -10,3 +10,7 @@ locale jsonview ja-JP locale/ja-JP/
 locale jsonview pt-BR locale/pt-BR/
 locale jsonview ru-RU locale/ru-RU/
 locale jsonview zh-CN locale/zh-CN/
+locale jsonview bg-BG locale/bg-BG/
+locale jsonview de-DE locale/de-DE/
+locale jsonview hu-HU locale/hu-HU/
+locale jsonview tr-TR locale/tr-TR/
