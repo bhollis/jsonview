@@ -57,6 +57,15 @@ li:last-child:after {
   font-size: 1.1em;
 }
 
+.indent {
+  padding-left: 5px;
+}
+
+#callback {
+  font-family: monospace;
+  color: brown;
+}
+
 ul {
   list-style: none;
   margin: 0 0 0 2em;

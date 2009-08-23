@@ -11,6 +11,9 @@
     <em:creator>Benjamin Hollis</em:creator>
 		<em:homepageURL>http://jsonview.com/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
+    
+    <!-- Initial JSONP support -->
+    <em:contributor>Gabriel Barros</em:contributor>
        
     <em:translator>markh van BabelZilla.org (nl-NL)</em:translator>
     <em:localized>

@@ -73,7 +73,7 @@ JSONFormatter.prototype = {
   arrayToHTML: function(json) {
     var output = '[<ul class="array collapsible">';
     for ( var prop in json ) {
-      output += '<li>';      
+      output += '<li>';
       output += this.valueToHTML(json[prop]);
       output += '</li>';
     }
@@ -95,10 +95,19 @@ JSONFormatter.prototype = {
   },
   
   // Convert a whole JSON object into a formatted HTML document.
-  jsonToHTML: function(json, uri) {
-    var output = '<div id="json">' 
+  jsonToHTML: function(json, callback, uri) {
+    var output = '';
+    if( callback ){
+      output += '<div id="callback">' + callback + ' (</div>';
+      output += '<div id="json" class="indent">';
+    }else{
+      output += '<div id="json">';
+    }
     output += this.valueToHTML(json);
     output += '</div>';
+    if( callback ){
+      output += '<div id="callback">)</div>';
+    }
     return this.toHTML(output, uri);
   },
   
@@ -217,6 +226,7 @@ JSONView.prototype = {
      * This should go something like this:
      * 1. Make sure we have a unicode string.
      * 2. Convert it to a Javascript object.
+     * 2.1 Removes the callback
      * 3. Convert that to HTML? Or XUL?
      * 4. Spit it back out at the listener
      */
@@ -225,15 +235,23 @@ JSONView.prototype = {
         .classes["@mozilla.org/intl/scriptableunicodeconverter"]
         .createInstance(Ci.nsIScriptableUnicodeConverter);
     converter.charset = this.charset;
+    var cleanData = '',
+        callback = '';
 
     var outputDoc = "";
+    // check if we must remove the callback
+    if( /^[a-zA-Z][^(]*(.*)[ ;\t\n\r]*$/.test(this.data) ){
+      cleanData = this.data.replace(/^.*\(/,'').replace(/\)[ ;\t\n\r]*$/,'');
+      callback = this.data.replace(/\(.*/,'');
+    }else{
+      cleanData = this.data;
+    }
     try {
-      var jsonObj = this.nativeJSON.decode(this.data);
-    
-      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, this.uri);
+      var jsonObj = this.nativeJSON.decode(cleanData);
+      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);
     }
     catch(e) {
-      outputDoc = this.jsonFormatter.errorPage(e, this.data, this.uri);
+      outputDoc = this.jsonFormatter.errorPage(e, this.cleanData, this.uri);
     }
     
     // I don't really understand this part, but basically it's a way to get our UTF-8 stuff
