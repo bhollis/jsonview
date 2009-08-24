@@ -72,25 +72,39 @@ JSONFormatter.prototype = {
   // Convert an array into an HTML fragment
   arrayToHTML: function(json) {
     var output = '[<ul class="array collapsible">';
+    var hasContents = false;
     for ( var prop in json ) {
+      hasContents = true;
       output += '<li>';
       output += this.valueToHTML(json[prop]);
       output += '</li>';
     }
     output += '</ul>]';
+    
+    if ( ! hasContents ) {
+      output = "[ ]";
+    }
+    
     return output;
   },
   
   // Convert a JSON object to an HTML fragment
   objectToHTML: function(json) {
     var output = '{<ul class="obj collapsible">';
+    var hasContents = false;
     for ( var prop in json ) {
+      hasContents = true;
       output += '<li>';
       output += '<span class="prop">' + this.htmlEncode(prop) + '</span>: '
       output += this.valueToHTML(json[prop]);
       output += '</li>';
     }
     output += '</ul>}';
+    
+    if ( ! hasContents ) {
+      output = "{ }";
+    }
+    
     return output;
   },
   
