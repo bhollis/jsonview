@@ -211,10 +211,11 @@ JSONView.prototype = {
     is.init(aInputStream, this.charset, -1, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
   
     var str = {};
-    // -1 here says to use whatever the default buffer size is
-    while (is.readString(-1, str) != 0) {
-      this.data += str.value;
-    }
+    
+    // This used to read in a loop until readString returned 0, but it caused it to crash Firefox on OSX/Win32 (but not Win64)
+    // It seems just reading once with -1 (default buffer size) gets the file done.
+    is.readString(-1, str)
+    this.data += str.value;
   },
   
   // nsIRequestObserver::onStartRequest

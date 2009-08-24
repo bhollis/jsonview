@@ -1,6 +1,7 @@
 JSONView 0.3
 * Detects and displays JSONP, including display of the callback.
 * Doesn't show empty arrays and objects as collapsible, and displays them on one line.
+* Fixed an error reading large files.
 
 JSONView 0.2
 * .json files can be opened in JSONView from the local machine.
