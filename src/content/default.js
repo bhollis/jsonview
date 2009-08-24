@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     item.insertBefore(collapser, item.firstChild);
   }
   
-  items = document.getElementsByClassName('collapsible');
+  var items = document.getElementsByClassName('collapsible');
   for( var i = 0; i < items.length; i++) {
     addCollapser(items[i].parentNode);
   }

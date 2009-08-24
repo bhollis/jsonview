@@ -1,3 +1,6 @@
+JSONView 0.3
+* Detect and display JSONP, including display of the callback.
+
 JSONView 0.2
 * .json files can be opened in JSONView from the local machine.
 * Added Bulgarian, German, Hungarian, and (partial) Turkish translations. Thanks to 

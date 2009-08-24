@@ -31,7 +31,7 @@ function JSONFormatter() {
 }
 JSONFormatter.prototype = {
   htmlEncode: function (t) {
-    return t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    return t ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
   },
   
   decorateWithSpan: function (value, className) {
@@ -98,15 +98,15 @@ JSONFormatter.prototype = {
   jsonToHTML: function(json, callback, uri) {
     var output = '';
     if( callback ){
-      output += '<div id="callback">' + callback + ' (</div>';
-      output += '<div id="json" class="indent">';
+      output += '<div class="callback">' + callback + ' (</div>';
+      output += '<div id="json">';
     }else{
       output += '<div id="json">';
     }
     output += this.valueToHTML(json);
     output += '</div>';
     if( callback ){
-      output += '<div id="callback">)</div>';
+      output += '<div class="callback">)</div>';
     }
     return this.toHTML(output, uri);
   },
@@ -235,23 +235,41 @@ JSONView.prototype = {
         .classes["@mozilla.org/intl/scriptableunicodeconverter"]
         .createInstance(Ci.nsIScriptableUnicodeConverter);
     converter.charset = this.charset;
+    var outputDoc = "";
+    
     var cleanData = '',
         callback = '';
 
-    var outputDoc = "";
-    // check if we must remove the callback
-    if( /^[a-zA-Z][^(]*(.*)[ ;\t\n\r]*$/.test(this.data) ){
-      cleanData = this.data.replace(/^.*\(/,'').replace(/\)[ ;\t\n\r]*$/,'');
-      callback = this.data.replace(/\(.*/,'');
+    // This regex attempts to match a JSONP structure:
+    //    * Any amount of whitespace (including unicode nonbreaking spaces) between the start of the file and the callback name
+    //    * Callback name (any valid JavaScript function name according to ECMA-262 Edition 3 spec)
+    //    * Any amount of whitespace (including unicode nonbreaking spaces)
+    //    * Open parentheses
+    //    * Any amount of whitespace (including unicode nonbreaking spaces)
+    //    * Either { or [, the only two valid characters to start a JSON string.
+    //    * Any character, any number of times
+    //    * Either } or ], the only two valid closing characters of a JSON string.
+    //    * Any amount of whitespace (including unicode nonbreaking spaces)
+    //    * A closing parenthesis, an optional semicolon, and any amount of whitespace (including unicode nonbreaking spaces) until the end of the file.
+    // This will miss anything that has comments, or more than one callback, or requires modification before use.
+    var callback_results = /^[\s\u200B\uFEFF]*([\w$]+)[\s\u200B\uFEFF]*\([\s\u200B\uFEFF]*([\[{][\s\S]*[\]}])[\s\u200B\uFEFF]*\);?[\s\u200B\uFEFF]*$/.exec(this.data);
+    if( callback_results && callback_results.length == 3 ){
+      callback = callback_results[1];
+      cleanData = callback_results[2];
     }else{
       cleanData = this.data;
     }
+    
     try {
       var jsonObj = this.nativeJSON.decode(cleanData);
-      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);
+      if ( jsonObj ) {        
+        outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);
+      } else {
+        throw "There was no object!";
+      }
     }
     catch(e) {
-      outputDoc = this.jsonFormatter.errorPage(e, this.cleanData, this.uri);
+      outputDoc = this.jsonFormatter.errorPage(e, this.data, this.uri);
     }
     
     // I don't really understand this part, but basically it's a way to get our UTF-8 stuff
