@@ -267,7 +267,7 @@ JSONView.prototype = {
     //    * Any amount of whitespace (including unicode nonbreaking spaces)
     //    * A closing parenthesis, an optional semicolon, and any amount of whitespace (including unicode nonbreaking spaces) until the end of the file.
     // This will miss anything that has comments, or more than one callback, or requires modification before use.
-    var callback_results = /^[\s\u200B\uFEFF]*([\w$]+)[\s\u200B\uFEFF]*\([\s\u200B\uFEFF]*([\[{][\s\S]*[\]}])[\s\u200B\uFEFF]*\);?[\s\u200B\uFEFF]*$/.exec(this.data);
+    var callback_results = /^[\s\u200B\uFEFF]*([\w$\[\]\.]+)[\s\u200B\uFEFF]*\([\s\u200B\uFEFF]*([\[{][\s\S]*[\]}])[\s\u200B\uFEFF]*\);?[\s\u200B\uFEFF]*$/.exec(this.data);
     if( callback_results && callback_results.length == 3 ){
       callback = callback_results[1];
       cleanData = callback_results[2];
