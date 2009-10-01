@@ -154,10 +154,7 @@ const JSONVIEW_COMPONENT_ID =
     Components.ID("{64890660-53c4-11dd-ae16-0800200c9a66}");
     
 // JSONView class constructor. Not much to see here.
-function JSONView() {
-  // Allow us to directly access this from JavaScript
-  this.wrappedJSObject = this;
-  
+function JSONView() {  
   // Native JSON implementation, new to FF3
   this.nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
   this.jsonFormatter = new JSONFormatter();
