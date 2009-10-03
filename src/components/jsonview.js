@@ -31,7 +31,7 @@ function JSONFormatter() {
 }
 JSONFormatter.prototype = {
   htmlEncode: function (t) {
-    return t ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
+    return t != null ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
   },
   
   decorateWithSpan: function (value, className) {
