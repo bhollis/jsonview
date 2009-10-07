@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<!DOCTYPE prefwindow SYSTEM "chrome://jsonview/locale/prefs.dtd">
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="&jsonViewOptions;" 
+            onload="setupUIFromPrefs();"
+            onbeforeaccept="saveHttpAcceptPref();">
+  
+  <script type="application/x-javascript" src="chrome://jsonview/content/prefs/httpAccept.js"/>
+  
+  <prefpane id="jsonviewoptions">    
+
+    <preferences>
+      <preference id="httpAcceptDefault" name="network.http.accept.default" type="string" />
+    </preferences>
+        
+    <checkbox id="httpAcceptCheckbox" accesskey="&httpAcceptAccesskey;" label="&httpAcceptLabel;" />
+  </prefpane>  
+</prefwindow>

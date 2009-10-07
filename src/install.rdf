@@ -4,13 +4,14 @@
   <Description about="urn:mozilla:install-manifest">
 
     <em:id>jsonview@brh.numbera.com</em:id>
-    <em:version>0.3</em:version>
+    <em:version>0.4b1</em:version>
 
     <em:name>JSONView</em:name>
     <em:description>Views JSON in the browser.</em:description>
     <em:creator>Benjamin Hollis</em:creator>
 		<em:homepageURL>http://jsonview.com/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
+    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL>
     
     <!-- Initial JSONP support -->
     <em:contributor>Gabriel Barros</em:contributor>

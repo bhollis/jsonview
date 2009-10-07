@@ -1,3 +1,6 @@
+JSONView 0.4
+* Preference dialog with an option to send "application/json" in the HTTP Accept header.
+
 JSONView 0.3
 * Detects and displays JSONP, including display of the callback.
 * Doesn't show empty arrays and objects as collapsible, and displays them on one line.
