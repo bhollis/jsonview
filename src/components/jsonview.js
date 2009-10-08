@@ -211,8 +211,17 @@ JSONView.prototype = {
     
     // This used to read in a loop until readString returned 0, but it caused it to crash Firefox on OSX/Win32 (but not Win64)
     // It seems just reading once with -1 (default buffer size) gets the file done.
-    is.readString(-1, str)
-    this.data += str.value;
+    // However, *not* reading in a loop seems to cause problems with Firebug
+    // So I read in a loop, but do whatever I can to avoid infinite-looping.
+    var totalBytesRead = 0;
+    var bytesRead = 1; // Seed it with something positive
+    
+    while (totalBytesRead < aCount && bytesRead > 0) {
+      bytesRead = is.readString(-1, str);
+      totalBytesRead += bytesRead;
+      this.data += str.value;
+    }
+    
   },
   
   // nsIRequestObserver::onStartRequest

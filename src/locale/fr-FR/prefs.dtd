@@ -1,0 +1,3 @@
+<!ENTITY jsonViewOptions "Options de l'extension JSONView">
+<!ENTITY httpAcceptLabel "Inclure &quot;application/json&quot; dans l'en-tête HTTP Accept des requêtes">
+<!ENTITY httpAcceptAccesskey "I">

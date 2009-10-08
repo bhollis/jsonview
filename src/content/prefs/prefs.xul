@@ -5,8 +5,7 @@
 
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="&jsonViewOptions;" 
-            onload="setupUIFromPrefs();"
-            onbeforeaccept="saveHttpAcceptPref();">
+            onload="setupUIFromPrefs();">
   
   <script type="application/x-javascript" src="chrome://jsonview/content/prefs/httpAccept.js"/>
   
@@ -16,6 +15,6 @@
       <preference id="httpAcceptDefault" name="network.http.accept.default" type="string" />
     </preferences>
         
-    <checkbox id="httpAcceptCheckbox" accesskey="&httpAcceptAccesskey;" label="&httpAcceptLabel;" />
+    <checkbox id="httpAcceptCheckbox" accesskey="&httpAcceptAccesskey;" label="&httpAcceptLabel;" oncommand="saveHttpAcceptPref();" />
   </prefpane>  
 </prefwindow>

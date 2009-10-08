@@ -1,6 +1,8 @@
 JSONView 0.4
 * Preference dialog with an option to send "application/json" in the HTTP Accept header.
-* Fixed a bug where values that were 0 or false would not show up. 
+* Fixed a bug where values that were 0 or false would not show up.
+* Fixed a bug where documents would sometimes show up as invalid when Firebug was enabled
+* Bumped compatibility for 3.7a1pre 
 
 JSONView 0.3
 * Detects and displays JSONP, including display of the callback.
