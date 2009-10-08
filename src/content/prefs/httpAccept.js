@@ -1,5 +1,10 @@
 // This is what we'll insert into the HTTP Accept header
-const jsonAcceptFragment = ',application/json;q=0.6';
+// Technically we should include a quality parameter like "q=0.6" to 
+// say that we prefer non-JSON responses (like HTML) if possible. 
+// However, the primary need for sending this header is to work with 
+// CouchDB, and CouchDB has a bug (https://issues.apache.org/jira/browse/COUCHDB-234) 
+// that prevents it from understanding Accept headers with a quality parameter. 
+const jsonAcceptFragment = ',application/json';
 
 // Little helper to get the right pref
 function getHttpAcceptPref() {
