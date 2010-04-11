@@ -1,0 +1,5 @@
+{
+  "tabs": "check\tout\tmy\t\ttabs",
+  "spaces": "lots  of     consecutive  spaces",
+  "newlines": "this\nhas\n\nnewlines\r\nincluding\r\nwin-style"
+}

@@ -20,6 +20,7 @@ body {
 
 .string {
   color: green;
+  white-space: pre-wrap;
 }
 
 .collapser {
