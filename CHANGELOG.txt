@@ -1,3 +1,8 @@
+JSONView ???
+* Fixed display of newlines and multiple spaces - formatting is now better preserved.
+* Fixed display of ECMAScript 5th Edition style JSON (with non-object/array root values) thanks to a patch from Josh Kline.
+* URLs are matched even with uppercase scheme (such as "httpS://")
+
 JSONView 0.4
 * Preference dialog with an option to send "application/json" in the HTTP Accept header.
 * Fixed a bug where values that were 0 or false would not show up.

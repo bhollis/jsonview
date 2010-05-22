@@ -282,12 +282,8 @@ JSONView.prototype = {
     }
     
     try {
-      var jsonObj = this.nativeJSON.decode(cleanData);
-      if ( jsonObj ) {        
-        outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);
-      } else {
-        throw "There was no object!";
-      }
+      var jsonObj = this.nativeJSON.decode(cleanData);      
+      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);      
     }
     catch(e) {
       outputDoc = this.jsonFormatter.errorPage(e, this.data, this.uri);
