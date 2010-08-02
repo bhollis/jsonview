@@ -14,3 +14,6 @@ locale jsonview bg-BG locale/bg-BG/
 locale jsonview de-DE locale/de-DE/
 locale jsonview hu-HU locale/hu-HU/
 locale jsonview tr-TR locale/tr-TR/
+component {64890660-53c4-11dd-ae16-0800200c9a66} components/jsonview.js
+contract @mozilla.org/streamconv;1?from=application/json&to=*/* {64890660-53c4-11dd-ae16-0800200c9a66}
+category ext-to-type-mapping json application/json

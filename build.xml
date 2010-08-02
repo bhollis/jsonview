@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project name="jsonview" default="createxpi">
-  <property name="build.version" value="0.4"/>
+  <property name="build.version" value="0.5"/>
   <property name="xpi.name" value="${ant.project.name}-${build.version}.xpi"/>
   <property name="xpi-babelzilla.name" value="${ant.project.name}-${build.version}-babelzilla.xpi"/>
 

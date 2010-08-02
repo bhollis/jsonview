@@ -320,17 +320,23 @@ JSONView.prototype = {
 var components = [JSONView];
 
 // The actual hook into XPCOM
-function NSGetModule(compMgr, fileSpec) {
-  function postRegister() {
-     var catMgr = XPCOMUtils.categoryManager;
-     catMgr.addCategoryEntry('ext-to-type-mapping','json','application/json',true,true);  
+if (XPCOMUtils.generateNSGetFactory) {
+  // Gecko 2 (FF4) uses a different component registration strategy and registers categories in chrome.manifest
+  var NSGetFactory = XPCOMUtils.generateNSGetFactory(components);
+} else {
+  // Older Firefox requires manually setting up category entries
+  var NSGetModule = function NSGetModule(compMgr, fileSpec){
+    function postRegister(){
+      var catMgr = XPCOMUtils.categoryManager;
+      catMgr.addCategoryEntry('ext-to-type-mapping', 'json', 'application/json', true, true);
+    }
+    
+    
+    function preUnregister(){
+      var catMgr = XPCOMUtils.categoryManager;
+      catMgr.addCategoryEntry('ext-to-type-mapping', 'json', true);
+    }
+    
+    return XPCOMUtils.generateModule(components, postRegister, preUnregister);
   }
-  
-  
-  function preUnregister() {
-     var catMgr = XPCOMUtils.categoryManager;
-     catMgr.addCategoryEntry('ext-to-type-mapping','json',true); 
-  }
-  
-  return XPCOMUtils.generateModule(components, postRegister, preUnregister);
 }
