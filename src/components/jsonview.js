@@ -13,10 +13,6 @@ const Cc = Components.classes;
 // Import XPCOMUtils to help set up our JSONView XPCOM component (new to FF3)
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-// Let us use FUEL
-var Application = Cc["@mozilla.org/fuel/application;1"].getService(Ci.fuelIApplication);
-
-
 /* 
  * The JSONFormatter helper object. This contains two major functions, jsonToHTML and errorPage, 
  * each of which returns an HTML document.
