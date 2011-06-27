@@ -1,4 +1,5 @@
 content jsonview content/ contentaccessible=yes
+overlay chrome://browser/content/browser.xul chrome://jsonview/content/browser-overlay.xul
 skin jsonview default skin/default/
 locale jsonview en-US locale/en-US/
 locale jsonview cs-CZ locale/cs-CZ/

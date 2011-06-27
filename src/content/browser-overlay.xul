@@ -1,0 +1,4 @@
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="application/x-javascript"
+    src="chrome://jsonview/content/addon-events.js" />
+</overlay> 
