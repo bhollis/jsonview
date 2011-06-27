@@ -1,20 +1,6 @@
-// http://xulsolutions.blogspot.com/2006/07/creating-uninstall-script-for.html
-
-// in both cases:
-// detect disable, cancel
-// if disabled and disable not canceled, remove at shutdown
-// ditto with uninstall?
-// otherwise, always make pref match
-
-// cancel can mean either "don't uninstall" or "don't disable". "don't uninstall" can still be disabled
-// addon.userDisabled is the most interesting thing here (though uninstalling doesn't trigger it)
-
-// also set up header via pref state
-
 // detect disabling/uninstalling, set "needsCleanup " flag
-// detect cancel, clear flag if no longer uninstalling/disabling (see pendingOperations == 0?)
+// detect cancel, clear flag if no longer uninstalling/disabling
 // listen for app shutdown, if we need cleanup, clear out prefs
-
 (function() {
   const JSONVIEW_EXTENSION_ID = "jsonview@brh.numbera.com";
   const jsonAcceptFragment = ',application/json';
