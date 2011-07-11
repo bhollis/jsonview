@@ -43,7 +43,8 @@ JSONFormatter.prototype = {
       }
     }
 
-    s = JSON.stringify(s).slice(1, -1);
+    var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
+    s = nativeJSON.stringify(s).slice(1, -1);
 
     for (ws in has) {
       s = s.replace(new RegExp('\\\\u000' + (ws.charCodeAt().toString(16)), 'ig'),
