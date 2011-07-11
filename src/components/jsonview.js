@@ -19,6 +19,7 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
  */ 
 function JSONFormatter() {
 }
+
 JSONFormatter.prototype = {
   htmlEncode: function (t) {
     return t != null ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
@@ -89,18 +90,17 @@ JSONFormatter.prototype = {
   
   // Convert an array into an HTML fragment
   arrayToHTML: function(json) {
-    var output = '[<ul class="array collapsible">';
     var hasContents = false;
+    var output = '';
     for ( var prop in json ) {
       hasContents = true;
-      output += '<li>';
-      output += this.valueToHTML(json[prop]);
-      output += '</li>';
+      output += '<li>' + this.valueToHTML(json[prop]) + '</li>';
     }
-    output += '</ul>]';
     
-    if ( ! hasContents ) {
-      output = "[ ]";
+    if ( hasContents ) {
+      output = '[<ul class="array collapsible">' + output + '</ul>]';
+    } else {
+      output = '[ ]';
     }
     
     return output;
@@ -108,19 +108,18 @@ JSONFormatter.prototype = {
   
   // Convert a JSON object to an HTML fragment
   objectToHTML: function(json) {
-    var output = '{<ul class="obj collapsible">';
     var hasContents = false;
+    var output = '';
     for ( var prop in json ) {
       hasContents = true;
-      output += '<li>';
-      output += '<span class="prop">' + this.jsString(prop) + '</span>: '
-      output += this.valueToHTML(json[prop]);
-      output += '</li>';
+      output += '<li><span class="prop">' + this.jsString(prop) +
+                '</span>: ' + this.valueToHTML(json[prop]) + '</li>';
     }
-    output += '</ul>}';
     
-    if ( ! hasContents ) {
-      output = "{ }";
+    if ( hasContents ) {
+      output = '{<ul class="obj collapsible">' + output + '</ul>}';
+    } else {
+      output = '{ }';
     }
     
     return output;
@@ -158,9 +157,9 @@ JSONFormatter.prototype = {
   errorPage: function(error, data, uri) {
     var stringbundle = this.getStringBundle();
 
-    var output = '<div id="error">' + stringbundle.GetStringFromName('errorParsing') + '</div>';
-    output += '<h1>' + stringbundle.GetStringFromName('docContents') + ':</h1>';
-    output += '<div id="json">' + this.htmlEncode(data) + '</div>';
+    var output = '<div id="error">' + stringbundle.GetStringFromName('errorParsing') + '</div>' +
+                 '<h1>' + stringbundle.GetStringFromName('docContents') + ':</h1>' +
+                 '<div id="json">' + this.htmlEncode(data) + '</div>';
     return this.toHTML(output, uri + ' - Error');
   },
   
@@ -210,15 +209,6 @@ JSONView.prototype = {
       Ci.nsIRequestObserver
   ]),
 
-  // Lazy getter for the native JSON implementation, new to FF3
-  getNativeJSON: function() {
-    if (this.nativeJSON) {
-      return this.nativeJSON;
-    }
-    this.nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-    return this.nativeJSON;
-  },
-  
   /*
    * This component works as such:
    * 1. asyncConvertData captures the listener
@@ -290,13 +280,8 @@ JSONView.prototype = {
      * 4. Spit it back out at the listener
      */
     
-    var converter = Components
-        .classes["@mozilla.org/intl/scriptableunicodeconverter"]
-        .createInstance(Ci.nsIScriptableUnicodeConverter);
-    converter.charset = this.charset;
-    var outputDoc = "";
-    
-    var cleanData = '',
+    var outputDoc = '',
+        cleanData = '',
         callback = '';
 
     // This regex attempts to match a JSONP structure:
@@ -312,15 +297,15 @@ JSONView.prototype = {
     //    * A closing parenthesis, an optional semicolon, and any amount of whitespace (including unicode nonbreaking spaces) until the end of the file.
     // This will miss anything that has comments, or more than one callback, or requires modification before use.
     var callback_results = /^[\s\u200B\uFEFF]*([\w$\[\]\.]+)[\s\u200B\uFEFF]*\([\s\u200B\uFEFF]*([\[{][\s\S]*[\]}])[\s\u200B\uFEFF]*\);?[\s\u200B\uFEFF]*$/.exec(this.data);
-    if( callback_results && callback_results.length == 3 ){
+    if (callback_results && callback_results.length == 3) {
       callback = callback_results[1];
       cleanData = callback_results[2];
-    }else{
+    } else {
       cleanData = this.data;
     }
     
     try {
-      var nativeJSON = this.getNativeJSON();
+      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
       var jsonObj = nativeJSON.decode(cleanData);
       outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);      
     }
@@ -331,8 +316,7 @@ JSONView.prototype = {
     // I don't really understand this part, but basically it's a way to get our UTF-8 stuff
     // spit back out as a byte stream
     // See http://www.mail-archive.com/mozilla-xpcom@mozilla.org/msg04194.html
-    var storage = Cc["@mozilla.org/storagestream;1"]
-    .createInstance(Ci.nsIStorageStream);
+    var storage = Cc["@mozilla.org/storagestream;1"].createInstance(Ci.nsIStorageStream);
     
     // I have no idea what to pick for the first parameter (segments)
     storage.init(4, 0xffffffff, null);
