@@ -43,8 +43,10 @@ JSONFormatter.prototype = {
       }
     }
 
+    // The old nsIJSON can't encode just a string...
     var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-    s = nativeJSON.stringify(s).slice(1, -1);
+    s = nativeJSON.encode({a:s});
+    s = s.slice(6, -2);
 
     for (ws in has) {
       s = s.replace(new RegExp('\\\\u000' + (ws.charCodeAt().toString(16)), 'ig'),
