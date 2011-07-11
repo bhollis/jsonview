@@ -29,6 +29,34 @@ JSONFormatter.prototype = {
   htmlEncode: function (t) {
     return t != null ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
   },
+
+  // Completely escape strings, taking care to return common escape codes to their short forms
+  jsString: function(s) {
+    // the JSON serializer escapes everything to the long-form \uXXXX
+    // escape code. This is a map of characters to return to the short-escaped
+    // form after escaping.
+    var has = {
+      '\b': 'b',
+      '\f': 'f',
+      '\r': 'r',
+      '\n': 'n',
+      '\t': 't'
+    }, ws;
+    for (ws in has) {
+      if (-1 === s.indexOf(ws)) {
+        delete has[ws];
+      }
+    }
+
+    s = JSON.stringify(s).slice(1, -1);
+
+    for (ws in has) {
+      s = s.replace(new RegExp('\\\\u000' + (ws.charCodeAt().toString(16)), 'ig'),
+                    '\\' + has[ws]);
+    }
+
+    return this.htmlEncode(s);
+  },
   
   decorateWithSpan: function (value, className) {
     return '<span class="' + className + '">' + this.htmlEncode(value) + '</span>';
@@ -53,9 +81,9 @@ JSONFormatter.prototype = {
     }
     else if (valueType == 'string') {
       if (/^(http|https):\/\/[^\s]+$/i.test(value)) {
-        output += '<a href="' + value + '">' + this.htmlEncode(value) + '</a>';
+        output += '<a href="' + value + '">' + this.jsString(value) + '</a>';
       } else {
-        output += this.decorateWithSpan('"' + value + '"', 'string');
+        output += '<span class="string">"' + this.jsString(value) + '"</span>';
       }
     }
     else if (valueType == 'boolean') {
@@ -91,7 +119,7 @@ JSONFormatter.prototype = {
     for ( var prop in json ) {
       hasContents = true;
       output += '<li>';
-      output += '<span class="prop">' + this.htmlEncode(prop) + '</span>: '
+      output += '<span class="prop">' + this.jsString(prop) + '</span>: '
       output += this.valueToHTML(json[prop]);
       output += '</li>';
     }
@@ -104,19 +132,15 @@ JSONFormatter.prototype = {
     return output;
   },
   
-  // Convert a whole JSON object into a formatted HTML document.
+  // Convert a whole JSON value / JSONP response into a formatted HTML document
   jsonToHTML: function(json, callback, uri) {
-    var output = '';
-    if( callback ){
-      output += '<div class="callback">' + callback + ' (</div>';
-      output += '<div id="json">';
-    }else{
-      output += '<div id="json">';
-    }
-    output += this.valueToHTML(json);
-    output += '</div>';
-    if( callback ){
-      output += '<div class="callback">)</div>';
+    var output = '<div id="json">' +
+                 this.valueToHTML(json) +
+                 '</div>';
+    if (callback) {
+      output = '<div class="callback">' + callback + '(</div>' +
+               output +
+               '<div class="callback">)</div>';
     }
     return this.toHTML(output, uri);
   },
@@ -131,12 +155,12 @@ JSONFormatter.prototype = {
   
   // Wrap the HTML fragment in a full document. Used by jsonToHTML and errorPage.
   toHTML: function(content, title) {
-    return '<doctype html>' + 
-      '<html><head><title>' + title + '</title>' +
-      '<link rel="stylesheet" type="text/css" href="chrome://jsonview/content/default.css">' + 
-      '<script type="text/javascript" src="chrome://jsonview/content/default.js"></script>' + 
+    return '<!DOCTYPE html>\n' +
+      '<html><head><title>' + this.htmlEncode(title) + '</title>' +
+      '<link rel="stylesheet" type="text/css" href="chrome://jsonview/content/default.css">' +
+      '<script type="text/javascript" src="chrome://jsonview/content/default.js"></script>' +
       '</head><body>' +
-      content + 
+      content +
       '</body></html>';
   }
 };
