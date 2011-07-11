@@ -18,12 +18,6 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
  * each of which returns an HTML document.
  */ 
 function JSONFormatter() {
-  var src = 'chrome://jsonview/locale/jsonview.properties';
-  var localeService = Cc["@mozilla.org/intl/nslocaleservice;1"].getService(Ci.nsILocaleService);
-
-  var appLocale = localeService.getApplicationLocale();
-  var stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
-  this.stringbundle = stringBundleService.createBundle(src, appLocale);
 }
 JSONFormatter.prototype = {
   htmlEncode: function (t) {
@@ -144,11 +138,28 @@ JSONFormatter.prototype = {
     }
     return this.toHTML(output, uri);
   },
-  
+
+  // lazy load the translations
+  getStringBundle: function() {
+    if (this.stringbundle) {
+      return this.stringbundle;
+    }
+
+    var src = 'chrome://jsonview/locale/jsonview.properties';
+    var localeService = Cc["@mozilla.org/intl/nslocaleservice;1"].getService(Ci.nsILocaleService);
+
+    var appLocale = localeService.getApplicationLocale();
+    var stringBundleService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
+    this.stringbundle = stringBundleService.createBundle(src, appLocale);
+    return this.stringbundle;
+  },
+
   // Produce an error document for when parsing fails.
   errorPage: function(error, data, uri) {
-    var output = '<div id="error">' + this.stringbundle.GetStringFromName('errorParsing') + '</div>';
-    output += '<h1>' + this.stringbundle.GetStringFromName('docContents') + ':</h1>';
+    var stringbundle = this.getStringBundle();
+
+    var output = '<div id="error">' + stringbundle.GetStringFromName('errorParsing') + '</div>';
+    output += '<h1>' + stringbundle.GetStringFromName('docContents') + ':</h1>';
     output += '<div id="json">' + this.htmlEncode(data) + '</div>';
     return this.toHTML(output, uri + ' - Error');
   },
@@ -175,8 +186,6 @@ const JSONVIEW_COMPONENT_ID =
     
 // JSONView class constructor. Not much to see here.
 function JSONView() {  
-  // Native JSON implementation, new to FF3
-  this.nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
   this.jsonFormatter = new JSONFormatter();
 };
 
@@ -200,6 +209,15 @@ JSONView.prototype = {
       Ci.nsIStreamListener,
       Ci.nsIRequestObserver
   ]),
+
+  // Lazy getter for the native JSON implementation, new to FF3
+  getNativeJSON: function() {
+    if (this.nativeJSON) {
+      return this.nativeJSON;
+    }
+    this.nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
+    return this.nativeJSON;
+  },
   
   /*
    * This component works as such:
@@ -302,7 +320,8 @@ JSONView.prototype = {
     }
     
     try {
-      var jsonObj = this.nativeJSON.decode(cleanData);      
+      var nativeJSON = this.getNativeJSON();
+      var jsonObj = nativeJSON.decode(cleanData);
       outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);      
     }
     catch(e) {
@@ -358,5 +377,5 @@ if (XPCOMUtils.generateNSGetFactory) {
     }
     
     return XPCOMUtils.generateModule(components, postRegister, preUnregister);
-  }
+  };
 }

@@ -1,8 +1,13 @@
-JSONView ???
+JSONView 0.6
+* Preserve formatting for JSON error responses.
+* When disabling or uninstalling JSONView, make sure to remove the HTTP Accept header customization.
+* Better escaping of potentially display-breaking Unicode characters in strings, and some other tweaks. Extracted from a patch by Johan Sundström.
+* Some services are now loaded lazily in hopes of decreasing any effect JSONView might have on Firefox startup time.
+
+JSONView 0.5
 * Fixed display of newlines and multiple spaces - formatting is now better preserved.
 * Fixed display of ECMAScript 5th Edition style JSON (with non-object/array root values) thanks to a patch from Josh Kline.
 * URLs are matched even with uppercase scheme (such as "httpS://")
-* Better escaping of potentially display-breaking Unicode characters in strings, and some other tweaks. Extracted from a patch by Johan Sundström.
 
 JSONView 0.4
 * Preference dialog with an option to send "application/json" in the HTTP Accept header.
