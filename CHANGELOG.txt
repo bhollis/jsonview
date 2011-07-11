@@ -3,6 +3,7 @@ JSONView 0.6
 * When disabling or uninstalling JSONView, make sure to remove the HTTP Accept header customization.
 * Better escaping of potentially display-breaking Unicode characters in strings, and some other tweaks. Extracted from a patch by Johan Sundström.
 * Some services are now loaded lazily in hopes of decreasing any effect JSONView might have on Firefox startup time.
+* Unicode NUL character is now escaped when showing the body of an unparseable string.
 
 JSONView 0.5
 * Fixed display of newlines and multiple spaces - formatting is now better preserved.

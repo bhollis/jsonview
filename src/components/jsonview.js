@@ -160,6 +160,9 @@ JSONFormatter.prototype = {
   errorPage: function(error, data, uri) {
     var stringbundle = this.getStringBundle();
 
+    // Escape unicode nulls
+    data = data.replace("\u0000","\uFFFD");
+
     var output = '<div id="error">' + stringbundle.GetStringFromName('errorParsing') + '</div>' +
                  '<h1>' + stringbundle.GetStringFromName('docContents') + ':</h1>' +
                  '<div id="json">' + this.htmlEncode(data) + '</div>';
