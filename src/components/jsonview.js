@@ -6,6 +6,8 @@
  * to Firefox 3.
  */
 
+"use strict";
+
 // Save some tedious typing
 const Ci = Components.interfaces;
 const Cc = Components.classes;
@@ -79,7 +81,7 @@ JSONFormatter.prototype = {
     }
     else if (valueType == 'string') {
       if (/^(http|https):\/\/[^\s]+$/i.test(value)) {
-        output += '<a href="' + value + '">' + this.jsString(value) + '</a>';
+        output += '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
       } else {
         output += '<span class="string">"' + this.jsString(value) + '"</span>';
       }
@@ -95,9 +97,15 @@ JSONFormatter.prototype = {
   arrayToHTML: function(json) {
     var hasContents = false;
     var output = '';
+    var numProps = Object.keys(json).length;
     for ( var prop in json ) {
       hasContents = true;
-      output += '<li>' + this.valueToHTML(json[prop]) + '</li>';
+      output += '<li>' + this.valueToHTML(json[prop]);
+      if ( numProps > 1 ) {
+        output += ',';
+      }
+      output += '</li>';
+      numProps--;
     }
     
     if ( hasContents ) {
@@ -113,10 +121,16 @@ JSONFormatter.prototype = {
   objectToHTML: function(json) {
     var hasContents = false;
     var output = '';
+    var numProps = Object.keys(json).length;
     for ( var prop in json ) {
       hasContents = true;
-      output += '<li><span class="prop">' + this.jsString(prop) +
-                '</span>: ' + this.valueToHTML(json[prop]) + '</li>';
+      output += '<li><span class="prop"><span class="q">"</span>' + this.jsString(prop) +
+                '<span class="q">"</span></span>: ' + this.valueToHTML(json[prop]);
+      if ( numProps > 1 ) {
+        output += ',';
+      }
+      output += '</li>';
+      numProps--;
     }
     
     if ( hasContents ) {

@@ -27,18 +27,17 @@ body {
   position: absolute;
   left: -1em;
   cursor: pointer;
+  -moz-user-select: none;
+}
+
+.q {
+  display: inline-block;
+  width: 0px;
+  color: transparent;
 }
 
 li {
   position: relative;
-}
-
-li:after {
-  content: ',';
-}
-
-li:last-child:after {
-  content: '';
 }
 
 #error {
