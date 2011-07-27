@@ -97,7 +97,11 @@ JSONFormatter.prototype = {
   arrayToHTML: function(json) {
     var hasContents = false;
     var output = '';
-    var numProps = Object.keys(json).length;
+    var numProps = 0;
+    for (var prop in json ) {
+      numProps++;
+    }
+
     for ( var prop in json ) {
       hasContents = true;
       output += '<li>' + this.valueToHTML(json[prop]);
@@ -121,7 +125,11 @@ JSONFormatter.prototype = {
   objectToHTML: function(json) {
     var hasContents = false;
     var output = '';
-    var numProps = Object.keys(json).length;
+    var numProps = 0;
+    for (var prop in json ) {
+      numProps++;
+    }
+
     for ( var prop in json ) {
       hasContents = true;
       output += '<li><span class="prop"><span class="q">"</span>' + this.jsString(prop) +
