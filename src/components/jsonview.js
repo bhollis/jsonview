@@ -15,6 +15,21 @@ const Cc = Components.classes;
 // Import XPCOMUtils to help set up our JSONView XPCOM component (new to FF3)
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
+// Backwards-compatible support for FF3.0, which has no native JSON.
+var JSON;
+if (!JSON) {
+  JSON = {
+    parse: function(jsonString) {
+      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
+      return nativeJSON.decode(jsonString);
+    },
+    stringify: function(object) {
+      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
+      return nativeJSON.encode(object);
+    }
+  }
+}
+
 /* 
  * The JSONFormatter helper object. This contains two major functions, jsonToHTML and errorPage, 
  * each of which returns an HTML document.
@@ -46,8 +61,7 @@ JSONFormatter.prototype = {
     }
 
     // The old nsIJSON can't encode just a string...
-    var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-    s = nativeJSON.encode({a:s});
+    s = JSON.stringify({a:s});
     s = s.slice(6, -2);
 
     for (ws in has) {
@@ -333,8 +347,7 @@ JSONView.prototype = {
     }
     
     try {
-      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-      var jsonObj = nativeJSON.decode(cleanData);
+      var jsonObj = JSON.parse(cleanData);
       outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);      
     }
     catch(e) {
