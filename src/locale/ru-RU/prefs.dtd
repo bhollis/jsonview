@@ -1,3 +1,3 @@
-<!ENTITY jsonViewOptions "JSONView Options">
-<!ENTITY httpAcceptLabel "Include &quot;application/json&quot; in the HTTP Accept header for requests">
-<!ENTITY httpAcceptAccesskey "I">
+<!ENTITY jsonViewOptions "JSONView — Настройки">
+<!ENTITY httpAcceptLabel "Включить «application/json» в поле Accept заголовка запроса HTTP">
+<!ENTITY httpAcceptAccesskey "В">
