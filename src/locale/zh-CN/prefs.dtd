@@ -1,3 +1,3 @@
-<!ENTITY jsonViewOptions "JSONView Options">
-<!ENTITY httpAcceptLabel "Include &quot;application/json&quot; in the HTTP Accept header for requests">
-<!ENTITY httpAcceptAccesskey "I">
+<!ENTITY jsonViewOptions "JSONView选项">
+<!ENTITY httpAcceptLabel "在HTTP的头文件请教中,包括&quot;程序/JSON的&amp;quot.">
+<!ENTITY httpAcceptAccesskey "Http接受数据码">
