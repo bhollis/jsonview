@@ -16,18 +16,18 @@
     <!-- Initial JSONP support -->
     <em:contributor>Gabriel Barros</em:contributor>
        
-    <em:translator>markh van BabelZilla.org (nl-NL)</em:translator>
+    <em:translator>markh van BabelZilla.org (nl)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>nl-NL</em:locale>
+        <em:locale>nl</em:locale>
         <em:description>Bekijk JSON-documenten in de browser.</em:description>
       </Description>
     </em:localized>
 
-    <em:translator>Goofy (fr-FR)</em:translator>
+    <em:translator>Goofy (fr)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>fr-FR</em:locale>
+        <em:locale>fr</em:locale>
         <em:description>Afficher les documents JSON dans le navigateur.</em:description>
       </Description>
     </em:localized>
@@ -57,10 +57,10 @@
       </Description>
     </em:localized>
     
-    <em:translator>drry (ja-JP)</em:translator>
+    <em:translator>drry (ja)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>ja-JP</em:locale>
+        <em:locale>ja</em:locale>
         <em:description>JSON ドキュメントをブラウザー内で表示します。</em:description>
       </Description>
     </em:localized>
@@ -97,10 +97,10 @@
       </Description>
     </em:localized>
     
-    <em:translator>Archaeopteryx, Team erweiterungen.de (de-DE)</em:translator>
+    <em:translator>Archaeopteryx, Team erweiterungen.de (de)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>de-DE</em:locale>
+        <em:locale>de</em:locale>
         <em:description>JSON-Dokumente im Browser anzeigen.</em:description>
       </Description>
     </em:localized>
@@ -113,10 +113,10 @@
       </Description>
     </em:localized>
     
-    <em:translator>Ersen Yoldaç (tr-TR)</em:translator>
+    <em:translator>Ersen Yoldaç (tr)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>tr-TR</em:locale>
+        <em:locale>tr</em:locale>
         <em:description>JSON belgelerini tarayıcınızda açın.</em:description>
       </Description>
     </em:localized>
