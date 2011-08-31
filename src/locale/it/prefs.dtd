@@ -1,3 +1,4 @@
 <!ENTITY jsonViewOptions "Opzioni di JSONView">
 <!ENTITY httpAcceptLabel "Includi &quot;application/json&quot; nell'intestazione HTTP Accept per le richieste">
 <!ENTITY httpAcceptAccesskey "I">
+<!ENTITY httpAcceptWarning "Only enable this if you need it - this can cause problems with some websites">

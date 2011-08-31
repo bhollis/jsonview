@@ -1,3 +1,4 @@
 <!ENTITY jsonViewOptions "JSONView选项">
 <!ENTITY httpAcceptLabel "在HTTP的头文件请教中,包括&quot;程序/JSON的&amp;quot.">
 <!ENTITY httpAcceptAccesskey "Http接受数据码">
+<!ENTITY httpAcceptWarning "Only enable this if you need it - this can cause problems with some websites">

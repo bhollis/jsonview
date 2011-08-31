@@ -8,7 +8,7 @@
             onload="setupUIFromPrefs();">
   
   <script type="application/x-javascript" src="chrome://jsonview/content/prefs/httpAccept.js"/>
-  
+
   <prefpane id="jsonviewoptions">    
 
     <preferences>
@@ -16,5 +16,6 @@
     </preferences>
         
     <checkbox id="httpAcceptCheckbox" accesskey="&httpAcceptAccesskey;" label="&httpAcceptLabel;" oncommand="saveHttpAcceptPref();" />
+    <p class="warning" style="font-size:85%; margin-left:24px; margin-right: 1em;">&httpAcceptWarning;</p>
   </prefpane>  
 </prefwindow>
