@@ -128,7 +128,14 @@
         <em:description>Permette di visualizzare i file JSON nel browser.</em:description>
       </Description>
     </em:localized>
-       
+
+    <em:translator>ДакСРБИЈА (sr)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>sr</em:locale>
+        <em:description>Приказује JSON документе у прегледачу.</em:description>
+      </Description>
+    </em:localized>
        
     <em:targetApplication>
       <Description>
