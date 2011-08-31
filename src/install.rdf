@@ -141,7 +141,15 @@
     <em:localized>
       <Description>
         <em:locale>sr</em:locale>
-        <em:description>Приказује JSON документе у прегледачу.</em:description>
+        <em:description>Granska JSON-dokument i din webbläsare.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:translator>Zhouck (uk-UA)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>sr</em:locale>
+        <em:description>Перегляд JSON документів в браузер.</em:description>
       </Description>
     </em:localized>
        
