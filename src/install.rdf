@@ -120,6 +120,14 @@
         <em:description>JSON belgelerini tarayıcınızda açın.</em:description>
       </Description>
     </em:localized>
+
+    <em:translator>Luana Di Muzio - BabelZilla (it)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>it</em:locale>
+        <em:description>Permette di visualizzare i file JSON nel browser.</em:description>
+      </Description>
+    </em:localized>
        
        
     <em:targetApplication>
