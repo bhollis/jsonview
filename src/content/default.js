@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var ellipsis = target.parentNode.getElementsByClassName('ellipsis')[0];
       target.parentNode.removeChild(ellipsis);
       target.style.display = '';
+      collapser.innerHTML = '-';
     } else {
       target.style.display = 'none';
       
@@ -23,9 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
       ellipsis.className = 'ellipsis';
       ellipsis.innerHTML = ' &hellip; ';
       target.parentNode.insertBefore(ellipsis, target);
+      collapser.innerHTML = '+';
     }
-    
-    collapser.innerHTML = ( collapser.innerHTML == '-' ) ? '+' : '-';
   }
   
   function addCollapser(item) {

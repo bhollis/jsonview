@@ -11,7 +11,8 @@
     <em:creator>Benjamin Hollis</em:creator>
 		<em:homepageURL>http://jsonview.com/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
-    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL>
+    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL> 
+    <em:type>2</em:type>
     
     <!-- Initial JSONP support -->
     <em:contributor>Gabriel Barros</em:contributor>
