@@ -1,4 +1,5 @@
 JSONView 0.6
+* Several new and updated localizations.
 * Copying the formatted JSON and then pasting it now pastes valid JSON.
 * Preserve formatting for JSON error responses.
 * When disabling or uninstalling JSONView, make sure to remove the HTTP Accept header customization.

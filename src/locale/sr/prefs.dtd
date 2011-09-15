@@ -1,5 +1,5 @@
 <!ENTITY jsonViewOptions "JSONView - опције">
 <!ENTITY httpAcceptLabel "Укључи application/json у HTTP Accept заглављу за захтеве.">
 <!ENTITY httpAcceptAccesskey "З">
-<!ENTITY httpAcceptWarning "Only enable this if you need it - this can cause problems with some websites">
+<!ENTITY httpAcceptWarning "Ово омогућите само ако вам треба, јер може да изазове проблеме на неким страницама.">
 x
