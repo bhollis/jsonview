@@ -4,6 +4,7 @@
 <!DOCTYPE prefwindow SYSTEM "chrome://jsonview/locale/prefs.dtd">
 
 <prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="jsonviewPrefs"
             title="&jsonViewOptions;" 
             onload="setupUIFromPrefs();">
   
