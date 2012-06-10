@@ -7,14 +7,14 @@ Normally when encountering a [JSON](http://json.org) document (content type "app
 
 Once you've got JSONView installed, check out [this example JSON file](http://jsonview.com/example.json) to see the extension in action!
 
-[CouchDB](http://couchdb.apache.org/) users and others who need to have "application/json" sent in the HTTP Accept header to serve JSON properly should set that option in JSONView's options panel.
+[CouchDB](http://couchdb.apache.org/) users and others who need to have "application/json" sent in the HTTP Accept header to serve JSON properly should set that option in JSONView's options panel. Be aware that telling sites that you accept JSON can mess up some sites that don't expect it.
 
 If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Just go to [BabelZilla](http://www.babelzilla.org/index.php?option=com_wts&Itemid=88&type=show&extension=4898) and register as a translator for the JSONView extension. There's not much there to translate!
 
 Reporting Issues
 ----------------
 
-The code has moved over to GitHub, but the issues are still at Google Code for now: [JSONView issue tracker](http://code.google.com/p/jsonview/issues/list). Pull requests are welcome.
+Use the GitHub [Issue tracker for JSONView](https://github.com/bhollis/jsonview/issues) to file issues. Pull requests are especially welcome.
 
 Building JSONView
 -----------------
