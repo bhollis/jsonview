@@ -94,7 +94,7 @@ JSONFormatter.prototype = {
       output += this.decorateWithSpan(value, 'num');
     }
     else if (valueType == 'string') {
-      if (/^(http|https):\/\/[^\s]+$/i.test(value)) {
+      if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
         output += '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
       } else {
         output += '<span class="string">"' + this.jsString(value) + '"</span>';
