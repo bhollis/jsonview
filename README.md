@@ -34,6 +34,11 @@ Unofficial Ports
 * [jsonview-chrome](https://github.com/jamiew/jsonview-chrome)
 * [jsonview-opera](https://github.com/fearphage/jsonview-opera)
 
-
+Common Issues
+-------------
+* **JSONView isn't displaying my file as JSON**: You are probably not serving
+  the JSON with the "application/json" MIME type.
+* **JSONView is mangling large numbers**:
+  [Here's the explanation](https://github.com/bhollis/jsonview/issues/21).
 
 JSONView is open source software under the MIT licence.
