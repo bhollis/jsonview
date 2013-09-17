@@ -26,6 +26,7 @@ Developing JSONView
 -------------------
 * [Set up your Firefox addon development environment](https://developer.mozilla.org/en/Setting_up_extension_development_environment)
 * Open your [Firefox profile folder](http://kb.mozillazine.org/Profile_folder)
+* Open 'extensions' subfolder
 * Create a file called `jsonview@brh.numbera.com` and put the path to your checked out JSONView's `src` folder into it.
 * Run Firefox. You can now restart Firefox to pick up changes to JSONView in source.
 
