@@ -94,7 +94,7 @@ JSONFormatter.prototype = {
       output += this.decorateWithSpan(value, 'num');
     }
     else if (valueType == 'string') {
-      if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
+      if (/^(http|https):\/\/[^\s]+$/i.test(value)) {
         output += '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
       } else {
         output += '<span class="string">"' + this.jsString(value) + '"</span>';
@@ -125,11 +125,11 @@ JSONFormatter.prototype = {
       output += '</li>';
       numProps--;
     }
-    
+    var randID = Math.round(Math.random() * 10e7);
     if ( hasContents ) {
-      output = '[<ul class="array collapsible">' + output + '</ul>]';
+      output = '<span class="left bracket" bracketid="' + randID + '">[</span><ul class="array collapsible">' + output + '</ul><span class="right bracket" bracketid="' + randID + '">]</span>';
     } else {
-      output = '[ ]';
+      output = '<span class="left bracket" bracketid="' + randID + '">[</span> <span class="right bracket" bracketid="' + randID + '">]</span>';
     }
     
     return output;
@@ -154,11 +154,11 @@ JSONFormatter.prototype = {
       output += '</li>';
       numProps--;
     }
-    
+    var randID = Math.round(Math.random() * 10e7);
     if ( hasContents ) {
-      output = '{<ul class="obj collapsible">' + output + '</ul>}';
+      output = '<span class="left brace" bracketid="' + randID + '">{</span><ul class="obj collapsible">' + output + '</ul><span class="right brace" bracketid="' + randID + '">}</span>';
     } else {
-      output = '{ }';
+      output = '<span class="left brace" bracketid="' + randID + '">{</span> <span class="right brace" bracketid="' + randID + '">}</span>';
     }
     
     return output;
