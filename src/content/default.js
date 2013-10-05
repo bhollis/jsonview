@@ -40,9 +40,57 @@ document.addEventListener('DOMContentLoaded', function() {
     collapser.addEventListener('click', collapse, false);
     item.insertBefore(collapser, item.firstChild);
   }
-  
+
+  function hasClassName(ele,cls) {
+    return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+  }
+
+  function addClassName(ele,cls) {
+    if (!hasClassName(ele,cls)) ele.className += " " + cls;
+  }
+
+  function removeClassName(ele,cls) {
+    if (hasClassName(ele, cls)) {
+        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+        ele.className = ele.className.replace(reg, ' ');
+    }
+  }
+  function highlightBrackets(brack) {
+    var toMatch = brack.className.split(" ");
+    var brackData = {
+        "direction": toMatch[0],
+        "directionOpposite": ("left" == toMatch[0]) ? "right" : "left",
+        "type": toMatch[1],
+        "bracketID": brack.getAttribute('bracketid')
+    };
+    var toSearchQuery = "." + brackData.directionOpposite + "." + brackData.type + "[bracketid='" + brackData.bracketID + "']";
+    console.log(toSearchQuery);
+    var otherBrack = document.querySelector(toSearchQuery);
+    if(hasClassName(brack, 'light')) {
+      removeClassName(brack, 'light');
+      removeClassName(otherBrack, 'light');
+    } else {
+      addClassName(brack, 'light');
+      addClassName(otherBrack, 'light');
+    }
+  }
   var items = document.getElementsByClassName('collapsible');
-  for( var i = 0; i < items.length; i++) {
+  for( var i = 0; i < items.length; i++ ) {
     addCollapser(items[i].parentNode);
+  }
+
+  var left_sel = document.getElementsByClassName('left');
+  var right_sel = document.getElementsByClassName('right');
+  if( left_sel.length != right_sel.length ) console.log('There was an error while counting left & right brackets');
+  else {
+    var brackets_length = left_sel.length || right_sel.length;
+    for( var i = 0; i < brackets_length; i++ ) {
+        left_sel[i].addEventListener('click', function() {
+            highlightBrackets(this);
+        }, false);
+        right_sel[i].addEventListener('click', function() {
+            highlightBrackets(this);
+        }, false);
+    }
   }
 }, false);
