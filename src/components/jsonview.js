@@ -1,9 +1,7 @@
 /**
  * @author Benjamin Hollis
- * 
+ *
  * This component provides a stream converter that can translate from JSON to HTML.
- * It is compatible with Firefox 3 and up, since it uses many components that are new
- * to Firefox 3.
  */
 
 "use strict";
@@ -15,98 +13,67 @@ const Cc = Components.classes;
 // Import XPCOMUtils to help set up our JSONView XPCOM component (new to FF3)
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-// Backwards-compatible support for FF3.0, which has no native JSON.
-var JSON;
-if (!JSON) {
-  JSON = {
-    parse: function(jsonString) {
-      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-      return nativeJSON.decode(jsonString);
-    },
-    stringify: function(object) {
-      var nativeJSON = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-      return nativeJSON.encode(object);
-    }
-  }
-}
-
-/* 
- * The JSONFormatter helper object. This contains two major functions, jsonToHTML and errorPage, 
+/*
+ * The JSONFormatter helper object. This contains two major functions, jsonToHTML and errorPage,
  * each of which returns an HTML document.
- */ 
+ */
 function JSONFormatter() {
 }
 
 JSONFormatter.prototype = {
+  /**
+   * Encode a string to be used in HTML
+   */
   htmlEncode: function (t) {
-    return t != null ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
+    return t !== null ? t.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") : '';
   },
 
-  // Completely escape strings, taking care to return common escape codes to their short forms
+  /**
+   * Completely escape a json string
+   */
   jsString: function(s) {
-    // the JSON serializer escapes everything to the long-form \uXXXX
-    // escape code. This is a map of characters to return to the short-escaped
-    // form after escaping.
-    var has = {
-      '\b': 'b',
-      '\f': 'f',
-      '\r': 'r',
-      '\n': 'n',
-      '\t': 't'
-    }, ws;
-    for (ws in has) {
-      if (-1 === s.indexOf(ws)) {
-        delete has[ws];
-      }
-    }
-
-    // The old nsIJSON can't encode just a string...
-    s = JSON.stringify({a:s});
-    s = s.slice(6, -2);
-
-    for (ws in has) {
-      s = s.replace(new RegExp('\\\\u000' + (ws.charCodeAt().toString(16)), 'ig'),
-                    '\\' + has[ws]);
-    }
-
+    // Slice off the surrounding quotes
+    s = JSON.stringify(s).slice(1, -1);
     return this.htmlEncode(s);
   },
-  
+
+  /**
+   * Surround value with a span, including the given className
+   */
   decorateWithSpan: function (value, className) {
     return '<span class="' + className + '">' + this.htmlEncode(value) + '</span>';
   },
-  
+
   // Convert a basic JSON datatype (number, string, boolean, null, object, array) into an HTML fragment.
   valueToHTML: function(value) {
     var valueType = typeof value;
-    
-    var output = "";
-    if (value == null) {
-      output += this.decorateWithSpan('null', 'null');
+
+    if (value === null) {
+      return this.decorateWithSpan('null', 'null');
     }
     else if (value && value.constructor == Array) {
-      output += this.arrayToHTML(value);
+      return this.arrayToHTML(value);
     }
     else if (valueType == 'object') {
-      output += this.objectToHTML(value);
-    } 
+      return this.objectToHTML(value);
+    }
     else if (valueType == 'number') {
-      output += this.decorateWithSpan(value, 'num');
+      return this.decorateWithSpan(value, 'num');
     }
     else if (valueType == 'string') {
       if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
-        output += '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
+        return '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
       } else {
-        output += '<span class="string">"' + this.jsString(value) + '"</span>';
+        return '<span class="string">"' + this.jsString(value) + '"</span>';
       }
     }
     else if (valueType == 'boolean') {
-      output += this.decorateWithSpan(value, 'bool');
+      return this.decorateWithSpan(value, 'bool');
     }
-    
-    return output;
+
+    return '';
   },
-  
+
   // Convert an array into an HTML fragment
   arrayToHTML: function(json) {
     var hasContents = false;
@@ -125,22 +92,22 @@ JSONFormatter.prototype = {
       output += '</li>';
       numProps--;
     }
-    
+
     if ( hasContents ) {
       output = '[<ul class="array collapsible">' + output + '</ul>]';
     } else {
       output = '[ ]';
     }
-    
+
     return output;
   },
-  
+
   // Convert a JSON object to an HTML fragment
   objectToHTML: function(json) {
     var hasContents = false;
     var output = '';
     var numProps = 0;
-    for (var prop in json ) {
+    for ( var prop in json ) {
       numProps++;
     }
 
@@ -154,16 +121,16 @@ JSONFormatter.prototype = {
       output += '</li>';
       numProps--;
     }
-    
+
     if ( hasContents ) {
       output = '{<ul class="obj collapsible">' + output + '</ul>}';
     } else {
       output = '{ }';
     }
-    
+
     return output;
   },
-  
+
   // Convert a whole JSON value / JSONP response into a formatted HTML document
   jsonToHTML: function(json, callback, uri) {
     var output = '<div id="json">' +
@@ -204,7 +171,7 @@ JSONFormatter.prototype = {
                  '<div id="json">' + this.htmlEncode(data) + '</div>';
     return this.toHTML(output, uri + ' - Error');
   },
-  
+
   // Wrap the HTML fragment in a full document. Used by jsonToHTML and errorPage.
   toHTML: function(content, title) {
     return '<!DOCTYPE html>\n' +
@@ -222,13 +189,13 @@ const JSONVIEW_CONVERSION =
     "?from=application/json&to=*/*";
 const JSONVIEW_CONTRACT_ID =
     "@mozilla.org/streamconv;1" + JSONVIEW_CONVERSION;
-const JSONVIEW_COMPONENT_ID = 
+const JSONVIEW_COMPONENT_ID =
     Components.ID("{64890660-53c4-11dd-ae16-0800200c9a66}");
-    
+
 // JSONView class constructor. Not much to see here.
-function JSONView() {  
+function JSONView() {
   this.jsonFormatter = new JSONFormatter();
-};
+}
 
 // This defines an object that implements our converter, and is set up to be XPCOM-ified by XPCOMUtils
 JSONView.prototype = {
@@ -243,7 +210,7 @@ JSONView.prototype = {
     entry: JSONVIEW_CONVERSION,
     value: "JSON to HTML stream converter"
   }],
-  
+
   QueryInterface: XPCOMUtils.generateQI([
       Ci.nsISupports,
       Ci.nsIStreamConverter,
@@ -259,41 +226,41 @@ JSONView.prototype = {
    * 4. onStopRequest gets the collected data and converts it, spits it to the listener
    * 5. convert does nothing, it's just the synchronous version of asyncConvertData
    */
-  
+
   // nsIStreamConverter::convert
   convert: function (aFromStream, aFromType, aToType, aCtxt) {
       return aFromStream;
   },
-  
+
   // nsIStreamConverter::asyncConvertData
   asyncConvertData: function (aFromType, aToType, aListener, aCtxt) {
     // Store the listener passed to us
     this.listener = aListener;
   },
-  
+
   // nsIStreamListener::onDataAvailable
   onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
     // From https://developer.mozilla.org/en/Reading_textual_data
     var is = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
     is.init(aInputStream, this.charset, -1, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
-  
+
     var str = {};
-    
+
     // This used to read in a loop until readString returned 0, but it caused it to crash Firefox on OSX/Win32 (but not Win64)
     // It seems just reading once with -1 (default buffer size) gets the file done.
     // However, *not* reading in a loop seems to cause problems with Firebug
     // So I read in a loop, but do whatever I can to avoid infinite-looping.
     var totalBytesRead = 0;
     var bytesRead = 1; // Seed it with something positive
-    
+
     while (totalBytesRead < aCount && bytesRead > 0) {
       bytesRead = is.readString(-1, str);
       totalBytesRead += bytesRead;
       this.data += str.value;
     }
-    
+
   },
-  
+
   // nsIRequestObserver::onStartRequest
   onStartRequest: function (aRequest, aContext) {
     this.data = '';
@@ -310,7 +277,7 @@ JSONView.prototype = {
 
     this.listener.onStartRequest (this.channel, aContext);
   },
-  
+
   // nsIRequestObserver::onStopRequest
   onStopRequest: function (aRequest, aContext, aStatusCode) {
     /*
@@ -321,7 +288,7 @@ JSONView.prototype = {
      * 3. Convert that to HTML? Or XUL?
      * 4. Spit it back out at the listener
      */
-    
+
     var outputDoc = '',
         cleanData = '',
         callback = '';
@@ -345,34 +312,34 @@ JSONView.prototype = {
     } else {
       cleanData = this.data;
     }
-    
+
     try {
       var jsonObj = JSON.parse(cleanData);
-      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);      
+      outputDoc = this.jsonFormatter.jsonToHTML(jsonObj, callback, this.uri);
     }
     catch(e) {
       outputDoc = this.jsonFormatter.errorPage(e, this.data, this.uri);
     }
-    
+
     // I don't really understand this part, but basically it's a way to get our UTF-8 stuff
     // spit back out as a byte stream
     // See http://www.mail-archive.com/mozilla-xpcom@mozilla.org/msg04194.html
     var storage = Cc["@mozilla.org/storagestream;1"].createInstance(Ci.nsIStorageStream);
-    
+
     // I have no idea what to pick for the first parameter (segments)
     storage.init(4, 0xffffffff, null);
     var out = storage.getOutputStream(0);
-    
+
     var binout = Cc["@mozilla.org/binaryoutputstream;1"]
     .createInstance(Ci.nsIBinaryOutputStream);
     binout.setOutputStream(out);
     binout.writeUtf8Z(outputDoc);
     binout.close();
-    
+
     // I can't explain it, but we need to trim 4 bytes off the front or else it includes random crap
     var trunc = 4;
     var instream = storage.newInputStream(trunc);
-    
+
     // Pass the data to the main content listener
     this.listener.onDataAvailable(this.channel, aContext, instream, 0, storage.length - trunc);
 
@@ -382,25 +349,5 @@ JSONView.prototype = {
 
 // We only have one component to register
 var components = [JSONView];
-
-// The actual hook into XPCOM
-if (XPCOMUtils.generateNSGetFactory) {
-  // Gecko 2 (FF4) uses a different component registration strategy and registers categories in chrome.manifest
-  var NSGetFactory = XPCOMUtils.generateNSGetFactory(components);
-} else {
-  // Older Firefox requires manually setting up category entries
-  var NSGetModule = function NSGetModule(compMgr, fileSpec){
-    function postRegister(){
-      var catMgr = XPCOMUtils.categoryManager;
-      catMgr.addCategoryEntry('ext-to-type-mapping', 'json', 'application/json', true, true);
-    }
-    
-    
-    function preUnregister(){
-      var catMgr = XPCOMUtils.categoryManager;
-      catMgr.addCategoryEntry('ext-to-type-mapping', 'json', true);
-    }
-    
-    return XPCOMUtils.generateModule(components, postRegister, preUnregister);
-  };
-}
+// Gecko 2 (FF4) uses a different component registration strategy and registers categories in chrome.manifest
+var NSGetFactory = XPCOMUtils.generateNSGetFactory(components);

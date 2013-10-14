@@ -22,57 +22,57 @@
         this.needsCleanup = false;
       }
     },
-	  observe : function(subject, topic, data) {
+    observe : function(subject, topic, data) {
       // Firefox 3 sends Addon Manager events through this interface
-		  if (topic == "em-action-requested") {
-			  subject.QueryInterface(Components.interfaces.nsIUpdateItem);
+      if (topic == "em-action-requested") {
+        subject.QueryInterface(Components.interfaces.nsIUpdateItem);
 
         if (subject.id == JSONVIEW_EXTENSION_ID) {
-				  if (data == "item-uninstalled") {
+          if (data == "item-uninstalled") {
             this.needsCleanup = true;
-				  } else if (data == "item-cancel-action") {
+          } else if (data == "item-cancel-action") {
             this.needsCleanup = false;
-				  } else if (data == "item-disabled") {
+          } else if (data == "item-disabled") {
             this.needsCleanup = true;
-				  }
+          }
         }
-		  } else if (topic == "quit-application-granted") {
-			  if (this.needsCleanup) {
+      } else if (topic == "quit-application-granted") {
+        if (this.needsCleanup) {
           // Remove JSONView's customization of the http accept header
-          var httpAcceptPref = Application.prefs.get('network.http.accept.default').value
+          var httpAcceptPref = Application.prefs.get('network.http.accept.default').value;
           httpAcceptPref = httpAcceptPref.replace(jsonAcceptFragment, '');
           Application.prefs.get('network.http.accept.default').value = httpAcceptPref;
-			  }
-			  this.unregister();
-		  }
-	  },
+        }
+        this.unregister();
+      }
+    },
     register : function() {
-		  var observerService =
-			  Components.classes["@mozilla.org/observer-service;1"].
-			  getService(Components.interfaces.nsIObserverService);
+      var observerService =
+        Components.classes["@mozilla.org/observer-service;1"].
+        getService(Components.interfaces.nsIObserverService);
 
-		  observerService.addObserver(this, "em-action-requested", false);
-		  observerService.addObserver(this, "quit-application-granted", false);
+      observerService.addObserver(this, "em-action-requested", false);
+      observerService.addObserver(this, "quit-application-granted", false);
       if (AddonManager) {
         AddonManager.addAddonListener(this);
       }
-	  },
-	  unregister : function() {
-		  var observerService =
-			  Components.classes["@mozilla.org/observer-service;1"].
-			  getService(Components.interfaces.nsIObserverService);
+    },
+    unregister : function() {
+      var observerService =
+        Components.classes["@mozilla.org/observer-service;1"].
+        getService(Components.interfaces.nsIObserverService);
 
-		  observerService.removeObserver(this,"em-action-requested");
-		  observerService.removeObserver(this,"quit-application-granted");
+      observerService.removeObserver(this,"em-action-requested");
+      observerService.removeObserver(this,"quit-application-granted");
       if (AddonManager) {
         AddonManager.removeAddonListener(this);
       }
-	  }
-  }
+    }
+  };
 
   // TODO: Bug? Disabling / uninstalling JSONView then putting it back clears the accept header pref
-  
-  window.addEventListener("load", function() { AddonLifeCycleListener.register() }, false);
+
+  window.addEventListener("load", function() { AddonLifeCycleListener.register(); }, false);
 })();
 
 // Hack to remove FF8+'s built-in JSON-as-text viewer. I'm sure this is the wrong

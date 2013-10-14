@@ -11,12 +11,12 @@
     <em:creator>Benjamin Hollis</em:creator>
 		<em:homepageURL>http://jsonview.com/</em:homepageURL>
     <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
-    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL> 
+    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL>
     <em:type>2</em:type>
-    
+
     <!-- Initial JSONP support -->
     <em:contributor>Gabriel Barros</em:contributor>
-       
+
     <em:translator>markh van BabelZilla.org (nl)</em:translator>
     <em:localized>
       <Description>
@@ -32,7 +32,7 @@
         <em:description>Afficher les documents JSON dans le navigateur.</em:description>
       </Description>
     </em:localized>
-        
+
     <em:translator>funTomas (cs-CZ)</em:translator>
     <em:localized>
       <Description>
@@ -40,7 +40,7 @@
         <em:description>Dokumenty JSON přímo v prohlížeči.</em:description>
       </Description>
     </em:localized>
- 
+
     <em:translator>Fani Kozolchyk (es-ES)</em:translator>
     <em:translator>urko (es-ES)</em:translator>
     <em:localized>
@@ -49,7 +49,7 @@
         <em:description>Permite abrir documentos JSON en el navegador.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Xavi Ivars - Softcatalà (ca-AD)</em:translator>
     <em:localized>
       <Description>
@@ -57,7 +57,7 @@
         <em:description>Visualitza els documents JSON al navegador.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>drry (ja)</em:translator>
     <em:localized>
       <Description>
@@ -65,7 +65,7 @@
         <em:description>JSON ドキュメントをブラウザー内で表示します。</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Marcelo Ghelman (ghelman.net) (pt-BR)</em:translator>
     <em:localized>
       <Description>
@@ -73,7 +73,7 @@
         <em:description>Veja documentos JSON no navegador.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Пирятинский Виталий (ru-RU)</em:translator>
     <em:localized>
       <Description>
@@ -81,7 +81,7 @@
         <em:description>Просмотр документов в формате JSON прямо в браузере.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>hoolooday (zh-CN)</em:translator>
     <em:localized>
       <Description>
@@ -89,7 +89,7 @@
         <em:description>在浏览器中查看JSON 文件.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Стоян Димитров (bg-BG)</em:translator>
     <em:localized>
       <Description>
@@ -97,7 +97,7 @@
         <em:description>Директен преглед на JSON документи.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Archaeopteryx, Team erweiterungen.de (de)</em:translator>
     <em:localized>
       <Description>
@@ -105,7 +105,7 @@
         <em:description>JSON-Dokumente im Browser anzeigen.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>MIKES KASZMÁN István (hu-HU)</em:translator>
     <em:localized>
       <Description>
@@ -113,7 +113,7 @@
         <em:description>JSON dokumentumok megtekintése a böngészőben.</em:description>
       </Description>
     </em:localized>
-    
+
     <em:translator>Ersen Yoldaç (tr)</em:translator>
     <em:localized>
       <Description>
@@ -153,12 +153,12 @@
         <em:description>Перегляд JSON документів в браузер.</em:description>
       </Description>
     </em:localized>
-       
+
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>3.0</em:minVersion>
-        <em:maxVersion>9.*</em:maxVersion>
+        <em:minVersion>4.0</em:minVersion>
+        <em:maxVersion>24.*</em:maxVersion>
       </Description>
     </em:targetApplication>
   </Description>
