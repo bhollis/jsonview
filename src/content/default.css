@@ -26,8 +26,37 @@ body {
 .collapser {
   position: absolute;
   left: -1em;
+  top: -.2em;
   cursor: pointer;
   -moz-user-select: none;
+  transform: rotate(90deg);
+  transition: transform .2s;
+}
+
+.collapser:before {
+  content: "▸";
+}
+
+.collapsible {
+  transition: height 1.2s;
+  transition: width 1.2s;
+}
+
+.collapsible.collapsed {
+  height: .8em;
+  width: 1em;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+}
+.collapsible.collapsed:before {
+  content: "…";
+  width: 1em;
+  margin-left: .2em;
+}
+
+.collapser.collapsed {
+  transform: rotate(0deg);
 }
 
 .q {
@@ -41,7 +70,7 @@ li {
 }
 
 #error {
-  -moz-border-radius: 8px;
+  border-radius: 8px;
   border: 1px solid #970000;
   background-color: #F7E8E8;
   margin: .5em;
@@ -49,7 +78,7 @@ li {
 }
 
 .errormessage {
-  font-family: monospace;  
+  font-family: monospace;
 }
 
 #json {

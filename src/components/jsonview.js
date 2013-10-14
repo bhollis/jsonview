@@ -94,7 +94,7 @@ JSONFormatter.prototype = {
     }
 
     if ( hasContents ) {
-      output = '[<ul class="array collapsible">' + output + '</ul>]';
+      output = '<span class="collapser"></span>[<ul class="array collapsible">' + output + '</ul>]';
     } else {
       output = '[ ]';
     }
@@ -123,7 +123,7 @@ JSONFormatter.prototype = {
     }
 
     if ( hasContents ) {
-      output = '{<ul class="obj collapsible">' + output + '</ul>}';
+      output = '<span class="collapser"></span>{<ul class="obj collapsible">' + output + '</ul>}';
     } else {
       output = '{ }';
     }
