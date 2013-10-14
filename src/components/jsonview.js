@@ -62,7 +62,7 @@ JSONFormatter.prototype = {
     }
     else if (valueType == 'string') {
       if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
-        return '<a href="' + value + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
+        return '<a href="' + this.htmlEncode(value) + '"><span class="q">"</span>' + this.jsString(value) + '<span class="q">"</span></a>';
       } else {
         return '<span class="string">"' + this.jsString(value) + '"</span>';
       }
