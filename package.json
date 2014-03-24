@@ -1,0 +1,10 @@
+{
+  "id": "jsonview@brh.numbera.com",
+  "version": "0.8",
+  "name": "jsonview",
+  "title": "JSONView",
+  "description": "Views JSON in the browser.",
+  "homepage": "http://jsonview.com/",
+  "author": "Benjamin Hollis",
+  "license": "MIT License"
+}
