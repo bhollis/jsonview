@@ -1,4 +1,0 @@
-<!ENTITY jsonViewOptions "JSONView选项">
-<!ENTITY httpAcceptLabel "在HTTP的头文件请教中,包括&quot;application/json&quot;.">
-<!ENTITY httpAcceptAccesskey "I">
-<!ENTITY httpAcceptWarning "如果真的需要，请选中它。-它可能在一些网站上产生问题">

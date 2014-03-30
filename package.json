@@ -6,5 +6,38 @@
   "description": "Views JSON in the browser.",
   "homepage": "http://jsonview.com/",
   "author": "Benjamin Hollis",
-  "license": "MIT License"
+  "license": "MIT License",
+  "preferences": [
+    {
+      "name": "jsonHttpAccept",
+      "type": "bool",
+      "value": false,
+      "title": "Include \"application/json\" in the HTTP Accept header for requests",
+      "description": "Only enable this if you need it - this can cause problems with some websites"
+    }
+  ],
+  "contributors": [
+    "Gabriel Barros",
+    "Quoc-Viet Nguyen"
+  ],
+  "translators": [
+    "markh van BabelZilla.org (nl)",
+    "Goofy (fr)",
+    "funTomas (cs-CZ)",
+    "Fani Kozolchyk (es-ES)",
+    "urko (es-ES)",
+    "Xavi Ivars - Softcatalà (ca-AD)",
+    "drry (ja)",
+    "Marcelo Ghelman (ghelman.net) (pt-BR)",
+    "Пирятинский Виталий (ru-RU)",
+    "hoolooday (zh-CN)",
+    "Стоян Димитров (bg-BG)",
+    "Archaeopteryx, Team erweiterungen.de (de)",
+    "MIKES KASZMÁN István (hu-HU)",
+    "Ersen Yoldaç (tr)",
+    "Luana Di Muzio - BabelZilla (it)",
+    "ДакСРБИЈА (sr)",
+    "Mikael Hiort af Ornäs (sv-SE)",
+    "Zhouck (uk-UA)"
+  ]
 }

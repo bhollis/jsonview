@@ -1,4 +1,0 @@
-<!ENTITY jsonViewOptions "JSONView - Beállítások">
-<!ENTITY httpAcceptLabel "Az &quot;application/json&quot; beépülése a HTTP fejlécbe kérések esetén">
-<!ENTITY httpAcceptAccesskey "j">
-<!ENTITY httpAcceptWarning "Csak ha szükséges, akkor engedélyezze - ez problémákat okozhat néhány weboldalnál">

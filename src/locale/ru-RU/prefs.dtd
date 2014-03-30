@@ -1,4 +1,0 @@
-<!ENTITY jsonViewOptions "JSONView — Настройки">
-<!ENTITY httpAcceptLabel "Включить «application/json» в поле Accept заголовка запроса HTTP">
-<!ENTITY httpAcceptAccesskey "В">
-<!ENTITY httpAcceptWarning "Only enable this if you need it - this can cause problems with some websites">

@@ -1,4 +1,0 @@
-<!ENTITY jsonViewOptions "JSONView オプション">
-<!ENTITY httpAcceptLabel "HTTP Accept リクエストヘッダーに「application/json」を含める">
-<!ENTITY httpAcceptAccesskey "I">
-<!ENTITY httpAcceptWarning "Only enable this if you need it - this can cause problems with some websites">

@@ -1,4 +1,0 @@
-<!ENTITY jsonViewOptions "JSONView - Einstellungen">
-<!ENTITY httpAcceptLabel "&quot;application/json&quot; in den HTTP-Accept-Header einfügen">
-<!ENTITY httpAcceptAccesskey "I">
-<!ENTITY httpAcceptWarning "Nur bei Bedarf aktivieren, da es zu Problemen mit Websites führen kann">
