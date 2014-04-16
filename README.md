@@ -16,19 +16,13 @@ Reporting Issues
 
 Use the GitHub [Issue tracker for JSONView](https://github.com/bhollis/jsonview/issues) to file issues. Pull requests are especially welcome.
 
-Building JSONView
------------------
-
-* Install [ant](http://ant.apache.org/)
-* Run `ant` to produce an XPI
-
 Developing JSONView
 -------------------
-* [Set up your Firefox addon development environment](https://developer.mozilla.org/en/Setting_up_extension_development_environment)
-* Open your [Firefox profile folder](http://kb.mozillazine.org/Profile_folder)
-* Open 'extensions' subfolder
-* Create a file called `jsonview@brh.numbera.com` and put the path to your checked out JSONView's `src` folder into it.
-* Run Firefox. You can now restart Firefox to pick up changes to JSONView in source.
+* Install [Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)
+* Make sure the SDK Virtual Environment is activated by running `cfx` from shell prompt.
+* Run `python build.py run` to test in Firefox.
+* Run `python build.py xpi` to create an xpi.
+* Run `python build.py fix` to fix localized description in the generated xpi. See [Bug 661083](https://bugzilla.mozilla.org/show_bug.cgi?id=661083).
 
 Unofficial Ports
 ----------------
