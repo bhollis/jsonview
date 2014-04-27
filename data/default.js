@@ -24,6 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
     collapsible.classList.toggle('collapsed');
   }
 
+  /*
+   * Collapses the whole json using keyboard
+   * TODO: Add a navigator support for each of the elements
+   */
+  function collapseAll(evt) {
+    var inputList = document.getElementsByClassName('collapser');
+    if (evt.keyCode === 37) {  // Collapses the json on left arrow key up
+      for (var i = 0; i < len; i++) {
+        inputList[i].nextElementSibling.classList.add('collapsed');
+      }
+    } else if (evt.keyCode === 39) { // Expands the json on right arrow key up
+      for (var i = 0; i < len; i++) {
+        inputList[i].nextElementSibling.classList.remove('collapsed');
+      }
+    } 
+  }
+  
   // collapse with event delegation
   document.addEventListener('click', collapse, false);
+  document.addEventListener('keyup', collapseAll, false);
 }, false);
+
