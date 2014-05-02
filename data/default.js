@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
   function collapseAll(evt) {
     var inputList = document.getElementsByClassName('collapser');
     if (evt.keyCode === 37) {  // Collapses the json on left arrow key up
-      for (var i = 0; i < len; i++) {
+      for (var i = 0; i < inputList.length; i++) {
         inputList[i].nextElementSibling.classList.add('collapsed');
       }
     } else if (evt.keyCode === 39) { // Expands the json on right arrow key up
-      for (var i = 0; i < len; i++) {
+      for (var i = 0; i < inputList.length; i++) {
         inputList[i].nextElementSibling.classList.remove('collapsed');
       }
     } 
