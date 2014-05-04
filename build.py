@@ -11,8 +11,11 @@ XPI_NAME = "{}-{}.xpi".format(NAME, VERSION)
 
 ## Helpers ##
 
-# Search for profile dir
+
 def getProfileDir(profileName):
+  """
+  Search for profile dir
+  """
   if os.name == "nt":
     homeDir = os.path.join(os.getenv("APPDATA"), "Mozilla", "Firefox")
   else:
@@ -28,8 +31,11 @@ def getProfileDir(profileName):
       return os.path.join(homeDir, config.get(section, "Path"))
   return None
 
-# Copy all localized description tags
+
 def copyLocalizedDescription(source, target):
+  """
+  Copy all localized description tags
+  """
   rdfNamespace = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   emNamespace = "http://www.mozilla.org/2004/em-rdf#"
 
@@ -48,14 +54,20 @@ def copyLocalizedDescription(source, target):
   ET.register_namespace("em", emNamespace)
   targetTree.write(target, "utf-8", True)
 
-# Unpack a xpi to a folder
+
 def unpackXpi(source, target):
+  """
+  Unpack a xpi to a folder
+  """
   xpi = zipfile.ZipFile(source, "r")
   xpi.extractall(target)
   xpi.close()
 
-# Recreate a xpi file from a folder
+
 def packXpi(source, target):
+  """
+  Recreate a xpi file from a folder
+  """
   xpi = zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED)
 
   for dirPath, dirNames, fileNames in os.walk(source):
@@ -66,13 +78,19 @@ def packXpi(source, target):
 
   xpi.close()
 
-# Generate XPI file
+
 def createXpi(xpiName):
+  """
+  Generate XPI file
+  """
   args = ["cfx", "xpi", "--output-file=" + xpiName]
   return subprocess.call(args)
 
-# Run in browser
+
 def runBrowser(profileDir):
+  """
+  Run in browser
+  """
   args = ["cfx", "run"]
   if profileDir is not None:
     args.append("-p")
@@ -80,10 +98,13 @@ def runBrowser(profileDir):
 
   return subprocess.call(args)
 
-# Mozilla bug 661083
-# Addon metadata can not be localized. It requires unpacking the xpi,
-# updating the install.rdf and compressing everything again.
+
 def fixLocalizedDescription(xpiName):
+  """
+  Mozilla bug 661083
+  Addon metadata can not be localized. It requires unpacking the xpi,
+  updating the install.rdf and compressing everything again.
+  """
   if not os.path.isfile(xpiName):
     print("File {} must be created before running this task")
     return 1
@@ -100,8 +121,11 @@ def fixLocalizedDescription(xpiName):
   shutil.rmtree(targetDir)
   return 0
 
-# Print usage
+
 def printUsage():
+  """
+  Print usage
+  """
   print("Usage: {} [OPTIONS...] COMMAND".format(sys.argv[0]))
   print("""
 COMMANDS:
