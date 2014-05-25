@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os, sys, subprocess, tempfile, shutil
-import getopt
+import argparse
 import json, ConfigParser
 import xml.etree.ElementTree as ET
 import zipfile
@@ -118,53 +118,42 @@ def fixLocalizedDescription(inputXpi, outputXpi):
   shutil.rmtree(targetDir)
 
 
-def printUsage():
+def parseArgs():
   """
-  Print usage
+  Create parser for command arguments
   """
-  print("Usage: {} [OPTIONS...] COMMAND".format(sys.argv[0]))
-  print("""
-COMMANDS:
-  run     Run the addon
-  xpi     Create xpi file
-  fix     Fix localized description in generated xpi
+  class ArgParser(argparse.ArgumentParser):
+    def error(self, message):
+      sys.stderr.write("error: {}\n".format(message))
+      self.print_help()
+      sys.exit(2)
 
-OPTIONS:
-  -p PROFILE, --profile=PROFILE
-          Used with command 'run'. Open the addon with the specific browser
-          profile. PROFILE can be either an absolute path or a profile name
-          (i.e. 'dev'), which then be translated to profile path in
-          ~/.mozilla/firefox
-""")
+  parser = ArgParser(formatter_class=argparse.RawTextHelpFormatter)
+  parser.add_argument("-p", "--profile", default=None, help="""\
+Used with command 'run'. Open the addon with the specific browser
+profile. PROFILE can be either an absolute path or a profile name
+(i.e. 'dev'), which then be translated to profile path in
+~/.mozilla/firefox.""")
+  parser.add_argument("command", nargs="+", help="""\
+run: Run the addon.
+xpi: Create xpi file.
+fix: Fix localized description in generated xpi.""")
+  return parser.parse_args()
 
 ## Tasks ##
-def help(opts):
-  printUsage()
 
-def run(opts):
-  profileDir = None
-
-  for o, a in opts:
-    if o in ("-p", "--profile"):
-      profileDir = a
-    else:
-      print("Unhandled option: {}".format(o))
-      printUsage()
-      return 1
-
+def run(args):
   # If profile is just a name, search for full path
-  if profileDir is not None \
-      and "/" not in profileDir \
-      and "\\" not in profileDir:
-    profileName = profileDir
-    profileDir = getProfileDir(profileName)
+  if args.profile is not None \
+      and "/" not in args.profile \
+      and "\\" not in args.profile:
+    args.profile = getProfileDir(args.profile)
+  runBrowser(args.profile)
 
-  return runBrowser(profileDir)
+def xpi(args):
+  createXpi(XPI_NAME)
 
-def xpi(opts):
-  return createXpi(XPI_NAME)
-
-def fix(opts):
+def fix(args):
   if not os.path.isfile(XPI_NAME):
     raise Exception("File '{}' must be created before running this task."
         .format(XPI_NAME))
@@ -172,27 +161,17 @@ def fix(opts):
 
   fixLocalizedDescription(XPI_NAME, outputXpi)
   print("File created: {}".format(outputXpi))
-  return 0
+
 
 if __name__ == "__main__":
-  try:
-    opts, args = getopt.getopt(sys.argv[1:], "p:", ["profile="])
-  except getopt.GetoptError as err:
-    print(str(err))
-    printUsage()
-    sys.exit(1)
+  args = parseArgs()
 
-  if not args:
-    printUsage()
-    sys.exit(1)
-
-  for cmd in args:
+  for cmd in args.command:
     if cmd in locals():
       print("Running task: {}...".format(cmd))
-      locals()[cmd](opts)
+      locals()[cmd](args)
     else:
       print("Command '{}' is not supported".format(cmd))
-      printUsage()
       sys.exit(1)
   sys.exit(0)
 
