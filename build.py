@@ -29,7 +29,8 @@ def getProfileDir(profileName):
     if section.startswith("Profile") \
         and config.get(section, "Name") == profileName:
       return os.path.join(homeDir, config.get(section, "Path"))
-  return None
+
+  raise Exception("Profile '{}' does not exist.".format(profileName))
 
 
 def copyLocalizedDescription(source, target):
@@ -99,27 +100,22 @@ def runBrowser(profileDir):
   return subprocess.call(args)
 
 
-def fixLocalizedDescription(xpiName):
+def fixLocalizedDescription(inputXpi, outputXpi):
   """
   Mozilla bug 661083
   Addon metadata can not be localized. It requires unpacking the xpi,
   updating the install.rdf and compressing everything again.
   """
-  if not os.path.isfile(xpiName):
-    print("File {} must be created before running this task")
-    return 1
-
   targetDir = tempfile.mkdtemp()
   targetFile = "install.rdf"
 
-  unpackXpi(XPI_NAME, targetDir)
+  unpackXpi(inputXpi, targetDir)
   copyLocalizedDescription(os.path.join("src", targetFile), \
       os.path.join(targetDir, targetFile))
-  packXpi(targetDir, "fixed-" + xpiName)
+  packXpi(targetDir, outputXpi)
 
   # Cleanup
   shutil.rmtree(targetDir)
-  return 0
 
 
 def printUsage():
@@ -162,9 +158,6 @@ def run(opts):
       and "\\" not in profileDir:
     profileName = profileDir
     profileDir = getProfileDir(profileName)
-    if profileDir is None:
-      print("Profile '{}' does not exist.".format(profileName))
-      return 1
 
   return runBrowser(profileDir)
 
@@ -172,16 +165,13 @@ def xpi(opts):
   return createXpi(XPI_NAME)
 
 def fix(opts):
-  targetDir = tempfile.mkdtemp()
-  targetFile = "install.rdf"
+  if not os.path.isfile(XPI_NAME):
+    raise Exception("File '{}' must be created before running this task."
+        .format(XPI_NAME))
+  outputXpi = "fixed-{}".format(XPI_NAME)
 
-  unpackXpi(XPI_NAME, targetDir)
-  copyLocalizedDescription(os.path.join("src", targetFile), \
-      os.path.join(targetDir, targetFile))
-  packXpi(targetDir, "fixed-" + XPI_NAME)
-
-  # Cleanup
-  shutil.rmtree(targetDir)
+  fixLocalizedDescription(XPI_NAME, outputXpi)
+  print("File created: {}".format(outputXpi))
   return 0
 
 if __name__ == "__main__":
@@ -205,3 +195,5 @@ if __name__ == "__main__":
       printUsage()
       sys.exit(1)
   sys.exit(0)
+
+# vim: set ts=2 sts=2 sw=2 expandtab:
