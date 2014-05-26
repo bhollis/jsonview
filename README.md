@@ -24,6 +24,8 @@ Developing JSONView
 * Run `python build.py xpi` to create an xpi.
 * Run `python build.py fix` to fix localized description in the generated xpi. See [Bug 661083](https://bugzilla.mozilla.org/show_bug.cgi?id=661083).
 
+The build script also comes with a HTTP server which can be used to test JSON files in `tests` folder. To start the integrated server, listening on port 8000, along with Firefox, run `python build.py -b 8000 run`.
+
 Unofficial Ports
 ----------------
 * [jsonview-chrome](https://github.com/jamiew/jsonview-chrome)
