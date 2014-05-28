@@ -1,9 +1,12 @@
 #!/usr/bin/env python
-import os, sys, subprocess, tempfile, shutil
-import getopt
+import os, sys
+import subprocess, threading
+import tempfile, shutil
+import argparse
 import json, ConfigParser
 import xml.etree.ElementTree as ET
 import zipfile
+import SimpleHTTPServer, SocketServer
 
 NAME = "jsonview"
 VERSION = json.load(open("package.json"))["version"]
@@ -29,7 +32,8 @@ def getProfileDir(profileName):
     if section.startswith("Profile") \
         and config.get(section, "Name") == profileName:
       return os.path.join(homeDir, config.get(section, "Path"))
-  return None
+
+  raise Exception("Profile '{}' does not exist.".format(profileName))
 
 
 def copyLocalizedDescription(source, target):
@@ -87,7 +91,7 @@ def createXpi(xpiName):
   return subprocess.call(args)
 
 
-def runBrowser(profileDir):
+def runBrowser(profileDir=None, browserArgs=None):
   """
   Run in browser
   """
@@ -95,113 +99,132 @@ def runBrowser(profileDir):
   if profileDir is not None:
     args.append("-p")
     args.append(profileDir)
+  if browserArgs is not None:
+    args.append("--binary-args")
+    args.append(browserArgs)
 
   return subprocess.call(args)
 
 
-def fixLocalizedDescription(xpiName):
+def runHTTPServer(port):
+  """
+  Start HTTP server at current directory
+  """
+  class TCPServer(SocketServer.TCPServer):
+    allow_reuse_address = True
+
+    def start(self):
+      self.thread = threading.Thread(target=self.serve_forever)
+      self.thread.start()
+
+    def stop(self):
+      self.shutdown()
+      self.thread.join()
+
+  server = TCPServer(("", port), SimpleHTTPServer.SimpleHTTPRequestHandler)
+  server.start()
+  return server
+
+
+def fixLocalizedDescription(inputXpi, outputXpi):
   """
   Mozilla bug 661083
   Addon metadata can not be localized. It requires unpacking the xpi,
   updating the install.rdf and compressing everything again.
   """
-  if not os.path.isfile(xpiName):
-    print("File {} must be created before running this task")
-    return 1
-
   targetDir = tempfile.mkdtemp()
   targetFile = "install.rdf"
 
-  unpackXpi(XPI_NAME, targetDir)
+  unpackXpi(inputXpi, targetDir)
   copyLocalizedDescription(os.path.join("src", targetFile), \
       os.path.join(targetDir, targetFile))
-  packXpi(targetDir, "fixed-" + xpiName)
+  packXpi(targetDir, outputXpi)
 
   # Cleanup
   shutil.rmtree(targetDir)
-  return 0
 
 
-def printUsage():
+def parseArgs():
   """
-  Print usage
+  Create parser for command arguments
   """
-  print("Usage: {} [OPTIONS...] COMMAND".format(sys.argv[0]))
-  print("""
-COMMANDS:
-  run     Run the addon
-  xpi     Create xpi file
-  fix     Fix localized description in generated xpi
+  class ArgParser(argparse.ArgumentParser):
+    def error(self, message):
+      sys.stderr.write("error: {}\n".format(message))
+      self.print_help()
+      sys.exit(2)
 
-OPTIONS:
-  -p PROFILE, --profile=PROFILE
-          Used with command 'run'. Open the addon with the specific browser
-          profile. PROFILE can be either an absolute path or a profile name
-          (i.e. 'dev'), which then be translated to profile path in
-          ~/.mozilla/firefox
-""")
+  parser = ArgParser(formatter_class=argparse.RawTextHelpFormatter)
+  parser.add_argument("-p", "--profile", default=None, help="""\
+Used with command 'run'. Open the addon with the specific browser
+profile. PROFILE can be either an absolute path or a profile name
+(i.e. 'dev'), which then be translated to profile path in
+~/.mozilla/firefox.""")
+  parser.add_argument("-b", "--bind", metavar="PORT", default=None, help="""\
+Used with command 'run'. Also start integrated HTTP server
+listening on the given port number.""")
+  parser.add_argument("-u", "--url", default=None, help="""\
+Used with command 'run'. Also open the given url from the browser.""")
+  parser.add_argument("command", nargs="+", help="""\
+run: Run the addon.
+xpi: Create xpi file.
+fix: Fix localized description in generated xpi.""")
+
+  return parser.parse_args()
 
 ## Tasks ##
-def help(opts):
-  printUsage()
 
-def run(opts):
-  profileDir = None
-
-  for o, a in opts:
-    if o in ("-p", "--profile"):
-      profileDir = a
-    else:
-      print("Unhandled option: {}".format(o))
-      printUsage()
-      return 1
-
+def run(args):
   # If profile is just a name, search for full path
-  if profileDir is not None \
-      and "/" not in profileDir \
-      and "\\" not in profileDir:
-    profileName = profileDir
-    profileDir = getProfileDir(profileName)
-    if profileDir is None:
-      print("Profile '{}' does not exist.".format(profileName))
-      return 1
+  if args.profile is not None \
+      and "/" not in args.profile \
+      and "\\" not in args.profile:
+    args.profile = getProfileDir(args.profile)
 
-  return runBrowser(profileDir)
+  # Start HTTP server if listen port is specified
+  if args.bind is not None:
+    print("Starting HTTP server...")
+    server = runHTTPServer(int(args.bind))
+    if args.url is None:
+      # Automatically open tests directory
+      args.url = "localhost:{}/tests".format(args.bind)
+  else:
+    server = None
 
-def xpi(opts):
-  return createXpi(XPI_NAME)
+  # Prepend url parameter
+  if args.url is not None:
+    args.url = "-url {}".format(args.url)
 
-def fix(opts):
-  targetDir = tempfile.mkdtemp()
-  targetFile = "install.rdf"
+  runBrowser(args.profile, args.url)
 
-  unpackXpi(XPI_NAME, targetDir)
-  copyLocalizedDescription(os.path.join("src", targetFile), \
-      os.path.join(targetDir, targetFile))
-  packXpi(targetDir, "fixed-" + XPI_NAME)
+  # Browser closed, terminiate the HTTP server
+  if server is not None:
+    print("Shutting down HTTP server...")
+    server.stop()
 
-  # Cleanup
-  shutil.rmtree(targetDir)
-  return 0
+def xpi(args):
+  createXpi(XPI_NAME)
+
+def fix(args):
+  if not os.path.isfile(XPI_NAME):
+    raise Exception("File '{}' must be created before running this task."
+        .format(XPI_NAME))
+  outputXpi = "fixed-{}".format(XPI_NAME)
+
+  fixLocalizedDescription(XPI_NAME, outputXpi)
+  print("File created: {}".format(outputXpi))
+
 
 if __name__ == "__main__":
-  try:
-    opts, args = getopt.getopt(sys.argv[1:], "p:", ["profile="])
-  except getopt.GetoptError as err:
-    print(str(err))
-    printUsage()
-    sys.exit(1)
+  args = parseArgs()
 
-  if not args:
-    printUsage()
-    sys.exit(1)
-
-  for cmd in args:
+  for cmd in args.command:
     if cmd in locals():
       print("Running task: {}...".format(cmd))
-      locals()[cmd](opts)
+      locals()[cmd](args)
     else:
       print("Command '{}' is not supported".format(cmd))
-      printUsage()
       sys.exit(1)
   sys.exit(0)
+
+# vim: set ts=2 sts=2 sw=2 expandtab:
