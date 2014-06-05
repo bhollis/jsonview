@@ -91,9 +91,13 @@ li {
   color: rgb(167, 5, 5);
 }
 
-.errorlocation {
+.errorcolumn {
   background-color: rgb(167, 5, 5);
   color: white;
+}
+
+.errorline {
+    background-color: rgb(255, 226, 226);
 }
 
 #json {
