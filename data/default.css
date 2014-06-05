@@ -65,6 +65,13 @@ body {
   color: transparent;
 }
 
+.quoted .q {
+  display: inline;
+  width: auto;
+  color: inherit;
+  font-weight: normal;
+}
+
 li {
   position: relative;
 }
