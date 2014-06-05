@@ -1,3 +1,9 @@
+JSONView 0.9 (unreleased)
+---
+* JSON parsing errors now include details and highlight the line/column of the error.
+* Expanding and collapsing with arrow keys now does not collapse the top-level object/array.
+* Object keys that are not valid JS identifiers are now displayed with quotes around them.
+
 JSONView 0.8
 ---
 * Rewritten as a restartless addon using the Addon SDK thanks to Quoc-Viet Nguyen.
@@ -13,7 +19,7 @@ JSONView 0.8
 JSONView 0.7
 ---
 
-* Firefox 8+ compatibility. 
+* Firefox 8+ compatibility.
 
 JSONView 0.6
 ---
@@ -39,7 +45,7 @@ JSONView 0.4
 * Preference dialog with an option to send "application/json" in the HTTP Accept header.
 * Fixed a bug where values that were 0 or false would not show up.
 * Fixed a bug where documents would sometimes show up as invalid when Firebug was enabled
-* Bumped compatibility for 3.7a1pre 
+* Bumped compatibility for 3.7a1pre
 
 JSONView 0.3
 ---
@@ -52,7 +58,7 @@ JSONView 0.2
 ---
 
 * .json files can be opened in JSONView from the local machine.
-* Added Bulgarian, German, Hungarian, and (partial) Turkish translations. Thanks to 
+* Added Bulgarian, German, Hungarian, and (partial) Turkish translations. Thanks to
 	Стоян Димитров, Archaeopteryx, Team erweiterungen.de, MIKES KASZMÁN István and Ersen Yolda from BabelZilla.org.
 * Compatible with FF 3.5.*
 
@@ -60,8 +66,8 @@ JSONView 0.1
 ---
 
 * String values which contain only a URL are displayed as a clickable link. Props to stig.murberg for the patch.
-* Added Catalan, Spanish, Japanese, Portugese (Brazil), Russian, and Simplified Chinese translations. Thanks to 
-	Fani Kozolchyk, and Xavi Ivars - Softcatalà, hoolooday, drry, Marcelo Ghelman (ghelman.net), Пирятинский Виталий, 
+* Added Catalan, Spanish, Japanese, Portugese (Brazil), Russian, and Simplified Chinese translations. Thanks to
+	Fani Kozolchyk, and Xavi Ivars - Softcatalà, hoolooday, drry, Marcelo Ghelman (ghelman.net), Пирятинский Виталий,
 	and urko from BabelZilla.org.
 
 JSONView 0.1b3:
