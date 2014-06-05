@@ -29,20 +29,24 @@ document.addEventListener('DOMContentLoaded', function() {
    * TODO: Add a navigator support for each of the elements
    */
   function collapseAll(evt) {
-    var inputList = document.getElementsByClassName('collapser');
+    var inputList;
+
     if (evt.keyCode === 37) {  // Collapses the json on left arrow key up
+      inputList = document.querySelectorAll('.collapsible, .collapser');
       for (var i = 0; i < inputList.length; i++) {
-        inputList[i].nextElementSibling.classList.add('collapsed');
+        if (inputList[i].parentNode.id != 'json') {
+          inputList[i].classList.add('collapsed');
+        }
       }
     } else if (evt.keyCode === 39) { // Expands the json on right arrow key up
+      inputList = document.querySelectorAll('.collapsed');
       for (var i = 0; i < inputList.length; i++) {
-        inputList[i].nextElementSibling.classList.remove('collapsed');
+        inputList[i].classList.remove('collapsed');
       }
-    } 
+    }
   }
-  
+
   // collapse with event delegation
   document.addEventListener('click', collapse, false);
   document.addEventListener('keyup', collapseAll, false);
 }, false);
-
