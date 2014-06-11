@@ -126,3 +126,11 @@ h1 {
   font-family: monospace;
   color: #A52A2A;
 }
+
+li.clicked {
+  background-color: rgba(128, 255, 128, 0.2);
+}
+
+li:hover {
+  background-color: rgba(128, 128, 255, 0.2);
+}

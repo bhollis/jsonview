@@ -6,6 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
   function collapse(evt) {
     var collapser = evt.target;
 
+    var clickeds = document.querySelectorAll('.clicked');
+    for(var i=0; i<clickeds.length; i++){
+      clickeds[i].classList.toggle('clicked');
+    }
+    for(var node = collapser; node.parentNode; node = node.parentNode){
+      if(node.classList){
+        node.classList.toggle('clicked');
+      } 
+    }
+
     while (collapser && (!collapser.classList || !collapser.classList.contains('collapser'))) {
       collapser = collapser.nextSibling;
     }
