@@ -156,15 +156,15 @@ def parseArgs():
 
   parser = ArgParser(formatter_class=argparse.RawTextHelpFormatter)
   parser.add_argument("-p", "--profile", default=None, help="""\
-Used with command 'run'. Open the addon with the specific browser
+Used with command 'run'. Opens the addon with the specific browser
 profile. PROFILE can be either an absolute path or a profile name
-(i.e. 'dev'), which then be translated to profile path in
+(i.e. 'dev'), which can then be translated to the profile path in
 ~/.mozilla/firefox.""")
   parser.add_argument("-b", "--bind", metavar="PORT", default=None, help="""\
-Used with command 'run'. Also start integrated HTTP server
+Used with command 'run'. Also starts integrated HTTP server
 listening on the given port number.""")
   parser.add_argument("-u", "--url", default=None, help="""\
-Used with command 'run'. Also open the given url from the browser.""")
+Used with command 'run'. Also opens the given url from the browser.""")
   parser.add_argument("command", nargs="+", help="""\
 run: Run the addon.
 xpi: Create xpi file.
@@ -175,13 +175,16 @@ fix: Fix localized description in generated xpi.""")
 ## Tasks ##
 
 def run(args):
+  """
+  Runs the add-on.  Starts a browser session with given URL.
+  """
   # If profile is just a name, search for full path
   if args.profile is not None \
       and "/" not in args.profile \
       and "\\" not in args.profile:
     args.profile = getProfileDir(args.profile)
 
-  # Start HTTP server if listen port is specified
+  # Start HTTP server if listening port is specified
   if args.bind is not None:
     print("Starting HTTP server...")
     server = runHTTPServer(int(args.bind))
@@ -197,7 +200,7 @@ def run(args):
 
   runBrowser(args.profile, args.url)
 
-  # Browser closed, terminiate the HTTP server
+  # Browser closed, terminate the HTTP server
   if server is not None:
     print("Shutting down HTTP server...")
     server.stop()
@@ -206,6 +209,9 @@ def xpi(args):
   createXpi(XPI_NAME)
 
 def fix(args):
+  """
+  Checks if XPI file is created, or else creates it
+  """
   if not os.path.isfile(XPI_NAME):
     raise Exception("File '{}' must be created before running this task."
         .format(XPI_NAME))
