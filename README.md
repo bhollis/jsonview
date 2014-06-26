@@ -20,8 +20,8 @@ Developing JSONView
 -------------------
 * Install [Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)
 * Make sure the SDK Virtual Environment is activated by running `cfx` from shell prompt.
-* Run `python build.py run` to test in Firefox.
-* Run `python build.py xpi` to create an xpi.
+* Run `python build.py run` or `cfx run` to test in Firefox.
+* Run `python build.py xpi` or `cfx xpi` to create an xpi.
 * Run `python build.py fix` to fix localized description in the generated xpi. See [Bug 661083](https://bugzilla.mozilla.org/show_bug.cgi?id=661083).
 
 The build script also comes with a HTTP server which can be used to test JSON files in `tests` folder. To start the integrated server, listening on port 8000, along with Firefox, run `python build.py -b 8000 run`.
