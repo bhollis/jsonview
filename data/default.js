@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   function collapseAll(evt) {
     var inputList;
+ 
+    // Ignore anything paired with a modifier key. See https://github.com/bhollis/jsonview/issues/69
+    if (evt.ctrlKey || evt.shiftKey || evt.altKey || evt.metaKey) {
+      return;
+    }
 
     if (evt.keyCode === 37) {  // Collapses the json on left arrow key up
       inputList = document.querySelectorAll('.collapsible, .collapser');
@@ -38,11 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
           inputList[i].classList.add('collapsed');
         }
       }
+      evt.preventDefault();
     } else if (evt.keyCode === 39) { // Expands the json on right arrow key up
       inputList = document.querySelectorAll('.collapsed');
       for (var i = 0; i < inputList.length; i++) {
         inputList[i].classList.remove('collapsed');
       }
+      evt.preventDefault();
     }
   }
 
