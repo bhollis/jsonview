@@ -1,8 +1,11 @@
-JSONView 0.9 (unreleased)
+JSONView 0.9
 ---
 * JSON parsing errors now include details and highlight the line/column of the error.
 * Expanding and collapsing with arrow keys now does not collapse the top-level object/array.
 * Object keys that are not valid JS identifiers are now displayed with quotes around them.
+* Dragging a .json file onto Firefox should syntax-highlight it correctly, again.
+* Navigating in Firefox with keyboard shortcuts will no longer trigger expanding/collapsing JSON.
+* Updated compatibility to state that JSONView is now only compatible with Firefox 21+. This was true of 0.8 as well but was not documented correctly. It is possible to install JSONView 0.7 on older Firefox.
 
 JSONView 0.8
 ---
