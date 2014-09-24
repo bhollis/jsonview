@@ -45,7 +45,7 @@ body {
 }
 
 .collapsible.collapsed {
-  height: .8em;
+  height: .9em;
   width: 1em;
   display: inline-block;
   overflow: hidden;
