@@ -28,6 +28,7 @@ The build script also comes with a HTTP server which can be used to test JSON fi
 
 Unofficial Ports
 ----------------
+* [jsonview-safari](https://github.com/acrogenesis/jsonview-safari)
 * [jsonview-chrome](https://github.com/jamiew/jsonview-chrome)
 * [jsonview-opera](https://github.com/fearphage/jsonview-opera)
 
