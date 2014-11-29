@@ -18,6 +18,9 @@ Use the GitHub [Issue tracker for JSONView](https://github.com/bhollis/jsonview/
 
 Developing JSONView
 -------------------
+
+Before contributing to JSONView, make sure to read the [Contributing Guidelines](CONTRIBUTING.md). I appreciate contributions people make to JSONView, but the goal of the add-on is to be simple and straightforward, so I frequently reject contributions that add complexity or unnecessary features. Please consider filing an issue before doing any work, so you don't waste time on something I won't accept.
+
 * Install [Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)
 * Make sure the SDK Virtual Environment is activated by running `cfx` from shell prompt.
 * Run `python build.py run` or `cfx run` to test in Firefox.
@@ -28,9 +31,9 @@ The build script also comes with a HTTP server which can be used to test JSON fi
 
 Unofficial Ports
 ----------------
-* [jsonview-safari](https://github.com/acrogenesis/jsonview-safari)
 * [jsonview-chrome](https://github.com/jamiew/jsonview-chrome)
 * [jsonview-opera](https://github.com/fearphage/jsonview-opera)
+* [jsonview-safari](https://github.com/acrogenesis/jsonview-safari)
 
 Common Issues
 -------------
