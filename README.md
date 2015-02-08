@@ -11,6 +11,13 @@ Once you've got JSONView installed, check out [this example JSON file](http://js
 
 If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Just go to [BabelZilla](http://www.babelzilla.org/index.php?option=com_wts&Itemid=88&type=show&extension=4898) and register as a translator for the JSONView extension. There's not much there to translate!
 
+Keyboard Shortcuts
+----------------
+
+Left Arrow - Collapses the json on key up
+
+Right Arrow - Expands the json on key up
+
 Reporting Issues
 ----------------
 
