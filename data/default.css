@@ -49,6 +49,7 @@ body {
   width: 1em;
   display: inline-block;
   overflow: hidden;
+  vertical-align: top;
   margin: 0;
 }
 .collapsible.collapsed:before {
