@@ -8,8 +8,9 @@ import xml.etree.ElementTree as ET
 import zipfile
 import SimpleHTTPServer, SocketServer
 
-NAME = "jsonview"
-VERSION = json.load(open("package.json"))["version"]
+packageJson = json.load(open("package.json"))
+NAME = packageJson["id"]
+VERSION = packageJson["version"]
 XPI_NAME = "{}-{}.xpi".format(NAME, VERSION)
 
 ## Helpers ##
@@ -83,11 +84,11 @@ def packXpi(source, target):
   xpi.close()
 
 
-def createXpi(xpiName):
+def createXpi():
   """
   Generate XPI file
   """
-  args = ["cfx", "xpi", "--output-file=" + xpiName]
+  args = ["jpm", "xpi"]
   return subprocess.call(args)
 
 
@@ -95,7 +96,7 @@ def runBrowser(profileDir=None, browserArgs=None):
   """
   Run in browser
   """
-  args = ["cfx", "run"]
+  args = ["jpm", "run"]
   if profileDir is not None:
     args.append("-p")
     args.append(profileDir)
@@ -128,7 +129,7 @@ def runHTTPServer(port):
 
 def fixLocalizedDescription(inputXpi, outputXpi):
   """
-  Mozilla bug 661083
+  Mozilla bug 661083/1123428
   Addon metadata can not be localized. It requires unpacking the xpi,
   updating the install.rdf and compressing everything again.
   """
@@ -206,7 +207,7 @@ def run(args):
     server.stop()
 
 def xpi(args):
-  createXpi(XPI_NAME)
+  createXpi()
 
 def fix(args):
   """

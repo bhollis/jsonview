@@ -3,20 +3,8 @@
      xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
 
-    <em:id>jsonview@brh.numbera.com</em:id>
-    <em:version>0.9</em:version>
-
-    <em:name>JSONView</em:name>
-    <em:description>Views JSON in the browser.</em:description>
-    <em:creator>Benjamin Hollis</em:creator>
-		<em:homepageURL>http://jsonview.com/</em:homepageURL>
-    <em:iconURL>chrome://jsonview/skin/logo.png</em:iconURL>
-    <em:optionsURL>chrome://jsonview/content/prefs/prefs.xul</em:optionsURL>
-    <em:type>2</em:type>
-
-    <!-- Initial JSONP support -->
-    <em:contributor>Gabriel Barros</em:contributor>
-    <em:contributor>Quoc-Viet Nguyen</em:contributor>
+    <!-- This file is only used to copy over localized descriptions in the
+         JPM-created XPI, due to Bug 1123428. -->
 
     <em:translator>markh van BabelZilla.org (nl)</em:translator>
     <em:localized>
@@ -155,12 +143,5 @@
       </Description>
     </em:localized>
 
-    <em:targetApplication>
-      <Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>21.0</em:minVersion>
-        <em:maxVersion>24.*</em:maxVersion>
-      </Description>
-    </em:targetApplication>
   </Description>
 </RDF>

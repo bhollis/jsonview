@@ -1,12 +1,16 @@
 {
   "id": "jsonview@brh.numbera.com",
-  "version": "0.9",
+  "version": "0.9.1",
   "name": "jsonview",
   "title": "JSONView",
   "description": "Views JSON in the browser.",
   "homepage": "http://jsonview.com/",
   "author": "Benjamin Hollis",
   "license": "MIT License",
+  "main": "lib/main.js",
+  "engines": {
+    "firefox": ">=21.0"
+  },
   "preferences": [
     {
       "name": "jsonHttpAccept",
