@@ -1,3 +1,8 @@
+JSONView 1.0
+---
+* JSONView now works with Firefox's multi-process mode (electrolysis).
+* Ellipses once again appear when arrays and objects are collapsed.
+
 JSONView 0.9
 ---
 * JSON parsing errors now include details and highlight the line/column of the error.
