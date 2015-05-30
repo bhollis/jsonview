@@ -17,7 +17,14 @@
       "type": "bool",
       "value": false,
       "title": "Include \"application/json\" in the HTTP Accept header for requests",
-      "description": "Only enable this if you need it - this can cause problems with some websites"
+      "description": "Only enable this if you need it - this can cause problems with some websites."
+    },
+    {
+      "name": "alternateContentTypes",
+      "type": "string",
+      "value": "",
+      "title": "Alternate JSON content types",
+      "description": "Other content types that should be treated as JSON, separated by commas."
     }
   ],
   "contributors": [

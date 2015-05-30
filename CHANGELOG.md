@@ -2,6 +2,7 @@ JSONView 1.0
 ---
 * JSONView now works with Firefox's multi-process mode (electrolysis).
 * Ellipses once again appear when arrays and objects are collapsed.
+* Users can opt in to treating content types other than "application/json" as JSON. Add new content types in the extension preferences. Please be careful with this setting!
 
 JSONView 0.9
 ---
