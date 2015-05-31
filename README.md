@@ -9,7 +9,7 @@ Once you've got JSONView installed, check out [this example JSON file](http://js
 
 [CouchDB](http://couchdb.apache.org/) users and others who need to have `application/json` sent in the HTTP Accept header to serve JSON properly should set that option in JSONView's options panel. Be aware that telling sites that you accept JSON can mess up some sites that don't expect it.
 
-If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Just go to [BabelZilla](http://www.babelzilla.org/index.php?option=com_wts&Itemid=88&type=show&extension=4898) and register as a translator for the JSONView extension. There's not much there to translate!
+If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `locale` and `src/locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There's not much there to translate!
 
 Keyboard Shortcuts
 ----------------

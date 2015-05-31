@@ -5,6 +5,7 @@ JSONView 1.0
 * Users can opt in to treating content types other than "application/json" as JSON. Add new content types in the extension preferences. Please be careful with this setting!
 * JSONP support has been removed. Please consider using cross-origin resource sharing (CORS) instead. See https://github.com/bhollis/jsonview/issues/9#issuecomment-75919259 for rationale.
 * Empty JSON responses no longer cause the page to load forever.
+* Added hi-IN translation courtesy of Kishu Agarwal.
 
 JSONView 0.9
 ---

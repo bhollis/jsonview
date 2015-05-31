@@ -130,7 +130,7 @@
     <em:translator>Mikael Hiort af Ornäs (sv-SE)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>sr</em:locale>
+        <em:locale>sv-SE</em:locale>
         <em:description>Granska JSON-dokument i din webbläsare.</em:description>
       </Description>
     </em:localized>
@@ -138,8 +138,16 @@
     <em:translator>Zhouck (uk-UA)</em:translator>
     <em:localized>
       <Description>
-        <em:locale>sr</em:locale>
+        <em:locale>uk-UA</em:locale>
         <em:description>Перегляд JSON документів в браузер.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:translator>Kishu Agarwal (hi-IN)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>hi-IN</em:locale>
+        <em:description>Json डॉक्यूमेंट को ब्राउज़र में देखे.</em:description>
       </Description>
     </em:localized>
 
