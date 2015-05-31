@@ -14,9 +14,8 @@ If you'd like to contribute to JSONView but don't want to code, consider contrib
 Keyboard Shortcuts
 ----------------
 
-Left Arrow - Collapses the json on key up
-
-Right Arrow - Expands the json on key up
+* Left Arrow - Collapses the json on key up
+* Right Arrow - Expands the json on key up
 
 Reporting Issues
 ----------------
@@ -31,7 +30,7 @@ Before contributing to JSONView, make sure to read the [Contributing Guidelines]
 * Install [Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Installation)
 * Run `jpm run` to test in Firefox.
 * Run `jpm xpi` to create an xpi.
-* Run `python build.py xpi fix` to fix localized description in the generated xpi. See [Bug 1123428](https://bugzilla.mozilla.org/show_bug.cgi?id=1123428).
+* Run `python build.py fix` to fix localized description in the generated xpi. See [Bug 1123428](https://bugzilla.mozilla.org/show_bug.cgi?id=1123428).
 
 The build script also comes with a HTTP server which can be used to test JSON files in `tests` folder. To start the integrated server, listening on port 8000, along with Firefox, run `python build.py -b 8000 run`.
 
