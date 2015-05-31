@@ -1,0 +1,8 @@
+*.xpi
+*.zip
+*.md
+artwork/
+tests/
+src/
+build.py
+*.patch
