@@ -1,0 +1,36 @@
+[{
+  "asset_id": "336541846568177664",
+  "versions-numbersShouldMatchURLSuffix": [
+    [336541846568177665, "http://aarons-mbp-2011.local/api/assets/336541846568177664/336541846568177665"],
+    [336541849961369600, "http://aarons-mbp-2011.local/api/assets/336541846568177664/336541849961369600"]
+  ]
+},
+  {
+    "files": {
+      "vulture.jpg": {
+        "name": "vulture.jpg",
+        "exif": {},
+        "tags": [
+          "source"
+        ]
+      }
+    },
+    "updated": {
+      "timestamp": "2012-07-17T03:17:08Z",
+      "user": "aaron@foo.com"
+    },
+    "tags": [
+      ""
+    ],
+    "taxonomy": {},
+    "related": {},
+    "id-shouldEndWith664": 336541846568177664,
+    "title": "vulture",
+    "created": {
+      "timestamp": "2012-07-17T03:17:08Z",
+      "user": "aaron@foo.com"
+    },
+    "version-shouldEndWith665": 336541846568177665,
+    "storage_app": "reflib",
+    "storage_bucket": "336541846568177666"
+  }]
