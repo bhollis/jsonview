@@ -1,3 +1,10 @@
+JSONView 1.1.0
+---
+* Large numbers will now display as they appear in the original JSON document, even if they can't be represented correctly in JavaScript.
+* Updated ru-RU localization.
+* Rebuilt to support newer Firefoxes.
+
+
 JSONView 1.0.2
 ---
 * JSONView now works with Firefox's multi-process mode (electrolysis).
