@@ -151,5 +151,13 @@
       </Description>
     </em:localized>
 
+    <em:translator>hiyaku0317 (ko)</em:translator>
+    <em:localized>
+      <Description>
+        <em:locale>ko</em:locale>
+        <em:description>브라우저에서 JSON 문서를 보세요.</em:description>
+      </Description>
+    </em:localized>
+
   </Description>
 </RDF>
