@@ -1,3 +1,8 @@
+JSONView 1.1.1
+---
+* Fix a bug where copy-pasted numbers would include a unicode space.
+* Empty arrays no longer have collapsers.
+
 JSONView 1.1.0
 ---
 * Large numbers will now display as they appear in the original JSON document, even if they can't be represented correctly in JavaScript.
