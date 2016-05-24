@@ -40,11 +40,6 @@ body {
   content: "▸";
 }
 
-.collapsible {
-  transition: height 1.2s;
-  transition: width 1.2s;
-}
-
 .collapsible.collapsed {
   height: 1.2em;
   width: 1em;
