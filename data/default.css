@@ -30,14 +30,13 @@ body {
   left: -1em;
   top: -.2em;
   cursor: pointer;
-  -moz-user-select: none;
-  user-select: none;
   transform: rotate(90deg);
   transition: transform .2s;
 }
 
 .collapser:before {
   content: "▸";
+  -moz-user-select: none;
 }
 
 .collapsible.collapsed {

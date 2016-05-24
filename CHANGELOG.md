@@ -1,6 +1,7 @@
 JSONView 1.1.1
 ---
 * Fix a bug where copy-pasted numbers would include a unicode space.
+* Fix copy-pasting JSON to not introduce unnecessary whitespace.
 * Empty arrays no longer have collapsers.
 
 JSONView 1.1.0
