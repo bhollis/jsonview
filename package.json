@@ -8,6 +8,9 @@
   "author": "Benjamin Hollis",
   "license": "MIT License",
   "main": "lib/main.js",
+  "permissions": {
+    "multiprocess": true
+  },
   "preferences": [
     {
       "name": "jsonHttpAccept",
