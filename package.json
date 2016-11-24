@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "name": "jsonview",
   "title": "JSONView",
-  "description": "Views JSON in the browser.",
+  "description": "View JSON documents in the browser.",
   "homepage": "https://jsonview.com/",
   "author": "Benjamin Hollis",
   "repository": "https://github.com/bhollis/jsonview",
@@ -53,5 +53,67 @@
     "Zhouck (uk-UA)",
     "Kishu Agarwal (hi-IN)",
     "hiyaku0317 (ko)"
-  ]
+  ],
+  "locales": {
+    "bg-BG": {
+      "description": "Директен преглед на JSON документи."
+    },
+    "ca-AD": {
+      "description": "Visualitza els documents JSON al navegador."
+    },
+    "cs-CZ": {
+      "description": "Dokumenty JSON přímo v prohlížeči."
+    },
+    "de": {
+      "description": "JSON-Dokumente im Browser anzeigen."
+    },
+    "en": {
+      "description": "View JSON documents in the browser."
+    },
+    "es-ES": {
+      "description": "Permite abrir documentos JSON en el navegador."
+    },
+    "fr": {
+      "description": "Afficher les documents JSON dans le navigateur."
+    },
+    "hi-IN": {
+      "description": "Json डॉक्यूमेंट को ब्राउज़र में देखे."
+    },
+    "hu-HU": {
+      "description": "JSON dokumentumok megtekintése a böngészőben."
+    },
+    "it": {
+      "description": "Permette di visualizzare i file JSON nel browser."
+    },
+    "ja": {
+      "description": "JSON ドキュメントをブラウザー内で表示します。"
+    },
+    "ko": {
+      "description": "브라우저에서 JSON 문서를 보세요."
+    },
+    "nl": {
+      "description": "Bekijk JSON-documenten in de browser."
+    },
+    "pt-BR": {
+      "description": "Veja documentos JSON no navegador."
+    },
+    "ru-RU": {
+      "description": "Просмотр документов в формате JSON прямо в браузере."
+    },
+    "sr": {
+      "description": "Приказује JSON документе у прегледачу."
+    },
+    "sv-SE": {
+      "description": "Granska JSON-dokument i din webbläsare."
+    },
+    "tr": {
+      "description": "JSON belgelerini tarayıcınızda açın."
+    },
+    "uk-UA": {
+      "description": "Перегляд JSON документів в браузер."
+    },
+    "zh-CN": {
+      "description": "在浏览器中查看JSON 文件."
+    }
+  }
 }
