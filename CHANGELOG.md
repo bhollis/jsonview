@@ -1,3 +1,8 @@
+JSONView 1.2.0
+---
+* Add a preference to use the built-in Firefox JSON viewer.
+* Tell Firefox we support multi-process mode.
+
 JSONView 1.1.1
 ---
 * Fix a bug where copy-pasted numbers would include a unicode space.

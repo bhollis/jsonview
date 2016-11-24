@@ -26,6 +26,13 @@
       "value": "",
       "title": "Alternate JSON content types",
       "description": "Other content types that should be treated as JSON, separated by commas."
+    },
+    {
+      "name": "useNativeJsonView",
+      "type": "bool",
+      "value": false,
+      "title": "Use built-in Firefox JSON viewer",
+      "description": "Firefox now includes a built-in JSON viewer you can use instead of JSONView."
     }
   ],
   "contributors": [
