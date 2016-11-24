@@ -1,12 +1,13 @@
 {
   "id": "jsonview@brh.numbera.com",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "name": "jsonview",
   "title": "JSONView",
   "description": "Views JSON in the browser.",
-  "homepage": "http://jsonview.com/",
+  "homepage": "https://jsonview.com/",
   "author": "Benjamin Hollis",
-  "license": "MIT License",
+  "repository": "https://github.com/bhollis/jsonview",
+  "license": "MIT",
   "main": "lib/main.js",
   "permissions": {
     "multiprocess": true
