@@ -124,15 +124,12 @@ h1 {
 }
 
 .counter {
-  display: inline;
   padding: 0.2em 0.5em 0.1em;
   font-size: 75%;
-  font-weight: 700;
   line-height: 1;
-  color: #FFF;
-  text-align: center;
+  color: #AAA;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 0.25em;
-  background-color: #777;
+  font-style: italic;
+  -moz-user-select: none;
 }
