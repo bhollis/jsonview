@@ -2,6 +2,7 @@ JSONView 1.2.0
 ---
 * Add a preference to use the built-in Firefox JSON viewer.
 * Tell Firefox we support multi-process mode.
+* Fix a performance regression that could severely slow down rendering large documents.
 
 JSONView 1.1.1
 ---
