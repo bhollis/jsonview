@@ -123,7 +123,7 @@ h1 {
   color: #A52A2A;
 }
 
-.counter {
+.array[data-json-length]::before {
   padding: 0.2em 0.5em 0.1em;
   font-size: 75%;
   line-height: 1;
@@ -132,4 +132,5 @@ h1 {
   vertical-align: baseline;
   font-style: italic;
   -moz-user-select: none;
+  content: '(' attr(data-json-length) ')';
 }
