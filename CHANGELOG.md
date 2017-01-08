@@ -1,3 +1,7 @@
+JSONView 1.2.1
+---
+* Fixed a case where JSON would fail to parse if a string contains a number and the JSON isn't indented.
+
 JSONView 1.2.0
 ---
 * Add a preference to use the built-in Firefox JSON viewer.
