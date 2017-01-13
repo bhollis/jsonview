@@ -1,3 +1,7 @@
+JSONView 1.2.2
+---
+* Fixed a case where JSON would fail to parse if a string containing a number also contained escaped quotes.
+
 JSONView 1.2.1
 ---
 * Fixed a case where JSON would fail to parse if a string contains a number and the JSON isn't indented.
