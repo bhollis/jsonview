@@ -1,0 +1,4 @@
+{
+    "precondition": "text that ends in an escaped backslash \\",
+    "errorline": "After the number, the parser complains: 3 here is the error"
+}

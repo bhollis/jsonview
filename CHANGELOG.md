@@ -1,3 +1,7 @@
+JSONView 1.2.3
+---
+* Fixed a case where JSON would fail to parse if a string containing a number was preceded by a quote that was preceded by an escaped slash.
+
 JSONView 1.2.2
 ---
 * Fixed a case where JSON would fail to parse if a string containing a number also contained escaped quotes.
@@ -97,17 +101,14 @@ JSONView 0.2
 ---
 
 * .json files can be opened in JSONView from the local machine.
-* Added Bulgarian, German, Hungarian, and (partial) Turkish translations. Thanks to
-	Стоян Димитров, Archaeopteryx, Team erweiterungen.de, MIKES KASZMÁN István and Ersen Yolda from BabelZilla.org.
+* Added Bulgarian, German, Hungarian, and (partial) Turkish translations. Thanks to Стоян Димитров, Archaeopteryx, Team erweiterungen.de, MIKES KASZMÁN István and Ersen Yolda from BabelZilla.org.
 * Compatible with FF 3.5.*
 
 JSONView 0.1
 ---
 
 * String values which contain only a URL are displayed as a clickable link. Props to stig.murberg for the patch.
-* Added Catalan, Spanish, Japanese, Portugese (Brazil), Russian, and Simplified Chinese translations. Thanks to
-	Fani Kozolchyk, and Xavi Ivars - Softcatalà, hoolooday, drry, Marcelo Ghelman (ghelman.net), Пирятинский Виталий,
-	and urko from BabelZilla.org.
+* Added Catalan, Spanish, Japanese, Portugese (Brazil), Russian, and Simplified Chinese translations. Thanks to Fani Kozolchyk, and Xavi Ivars - Softcatalà, hoolooday, drry, Marcelo Ghelman (ghelman.net), Пирятинский Виталий, and urko from BabelZilla.org.
 
 JSONView 0.1b3:
 ---
