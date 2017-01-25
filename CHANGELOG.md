@@ -1,3 +1,7 @@
+JSONView 1.2.4
+---
+* Fixed a case where JSON would fail to parse if a string containing a number was preceded by a quote that was preceded by a lot of escaped slashes, or occurred near another number.
+
 JSONView 1.2.3
 ---
 * Fixed a case where JSON would fail to parse if a string containing a number was preceded by a quote that was preceded by an escaped slash.
