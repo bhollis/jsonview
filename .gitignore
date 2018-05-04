@@ -1,2 +1,6 @@
 *.xpi
 .tern-port
+/build
+/main.js
+/node_modules
+

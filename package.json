@@ -1,6 +1,6 @@
 {
   "id": "jsonview@brh.numbera.com",
-  "version": "1.2.4",
+  "version": "2.0.0",
   "name": "jsonview",
   "title": "JSONView",
   "description": "View JSON documents in the browser.",
@@ -8,33 +8,10 @@
   "author": "Benjamin Hollis",
   "repository": "https://github.com/bhollis/jsonview",
   "license": "MIT",
-  "main": "lib/main.js",
-  "permissions": {
-    "multiprocess": true
+  "scripts": {
+    "start": "tsc && rollup build/main.js --format iife --name 'main' --file main.js",
+    "lint": "tslint -p tsconfig.json"
   },
-  "preferences": [
-    {
-      "name": "jsonHttpAccept",
-      "type": "bool",
-      "value": false,
-      "title": "Include \"application/json\" in the HTTP Accept header for requests",
-      "description": "Only enable this if you need it - this can cause problems with some websites."
-    },
-    {
-      "name": "alternateContentTypes",
-      "type": "string",
-      "value": "",
-      "title": "Alternate JSON content types",
-      "description": "Other content types that should be treated as JSON, separated by commas."
-    },
-    {
-      "name": "useNativeJsonView",
-      "type": "bool",
-      "value": false,
-      "title": "Use built-in Firefox JSON viewer",
-      "description": "Firefox now includes a built-in JSON viewer you can use instead of JSONView."
-    }
-  ],
   "contributors": [
     "Gabriel Barros",
     "Quoc-Viet Nguyen"
@@ -122,5 +99,12 @@
     "zh-CN": {
       "description": "在浏览器中查看JSON 文件."
     }
+  },
+  "devDependencies": {
+    "rollup": "^0.58.2",
+    "tslint": "^5.10.0",
+    "tslint-eslint-rules": "^5.1.0",
+    "typescript": "^2.8.3",
+    "web-ext-types": "^2.0.1"
   }
 }
