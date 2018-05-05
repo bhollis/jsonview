@@ -11,7 +11,7 @@
     "256": "icon256.png"
   },
   "background": {
-    "scripts": ["lib/main.js"]
+    "scripts": ["main.js"]
   },
   "permissions": [
     "<all_urls>",

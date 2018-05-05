@@ -10,7 +10,14 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc && rollup build/main.js --format iife --name 'main' --file main.js",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "start": {
+      "patterns": "lib/*.ts",
+      "extensions": "js,ts"
+    }
   },
   "contributors": [
     "Gabriel Barros",
@@ -101,6 +108,7 @@
     }
   },
   "devDependencies": {
+    "npm-watch": "^0.3.0",
     "rollup": "^0.58.2",
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.1.0",
