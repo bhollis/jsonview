@@ -22,5 +22,9 @@
     "gecko": {
       "id": "jsonview@brh.numbera.com"
     }
-  }
+  },
+  "web_accessible_resources": [
+    "data/default.css",
+    "data/default.js"
+  ]
 }
