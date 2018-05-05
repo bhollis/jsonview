@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Перегляд JSON документів в браузер.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Зазвичай, коли зустрічається документ JSON (тип вмісту \"application/json\"), Firefox просто пропонує завантажити файл. Разом з розширенням JSONView, документи показуються в браузері подібно до XML. Документ форматується, підсвічується, масиви та об’єкти можуть згортатися. Навіть коли документ JSON містить помилки, JSONView покаже сирий текст.\nОдразу після встановлення JSONView, pfqlsnm yf http://jsonview.com/example.json і подивіться розширення в дії!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Сталася помилка при розборі документу JSON. Документ, можливо, неправильно оформлено.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Вміст документа",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

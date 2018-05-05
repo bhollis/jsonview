@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Granska JSON-dokument i din webbläsare.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "I vanliga fall, när du stöter på ett JSON-dokument (innehållstyp \"application/json\"), uppmanar Firefox dig helt enkelt att ladda ner filen. Med tillägget JSONView visas JSON-dokument i webbläsaren, på ungefär samma sätt som XML-dokument visas. Dokumentet är formaterat, markerat, och matriser och objekt kan komprimeras.  Även om JSON-dokumentet innehåller fel kommer JSONView ändå att visa textinnehållet.\nNär du har installerat JSONView, besök http://jsonview.com/example.json för att se tillägget i funktion!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Ett fel inträffade under parsning av JSON-dokumentet. Dokumentet är kanske inte grammatiskt korrekt.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Dokumentinnehåll",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

@@ -16,17 +16,12 @@ export function errorPage(error: Error, data: string, uri: string) {
 
   const errorInfo = massageError(error);
 
-  let output = `<div id="error">${_('errorParsing')}`;
+  let output = `<div id="error">${browser.i18n.getMessage('errorParsing')}`;
   if (errorInfo.message) {
     output += `<div class="errormessage">${errorInfo.message}</div>`;
   }
   output += `</div><div id="json">${highlightError(data, errorInfo.line, errorInfo.column)}</div>`;
   return toHTML(output, uri + ' - Error');
-}
-
-// TODO: add localization
-function _(str: string) {
-  return str;
 }
 
 /**

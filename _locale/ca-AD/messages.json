@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Visualitza els documents JSON al navegador.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Quan el Firefox troba un document JSON (content-type \"application/json\"), normalment insta a descarregar el fitxer. Amb l'extensió JSONView, els documents JSON es mostren al navegador d'una manera semblant a com ho fan els documents XML. El document es mostra amb format, resaltat, i els arrays i els objectes es poden contraure. Fins i tot si el document JSON conté errors, JSONView mostrarà el text pla.\nQuan tingueu l'extensió instal·lada, podeu comprovar el seu funcionament a http://jsonview.com/example.json",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Hi ha hagut un error a l'hora d'analitzar el document JSON. És possible que no estiga ben format.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Contingut del document",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

@@ -14,6 +14,6 @@
     "typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
   },
   "include": [
-    "./lib/main.*"
+    "./lib/**"
   ]
 }

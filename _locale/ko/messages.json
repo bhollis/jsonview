@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "브라우저에서 JSON 문서를 보세요.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "일반적으로 JSON 문서(컨텐츠 타입 \"application/json\")가 발생하면 Firefox는 단순히 파일을 다운로드하라는 메시지를 표시합니다. JSONView 확장 기능은 JSON 문서를 XML 문서가 표시되는 것과 같이 브라우저에 표시합니다. 형식화 및 하이라이트되어 배열과 객체를 축소할 수 있습니다. JSON 문서에 오류가 있는 경우에도 JSONView는 raw text를 표시합니다.\nJSONView를 설치한 후, 확장 기능의 동작을 보기 위해  http://jsonview.com/example.json 를 확인해보세요!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "JSON 문서에 구문 분석 오류가 있습니다. 이 문서가 잘 형성되지 않을 수 있습니다.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "문서 내용",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Директен преглед на JSON документи.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Обикновено, когато се натъкнете на JSON документ (съдържание тип \"application/json\"), Firefox просто подава файла за изтегляне. С разширението JSONView, JSON документите се показват по начин подобен, на който XML документите се показват. Документът е форматиран, синтактично оцветен, а масивите и обектите могат да бъдат скривани и показвани. Дори ако JSON документът съдържа грешки, JSONView ще покаже суровия текст.\nСлед инсталация на JSONView, отидете на http://jsonview.com/example.json, за да видите разширението в действие!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Грешка при анализирането на JSON документа. Вероятно документът не е добре форматиран.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Съдържание на документа",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

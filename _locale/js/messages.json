@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "JSON ドキュメントをブラウザー内で表示します。",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "通常、JSON ドキュメント(内容タイプ「application/json」)に遭遇すると、Firefox は単にファイルのダウンロードを促します。JSONView 拡張機能では、JSON ドキュメントは XML ドキュメントが表示されるのと同じようにブラウザー内で表示されます。ドキュメントはフォーマットおよびハイライトされ、配列とオブジェクトは折りたたむことができます。JSON ドキュメントにエラーがあったとしても、JSONView は素のテキストを表示します。\nJSONView をインストールしたら、http://jsonview.com/example.json で拡張機能の動作確認をしてみてください！",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "JSON ドキュメントの解析エラーがありました。ドキュメントが整形式ではなさそうです。",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "ドキュメント内容",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

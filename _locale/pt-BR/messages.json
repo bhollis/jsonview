@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Veja documentos JSON no navegador.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Normalmente, ao abrir um documento JSON (content type \"application/json\"), o Firefox simplesmente pergunta se quer baixar o arquivo. Com o complemento JSONView, documentos JSON são mostrados no navegador do mesmo modo como documentos XML. O documento é formatado, realçado e setas e objetos podem ser recolhidos. Mesmo que o documento JSON contenha erros, o JSONView mostrará ainda o texto puro.\nUma vez que tenha o JSONView instalado, vá para http://jsonview.com/example.json para ver o complemento em ação!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Houve um erro ao parsear o documento JSON. O documento pode não estar bem formado.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Conteúdo do documento",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

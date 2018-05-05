@@ -1,6 +1,10 @@
-import { jsonToHTML, errorPage } from "./jsonformatter";
+import { jsonToHTML, errorPage } from './jsonformatter';
+import { safeStringEncodeNums } from './safe-encode-numbers';
 
-const jsonRequestIds = new Set<string>();
+// const jsonRequestIds = new Set<string>();
+
+// TODO: Do something for chrome in concert with a content script?
+// Or maybe save the content off somehow and load it up again in a redirected page
 
 interface RequestDetails {
   requestId: string;
@@ -18,13 +22,7 @@ interface RequestDetails {
 }
 
 function listener(details: RequestDetails) {
-  console.log("JSONView listener", details);
-  if (!jsonRequestIds.has(details.requestId)) {
-    console.log("JSONView this isn't JSON");
-    return;
-  }
-
-  const requestId = details.requestId;
+  // const requestId = details.requestId;
   const filter = browser.webRequest.filterResponseData(details.requestId);
 
   // TODO: figure out encoding I guess
@@ -33,35 +31,16 @@ function listener(details: RequestDetails) {
   let content = "";
 
   function disconnect() {
-    console.log("JSONView disconnect filter");
     filter.disconnect();
-    jsonRequestIds.delete(requestId);
   }
-
-  filter.onstart = (event: Event) => {
-    console.log("JSONView started", event, details);
-
-    if (jsonRequestIds.has(requestId)) {
-      console.log("JSONView YEAH start");
-    } else {
-      disconnect();
-    }
-  };
 
   filter.ondata = (event: Event & {
     data: ArrayBuffer;
   }) => {
-    console.log(event.data, event);
-    if (jsonRequestIds.has(requestId)) {
-      console.log("JSONView YEAH data");
-    }
     content = content + dec.decode(event.data);
   };
 
-  filter.onstop = (event: Event) => {
-    console.log("JSONView finished", event, details);
-    console.log("CONTENT", content);
-
+  filter.onstop = (_event: Event) => {
     let outputDoc = '';
 
     try {
@@ -83,11 +62,11 @@ function detectJSON(event: RequestDetails) {
     return;
   }
   for (const header of event.responseHeaders) {
+    // TODO: look for weird x+json types
     if (header.name === "Content-Type" && header.value && header.value.includes("application/json")) {
-      console.log("JSONView found some JSON!");
-      // TODO: replace headers
       header.value = "text/html";
-      jsonRequestIds.add(event.requestId);
+      // TODO: this could be for chrome
+      // jsonRequestIds.add(event.requestId);
       listener(event);
     }
   }
@@ -104,57 +83,3 @@ browser.webRequest.onHeadersReceived.addListener(
 );
 
 // TODO: as far as I can tell, there's no way to intercept local files
-
-/*
-  *  Takes a JSON string and replaces number values with strings with a leading \u200B.
-  *  Prior to this, it doubles any pre-existing \u200B characters. This Unicode value is
-  *  a zero-width space, so doubling it won't affect the HTML view.
-  *
-  *  This addresses JSONView issue 21 (https://github.com/bhollis/jsonview/issues/21),
-  *  where numbers larger than Number.MAX_SAFE_INTEGER get rounded to the nearest value
-  *  that can fit in the mantissa. Instead we will string encode those numbers, and rely
-  *  on JSONFormatter to detect the leading zero-width space, check the remainder of the
-  *  string with !isNaN() for number-ness, and render it with number styling, sans-quotes.
-  */
-function safeStringEncodeNums(jsonString: string) {
-  const viewString = jsonString.replace(/\u200B/g, "\u200B\u200B");
-
-  // This has some memory of what its last state was
-  let wasInQuotes = false;
-  function isInsideQuotes(str: string) {
-    let inQuotes = false;
-    for (let i = 0; i < str.length; i++) {
-      if (str[i] === '"') {
-        let escaped = false;
-        for (let lookback = i - 1; lookback >= 0; lookback--) {
-          if (str[lookback] === '\\') {
-            escaped = !escaped;
-          } else {
-            break;
-          }
-        }
-        if (!escaped) {
-          inQuotes = !inQuotes;
-        }
-      }
-    }
-    if (wasInQuotes) {
-      inQuotes = !inQuotes;
-    }
-    wasInQuotes = inQuotes;
-    return inQuotes;
-  }
-
-  let startIndex = 0;
-  function replaceNumbers(match: string, index: number) {
-    // Substring should be copy-on-write, and thus cheap
-    const lookback = viewString.substring(startIndex, index);
-    const insideQuotes = isInsideQuotes(lookback);
-    startIndex = index + match.length;
-    return insideQuotes ? match : `"\u200B${match}"`;
-  }
-
-  // JSON legal number matcher, Andrew Cheong, http://stackoverflow.com/questions/13340717
-  const numberFinder = /-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
-  return viewString.replace(numberFinder, replaceNumbers);
-}

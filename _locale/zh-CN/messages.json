@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "在浏览器中查看JSON 文件.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "通常当遇到JSON文件（内容类型“应用/JSON），Firefox一般会提示您下载该文档.在JSONView的帮助下，你可以在浏览器中像XML文件一样查看JSON，具有代码自动高亮,自动缩进,自动折叠功能.甚至JSON文件中有错误，JSONView仍然可以显示原始代码.\n一旦你安装了JSONView，请到http://jsonview.com/example.json查看扩展是否起作用了!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "分析JSON文件时出错。文件格式可能不正确.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "文件内容",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "Приказује JSON документе у прегледачу.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Када Фајерфокс наиђе на JSON документ (тип application/json), једноставно вас пита желите ли да га сачувате. Са овим додатком, JSON документи се приказују у прегледачу, слично XML-у. Види се обликовање, истакнути делови и објекти који могу да се скупе. Чак и ако JSON документ садржи грешке, JSONView ће приказати бар текст.\nКада инсталирате JSONView, погледајте http://jsonview.com/example.json да бисте га видели на делу!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Дошло је до грешке приликом рашчлањавања JSON  документа, па можда неће бити правилно обликован.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Садржај документа",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}

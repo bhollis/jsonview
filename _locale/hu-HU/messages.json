@@ -1,0 +1,18 @@
+{
+  "extensionDescription": {
+    "message": "JSON dokumentumok megtekintése a böngészőben.",
+    "description": "Description of the extension."
+  },
+  "detailedDescription": {
+    "message": "Egy JSON dokumentum felismerésekor (\"application/json\" tartalom) a Firefox egyszerűen rákérdez a fájl mentésére. A JSONView kiterjesztéssel a JSON dokumentumok a böngészőben az XML dokumentumokhoz hasonlóan nyitódnak meg. A dokumentum formázott és kiemelt lesz. A tömbök, objektumok összecsukhatók lesznek. Amennyiben a JSON dokumentum hibákat tartalmaz, a JSONView raw szöveget jelenít meg.\nA JSONView telepítése után tekintse meg a kiterjesztés működését a http://jsonview.com/example.json oldalon!",
+    "description": "Longer description for the extension in the stores."
+  },
+  "errorParsing": {
+    "message": "Hiba keletkezett a JSON dkumentum feldolgozása közben. Lehetséges, hogy a dokumentum nincs jól formázva.",
+    "description": "The message shown when there was an error parsing your JSON"
+  },
+  "docContents": {
+    "message": "Dokumentum tartalom",
+    "description": "The text that gets displayed on the error page before the dump of the response"
+  }
+}
