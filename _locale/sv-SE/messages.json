@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Ett fel inträffade under parsning av JSON-dokumentet. Dokumentet är kanske inte grammatiskt korrekt.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Dokumentinnehåll",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

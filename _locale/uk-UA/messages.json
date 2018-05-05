@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Сталася помилка при розборі документу JSON. Документ, можливо, неправильно оформлено.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Вміст документа",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

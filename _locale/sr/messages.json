@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Дошло је до грешке приликом рашчлањавања JSON  документа, па можда неће бити правилно обликован.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Садржај документа",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

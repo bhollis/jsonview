@@ -9,9 +9,5 @@
   "errorParsing": {
     "message": "Při zpracování JSON dokumentu nastala chyba. Tento dokument nemusí být správně uspořádán.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Obsah dokumentu",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

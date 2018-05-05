@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Hiba keletkezett a JSON dkumentum feldolgozása közben. Lehetséges, hogy a dokumentum nincs jól formázva.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Dokumentum tartalom",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

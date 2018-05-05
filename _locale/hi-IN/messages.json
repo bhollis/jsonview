@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Json डॉक्यूमेंट को पार्स करने में असफलता. शायद डॉक्यूमेंट सही रूप से बना नहीं हैं.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "डॉक्यूमेंट का सामान",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

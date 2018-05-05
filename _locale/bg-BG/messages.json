@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Грешка при анализирането на JSON документа. Вероятно документът не е добре форматиран.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Съдържание на документа",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

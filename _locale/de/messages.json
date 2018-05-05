@@ -9,9 +9,5 @@
   "errorParsing": {
     "message": "Beim Auswerten des JSON-Dokuments trat ein Fehler auf. Eventuell ist das Dokument nicht nach den Spezifikationen aufgebaut.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Dokumentinhalt",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

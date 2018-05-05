@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Houve um erro ao parsear o documento JSON. O documento pode não estar bem formado.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Conteúdo do documento",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

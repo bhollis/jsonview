@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Er is een fout opgetreden bij het ontleden van het JSON-document. Het document is wellicht beschadigd.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Documentinhoud",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

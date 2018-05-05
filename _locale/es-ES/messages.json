@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Se produjo un error al analizar el documento JSON. El documento podría no estar bien formateado.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Contenido del documento",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }

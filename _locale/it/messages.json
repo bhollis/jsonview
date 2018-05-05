@@ -10,9 +10,5 @@
   "errorParsing": {
     "message": "Si è verificato un errore durante l'analisi del file JSON. Il file potrebbe essere malformato.",
     "description": "The message shown when there was an error parsing your JSON"
-  },
-  "docContents": {
-    "message": "Il file contiene",
-    "description": "The text that gets displayed on the error page before the dump of the response"
   }
 }
