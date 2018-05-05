@@ -1,6 +1,8 @@
 import { jsonToHTML, errorPage } from './jsonformatter';
 import { safeStringEncodeNums } from './safe-encode-numbers';
 
+declare const chrome: typeof browser;
+
 // const jsonRequestIds = new Set<string>();
 
 // TODO: Do something for chrome in concert with a content script?
@@ -23,7 +25,7 @@ interface RequestDetails {
 
 function listener(details: RequestDetails) {
   // const requestId = details.requestId;
-  const filter = browser.webRequest.filterResponseData(details.requestId);
+  const filter = chrome.webRequest.filterResponseData(details.requestId);
 
   // TODO: figure out encoding I guess
   const dec = new TextDecoder("utf-8");
@@ -76,7 +78,7 @@ function detectJSON(event: RequestDetails) {
 
 // Listen for onHeaderReceived for the target page.
 // Set "blocking" and "responseHeaders".
-browser.webRequest.onHeadersReceived.addListener(
+chrome.webRequest.onHeadersReceived.addListener(
   detectJSON,
   { urls: ["<all_urls>"], types: ["main_frame"] },
   ["blocking", "responseHeaders"]
