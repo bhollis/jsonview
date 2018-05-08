@@ -1,25 +1,29 @@
 import { jsonToHTML, errorPage } from './jsonformatter';
 import { safeStringEncodeNums } from './safe-encode-numbers';
 
-console.log("JSONView init!");
+/**
+ * This is the background script that runs independent of any document. It listens to main frame requests
+ * and kicks in if the headers indicate JSON. If we have the filterResponseData API available, we will use
+ * that to directly change the content of the response to HTML. Otherwise we interface with a content script
+ * to reformat the page.
+ */
 
+// TODO: as far as I can tell, there's no way to intercept local files
+
+// Look for JSON if the content type is "application/json",
+// or "application/whatever+json" or "application/json; charset=utf-8"
+const jsonContentType = /^application\/([a-z]+\+)?json($|;)/;
+
+// Keep track globally of URLs that contain JSON content.
 const jsonUrls = new Set<string>();
 
-// TODO: Do something for chrome in concert with a content script?
-// Or maybe save the content off somehow and load it up again in a redirected page
-
+/** Use the filterResponseData API to transform a JSON document to HTML. */
 function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDetails) {
-  // const requestId = details.requestId;
   const filter = browser.webRequest.filterResponseData(details.requestId);
 
-  // TODO: figure out encoding I guess
   const dec = new TextDecoder("utf-8");
   const enc = new TextEncoder();
   let content = "";
-
-  function disconnect() {
-    filter.disconnect();
-  }
 
   filter.ondata = (event: Event & {
     data: ArrayBuffer;
@@ -39,19 +43,16 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
 
     filter.write(enc.encode(outputDoc));
 
-    disconnect();
+    filter.disconnect();
   };
 }
 
 function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
-  console.log("JSONView headers", event);
   if (!event.responseHeaders) {
     return;
   }
   for (const header of event.responseHeaders) {
-    // TODO: look for weird x+json types
-    if (header.name === "Content-Type" && header.value && header.value.includes("application/json")) {
-      console.log("JSONView found JSON!");
+    if (header.name === "Content-Type" && header.value && jsonContentType.test(header.value)) {
       if (typeof browser !== 'undefined' && 'filterResponseData' in browser.webRequest) {
         header.value = "text/html";
         transformResponseToJSON(event);
@@ -72,14 +73,12 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["blocking", "responseHeaders"]
 );
 
-chrome.runtime.onMessage.addListener((message: any, sender: { url: string }, sendResponse: (response: any) => void) => {
+chrome.runtime.onMessage.addListener((_message: any, sender: { url: string }, sendResponse: (response: boolean) => void) => {
+  // If we support this API, we don't need to invoke the content script.
   if ('filterResponseData' in chrome.webRequest) {
     sendResponse(false);
     return;
   }
-  console.log("JSONView message: ", message, sender);
   sendResponse(jsonUrls.has(sender.url));
   jsonUrls.delete(sender.url);
 });
-
-// TODO: as far as I can tell, there's no way to intercept local files
