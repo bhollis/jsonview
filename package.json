@@ -9,7 +9,7 @@
   "repository": "https://github.com/bhollis/jsonview",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && rollup build/main.js --format iife --name 'main' --file main.js",
+    "start": "./build.sh",
     "lint": "tslint -p tsconfig.json",
     "watch": "npm-watch"
   },
@@ -108,6 +108,7 @@
     }
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.65",
     "npm-watch": "^0.3.0",
     "rollup": "^0.58.2",
     "tslint": "^5.10.0",

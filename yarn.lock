@@ -2,9 +2,25 @@
 # yarn lockfile v1
 
 
+"@types/chrome@^0.0.65":
+  version "0.0.65"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.65.tgz#bd19a4cff5a7f91ce5e487cfb0c7cca59271a053"
+  dependencies:
+    "@types/filesystem" "*"
+
 "@types/estree@0.0.38":
   version "0.0.38"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.38.tgz#c1be40aa933723c608820a99a373a16d215a1ca2"
+
+"@types/filesystem@*":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/filesystem/-/filesystem-0.0.28.tgz#3fd7735830f2c7413cb5ac45780bc45904697b0e"
+  dependencies:
+    "@types/filewriter" "*"
+
+"@types/filewriter@*":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
 "@types/node@*":
   version "10.0.3"

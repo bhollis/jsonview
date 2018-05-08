@@ -1,17 +1,13 @@
 JSONView
 ========
 
-[JSONView](http://jsonview.com) is a Firefox extension that helps you view JSON documents in the browser.
+[JSONView](http://jsonview.com) is a Web extension compatible with Firefox and Google Chrome that helps you view JSON documents in the browser.
 
 Normally when encountering a [JSON](http://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
 
 Once you've got JSONView installed, check out [this example JSON file](http://jsonview.com/example.json) to see the extension in action!
 
-[CouchDB](http://couchdb.apache.org/) users and others who need to have `application/json` sent in the HTTP Accept header to serve JSON properly should set that option in JSONView's options panel. Be aware that telling sites that you accept JSON can mess up some sites that don't expect it.
-
-If you want to inspect a JSON snippet from your clipboard you can do so by entering `data:application/json,<paste the json document>` in the URL bar.
-
-If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `locale` and `src/locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There's not much there to translate!
+If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `src/_locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There's not many strings to translate!
 
 Keyboard Shortcuts
 ----------------
@@ -27,26 +23,20 @@ Use the GitHub [Issue tracker for JSONView](https://github.com/bhollis/jsonview/
 Developing JSONView
 -------------------
 
-Before contributing to JSONView, make sure to read the [Contributing Guidelines](CONTRIBUTING.md). I appreciate contributions people make to JSONView, but the goal of the add-on is to be simple and straightforward, so I frequently reject contributions that add complexity or unnecessary features. Please consider filing an issue before doing any work, so you don't waste time on something I won't accept.
+Before contributing to JSONView, make sure to read the [Contributing Guidelines](CONTRIBUTING.md). I appreciate contributions people make to JSONView, but the goal of the extension is to be simple and straightforward, so I frequently reject contributions that add complexity or unnecessary features. Please consider filing an issue before doing any work, so you don't waste time on something I won't accept.
 
-* Install [Add-on SDK](https://developer.mozilla.org/en-US/Add-ons/SDK/Tools/jpm#Installation)
-* Install [Firefox Nightly](https://nightly.mozilla.org/) - the regular Firefox won't run unsigned extensions.
-* Run `jpm run -b Nightly` to test in Firefox Nightly.
-* Run `jpm xpi` to create an xpi.
+* Install [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/en/docs/install).
+* Check out jsonview.
+* Run `yarn` inside the jsonview repository.
+* Run `yarn start` to build the extension.
+* In Firefox, go to `about:debugging#addons` in the address bar, check "Enable add-on debugging", select "Load Temporary Add-on", and choose the `jsonview/build` folder.
+* In Chrome, go to `chrome://extensions/` in the address bar, select "Load Unpacked", and choose the `jsonview/build` folder.
 
-The build script also comes with a HTTP server which can be used to test JSON files in `tests` folder. To start the integrated server, listening on port 8000, along with Firefox, run `python build.py -b 8000 run`.
-
-Unofficial Ports
-----------------
-* [jsonview-chrome](https://github.com/jamiew/jsonview-chrome)
-* [jsonview-opera](https://github.com/fearphage/jsonview-opera)
-* [jsonview-safari](https://github.com/acrogenesis/jsonview-safari)
+JSONView makes use of [TypeScript](https://www.typescriptlang.org/). I recommend [VSCode](https://code.visualstudio.com/) for editing the code - it will automatically prompt to install the correct extensions, and will highlight errors.
 
 Common Issues
 -------------
 * **JSONView isn't displaying my file as JSON**: You are probably not serving
   the JSON with the "application/json" MIME type.
-* **JSONView is mangling large numbers**:
-  [Here's the explanation](https://github.com/bhollis/jsonview/issues/21).
 
 JSONView is open source software under the MIT licence.

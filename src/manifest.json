@@ -11,8 +11,14 @@
     "256": "icon256.png"
   },
   "background": {
-    "scripts": ["main.js"]
+    "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
   "permissions": [
     "<all_urls>",
     "webRequest",
@@ -24,8 +30,8 @@
     }
   },
   "web_accessible_resources": [
-    "data/default.css",
-    "data/default.js"
+    "viewer.css",
+    "viewer.js"
   ],
   "default_locale": "en"
 }

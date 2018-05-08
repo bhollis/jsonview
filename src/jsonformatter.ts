@@ -5,23 +5,33 @@
 
 /** Convert a whole JSON value / JSONP response into a formatted HTML document */
 export function jsonToHTML(json: any, uri: string) {
+  return toHTML(jsonToHTMLBody(json), uri);
+}
+
+/** Convert a whole JSON value / JSONP response into an HTML body, without title and scripts */
+export function jsonToHTMLBody(json: any) {
   const output = `<div id="json">${valueToHTML(json, '<root>')}</div>`;
-  return toHTML(output, uri);
+  return output;
 }
 
 /** Produce an error document for when parsing fails. */
 export function errorPage(error: Error, data: string, uri: string) {
+  return toHTML(errorPageBody(error, data), uri + ' - Error');
+}
+
+/** Produce an error content for when parsing fails. */
+export function errorPageBody(error: Error, data: string) {
   // Escape unicode nulls
   data = data.replace("\u0000", "\uFFFD");
 
   const errorInfo = massageError(error);
 
-  let output = `<div id="error">${browser.i18n.getMessage('errorParsing')}`;
+  let output = `<div id="error">${chrome.i18n.getMessage('errorParsing')}`;
   if (errorInfo.message) {
     output += `<div class="errormessage">${errorInfo.message}</div>`;
   }
   output += `</div><div id="json">${highlightError(data, errorInfo.line, errorInfo.column)}</div>`;
-  return toHTML(output, uri + ' - Error');
+  return output;
 }
 
 /**
@@ -185,8 +195,8 @@ function highlightError(data: string, lineNum?: number, columnNum?: number) {
 function toHTML(content: string, title: string) {
   return `<!DOCTYPE html>
 <html><head><title>${htmlEncode(title)}</title>
-<link rel="stylesheet" type="text/css" href="${browser.extension.getURL("data/default.css")}">
-<script type="text/javascript" src="${browser.extension.getURL("data/default.js")}"></script>
+<link rel="stylesheet" type="text/css" href="${chrome.runtime.getURL("data/default.css")}">
+<script type="text/javascript" src="${chrome.runtime.getURL("data/default.js")}"></script>
 </head><body>
 ${content}
 </body></html>`;

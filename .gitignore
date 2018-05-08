@@ -1,6 +1,7 @@
 *.xpi
+*.zip
 .tern-port
+/ts-out
 /build
-/main.js
 /node_modules
 
