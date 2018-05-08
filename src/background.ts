@@ -8,8 +8,6 @@ import { safeStringEncodeNums } from './safe-encode-numbers';
  * to reformat the page.
  */
 
-// TODO: as far as I can tell, there's no way to intercept local files
-
 // Look for JSON if the content type is "application/json",
 // or "application/whatever+json" or "application/json; charset=utf-8"
 const jsonContentType = /^application\/([a-z]+\+)?json($|;)/;
@@ -74,6 +72,10 @@ chrome.webRequest.onHeadersReceived.addListener(
 );
 
 chrome.runtime.onMessage.addListener((_message: any, sender: { url: string }, sendResponse: (response: boolean) => void) => {
+  if (sender.url.startsWith("file://") && sender.url.endsWith(".json")) {
+    sendResponse(true);
+    return;
+  }
   // If we support this API, we don't need to invoke the content script.
   if ('filterResponseData' in chrome.webRequest) {
     sendResponse(false);
