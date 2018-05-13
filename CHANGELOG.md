@@ -1,3 +1,10 @@
+JSONView 2.0.0
+---
+* JSONView has been rewritten with the new WebExtension model, and is now compatible with Firefox 57+ and Google Chrome.
+* JSONView will now highlight any content type matching "application/*+json" in addition to "application/json".
+* Due to the new extension model, the ability to add "application/json" to the Accept header has been removed.
+* Removed the preference to use the built-in Firefox JSON viewer.
+
 JSONView 1.2.4
 ---
 * Fixed a case where JSON would fail to parse if a string containing a number was preceded by a quote that was preceded by a lot of escaped slashes, or occurred near another number.
