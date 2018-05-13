@@ -2,6 +2,7 @@
 
 tsc
 
+rm -rf build
 mkdir -p build
 
 rollup ts-out/background.js --format iife --name 'background' --file build/background.js

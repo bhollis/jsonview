@@ -7,7 +7,9 @@
   "homepage_url": "https://jsonview.com/",
   "icons": {
     "32": "icon.png",
+    "48": "icon48.png",
     "64": "icon64.png",
+    "128": "icon128.png",
     "256": "icon256.png"
   },
   "background": {
