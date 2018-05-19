@@ -1,3 +1,7 @@
+JSONView 2.0.1
+---
+* Force encoding to UTF-8.
+
 JSONView 2.0.0
 ---
 * JSONView has been rewritten with the new WebExtension model, and is now compatible with Firefox 57+ and Google Chrome.

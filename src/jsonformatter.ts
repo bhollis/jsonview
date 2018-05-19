@@ -194,6 +194,7 @@ function highlightError(data: string, lineNum?: number, columnNum?: number) {
 function toHTML(content: string, title: string) {
   return `<!DOCTYPE html>
 <html><head><title>${htmlEncode(title)}</title>
+<meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="${chrome.runtime.getURL("viewer.css")}">
 <script type="text/javascript" src="${chrome.runtime.getURL("viewer.js")}"></script>
 </head><body>
