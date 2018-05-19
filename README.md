@@ -41,5 +41,6 @@ Common Issues
 -------------
 * **JSONView isn't displaying my file as JSON**: You are probably not serving
   the JSON with the "application/json" MIME type.
+* **Opening a local .json file uses the Firefox default JSON viewer**: You need to disable the built-in JSON viewer to use JSONView. Go to "about:config" and set "devtools.jsonview.enabled" to "false".
 
 JSONView is open source software under the MIT licence.
