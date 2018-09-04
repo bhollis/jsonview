@@ -50,7 +50,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
     return;
   }
   for (const header of event.responseHeaders) {
-    if (header.name === "Content-Type" && header.value && jsonContentType.test(header.value)) {
+    if (header.name.toLowerCase() === "content-type" && header.value && jsonContentType.test(header.value)) {
       if (typeof browser !== 'undefined' && 'filterResponseData' in browser.webRequest) {
         header.value = "text/html";
         transformResponseToJSON(event);
