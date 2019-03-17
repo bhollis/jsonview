@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 tsc
 
@@ -14,7 +14,7 @@ cp license.txt build/license.txt
 cp -r src/_locales build
 cp src/icon*.png build
 
-rm jsonview.zip
+rm -f jsonview.zip
 pushd build
 zip -r ../jsonview.zip *
 popd
