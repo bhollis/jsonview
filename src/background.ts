@@ -15,6 +15,10 @@ const jsonContentType = /^application\/([a-z]+\+)?json($|;)/;
 // Keep track globally of URLs that contain JSON content.
 const jsonUrls = new Set<string>();
 
+function isRedirect(status: number) {
+  return status >= 300 && status < 400;
+}
+
 /** Use the filterResponseData API to transform a JSON document to HTML. */
 function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDetails) {
   const filter = browser.webRequest.filterResponseData(details.requestId);
@@ -46,7 +50,7 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
 }
 
 function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
-  if (!event.responseHeaders) {
+  if (!event.responseHeaders || isRedirect(event.statusCode)) {
     return;
   }
   for (const header of event.responseHeaders) {
