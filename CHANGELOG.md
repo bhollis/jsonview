@@ -1,3 +1,11 @@
+JSONView 2.2.0
+---
+* Do not read content type from redirect responses
+
+JSONView 2.1.0
+---
+* Ignore case when checking headers.
+
 JSONView 2.0.1
 ---
 * Force encoding to UTF-8.

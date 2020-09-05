@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "JSONView",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "description": "__MSG_extensionDescription__",
   "author": "Benjamin Hollis",
   "homepage_url": "https://jsonview.com/",

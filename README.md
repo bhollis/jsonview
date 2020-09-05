@@ -44,3 +44,12 @@ Common Issues
 * **Opening a local .json file uses the Firefox default JSON viewer**: You need to disable the built-in JSON viewer to use JSONView. Go to "about:config" and set "devtools.jsonview.enabled" to "false".
 
 JSONView is open source software under the MIT licence.
+
+Publishing
+----------
+
+```
+npm start
+```
+
+`jsonview.zip` can then be manually uploaded to the extension sites.
