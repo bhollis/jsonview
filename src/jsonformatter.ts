@@ -40,6 +40,7 @@ function htmlEncode(t: any): string {
   return (typeof t !== "undefined" && t !== null) ? t.toString()
     .replace(/&/g, "&amp;")
     .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     : '';
