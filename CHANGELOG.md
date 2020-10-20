@@ -1,3 +1,7 @@
+JSONView 2.2.1
+---
+* Escape single quotes in generated HTML.
+
 JSONView 2.2.0
 ---
 * Do not read content type from redirect responses
