@@ -9,7 +9,7 @@ body {
 }
 
 .null {
-  color: red;
+  color: #A52A2A;
 }
 
 .bool {
@@ -121,4 +121,61 @@ h1 {
 .callback {
   font-family: monospace;
   color: #A52A2A;
+}
+
+/* Tomorrow Night theme */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #27292C;
+    color: #D7DAD8;
+  }
+
+  a {
+    color: #4c9edd;
+  }
+  a:visited {
+    color: #b678c7;
+  }
+
+  .bool {
+    color: #92B2CA;
+  }
+
+  .num {
+    color: #92B2CA;
+  }
+
+  .null {
+    color: #D77C78;
+  }
+
+  .callback {
+    color: #D77C78;
+  }
+
+  .string {
+    color: #C2C77B;
+  }
+
+  #error {
+    border-bottom: 1px solid rgb(61, 61, 61);
+    background-color: rgb(37, 37, 37);
+    margin-bottom: 1.5em;
+    padding: 1em .5em;
+  }
+
+  .errormessage {
+    font-family: monospace;
+    margin-top: .5em;
+    color: rgb(212, 10, 10);
+  }
+
+  .errorcolumn {
+    background-color: rgb(212, 10, 10);
+    color: white;
+  }
+
+  .errorline {
+      background-color: rgb(32, 29, 29);
+  }
 }
