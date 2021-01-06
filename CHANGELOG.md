@@ -1,3 +1,7 @@
+JSONView 2.3.0
+---
+* Switch to a dark theme when your system is set to dark mode.
+
 JSONView 2.2.1
 ---
 * Escape single quotes in generated HTML.
