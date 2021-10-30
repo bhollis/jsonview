@@ -8,6 +8,19 @@ function setJsonAsGlobalVariable(jsonObj: JSON) {
   const jsonStr = JSON.stringify(jsonObj).replace(/\\/g, "\\\\");
   script.text = `window.data=JSON.parse('${jsonStr}');`;
   document.documentElement.appendChild(script);
+
+  // log info message
+  // with this queueMicrotask user can not see source file information in log
+  queueMicrotask(
+    console.log.bind(
+      console,
+      "%c%s%c%s",
+      "color: green; font-size: 16px;",
+      "JSON is exposed as variable called ",
+      "background-color: rgba(175, 184, 193, 0.2); font-size: 16px; margin: 0; padding: 0.2em 0.4em; border-radius: 6px",
+      "data"
+    )
+  );
 }
 
 /**
@@ -28,13 +41,6 @@ chrome.runtime.sendMessage({}, (response: boolean) => {
     outputDoc = jsonToHTML(jsonObj, document.URL);
 
     setJsonAsGlobalVariable(jsonObj);
-    console.log(
-      "%c%s%c%s",
-      "color: green; font-size: 16px;",
-      "JSON is exposed as variable called ",
-      "background-color: rgba(175, 184, 193, 0.2); font-size: 16px; margin: 0; padding: 0.2em 0.4em; border-radius: 6px",
-      "data"
-    );
   } catch (e) {
     outputDoc = errorPage(e, content, document.URL);
   }
