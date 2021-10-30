@@ -10,8 +10,10 @@
   "license": "MIT",
   "scripts": {
     "start": "./build.sh",
+    "startWindows": "Powershell.exe -File ./buildWindows.ps1",
     "lint": "tslint -p tsconfig.json",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "rollup": "rollup"
   },
   "watch": {
     "start": {
