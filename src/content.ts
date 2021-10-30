@@ -5,7 +5,8 @@ import { safeStringEncodeNums } from "./safe-encode-numbers";
 
 function setJsonAsGlobalVariable(jsonObj: JSON) {
   const script = document.createElement("script");
-  script.text = `window.data=JSON.parse('${JSON.stringify(jsonObj)}');`;
+  const jsonStr = JSON.stringify(jsonObj).replace(/\\/g, "\\\\");
+  script.text = `window.data=JSON.parse('${jsonStr}');`;
   document.documentElement.appendChild(script);
 }
 
