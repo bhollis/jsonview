@@ -10,7 +10,7 @@ import { safeStringEncodeNums } from './safe-encode-numbers';
 
 // Look for JSON if the content type is "application/json",
 // or "application/whatever+json" or "application/json; charset=utf-8"
-const jsonContentType = /^application\/([a-z]+\+)?json($|;)/;
+const jsonContentType = /^application\/([a-z.]+\+)?json($|;)/;
 
 // Keep track globally of URLs that contain JSON content.
 const jsonUrls = new Set<string>();
