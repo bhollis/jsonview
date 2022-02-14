@@ -1,0 +1,14 @@
+{
+  "extensionDescription": {
+    "message": "Lihat dokumen JSON di browser.",
+    "description": "Deskripsi ekstensi."
+  },
+  "detailedDescription": {
+    "message": "Biasanya ketika menemukan dokumen JSON (tipe konten \"application/json\"), browser hanya menampilkan teks biasa. Dengan ekstensi JSONView, dokumen JSON diformat, disorot, dan array serta objek dapat dipendekkan. Bahkan jika dokumen JSON berisi kesalahan, JSONView akan tetap menampilkan teks mentah.\nSetelah Anda menginstal JSONView, lihat http://jsonview.com/example.json untuk melihat ekstensi beraksi!",
+    "description": "Deskripsi yang lebih panjang untuk ekstensi di toko."
+  },
+  "errorParsing": {
+    "message": "Terjadi kesalahan saat menguraikan dokumen JSON. Dokumen mungkin tidak terbentuk dengan baik.",
+    "description": "Pesan yang ditampilkan ketika ada kesalahan saat mengurai JSON Anda"
+  }
+}
