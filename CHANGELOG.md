@@ -1,7 +1,7 @@
 ## JSONView 2.4.0
 
 - Preserve indentation when copying JSON.
-- The JSON object is available from the console via the global "data" property.
+- The JSON object is available from the console via the global "data" property. Note: This may go away when JSONView is forced into the new Manifest V3 extension model.
 - Increased the number of content types that will be recognized as JSON.
 - Added Indonesian localization.
 
