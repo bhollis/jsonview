@@ -1,11 +1,9 @@
-import { jsonToHTML, errorPage } from "./jsonformatter";
-import { safeStringEncodeNums } from "./safe-encode-numbers";
-
 /**
- * This is the background script that runs independent of any document. It listens to main frame requests
- * and kicks in if the headers indicate JSON. If we have the filterResponseData API available, we will use
- * that to directly change the content of the response to HTML. Otherwise we interface with a content script
- * to reformat the page.
+ * This is the background script that runs independent of any document. It
+ * listens to main frame requests and kicks in if the headers indicate JSON. If
+ * we have the filterResponseData API available, we will use that to change the
+ * page to what Chrome displays for JSON (this is only used in Firefox). Then a
+ * content script reformats the page.
  */
 
 // Look for JSON if the content type is "application/json",
@@ -32,17 +30,8 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
   };
 
   filter.onstop = (_event: Event) => {
-    let outputDoc = "";
-
-    try {
-      const jsonObj = JSON.parse(safeStringEncodeNums(content));
-      outputDoc = jsonToHTML(jsonObj, details.url);
-    } catch (e: any) {
-      outputDoc = errorPage(e, content, details.url);
-    }
-
+    const outputDoc = `<!DOCTYPE html><html><body><pre>${content}</pre></body></html>`;
     filter.write(enc.encode(outputDoc));
-
     filter.disconnect();
   };
 }
@@ -57,11 +46,10 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
       header.value &&
       jsonContentType.test(header.value)
     ) {
+      jsonUrls.add(event.url);
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
         header.value = "text/html";
         transformResponseToJSON(event);
-      } else {
-        jsonUrls.add(event.url);
       }
     }
   }
@@ -77,14 +65,13 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["blocking", "responseHeaders"]
 );
 
+// Listen for a message from the content script to decide whether to
+// operate on the page. This is only necessary when the browser does
+// not support filterResponseData. Calls sendResponse with a boolean
+// that's true if the content script should run, and false otherwise.
 chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
   if (sender.url?.startsWith("file://") && sender.url.endsWith(".json")) {
     sendResponse(true);
-    return;
-  }
-  // If we support this API, we don't need to invoke the content script.
-  if ("filterResponseData" in chrome.webRequest) {
-    sendResponse(false);
     return;
   }
   sendResponse(sender.url && jsonUrls.has(sender.url));

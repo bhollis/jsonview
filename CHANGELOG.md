@@ -1,7 +1,7 @@
 ## JSONView 2.4.0
 
 - Preserve indentation when copying JSON.
-- In Chrome, the JSON object is available from the console via the global "data" property.
+- The JSON object is available from the console via the global "data" property.
 - Increased the number of content types that will be recognized as JSON.
 - Added Indonesian localization.
 
