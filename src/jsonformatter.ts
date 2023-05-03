@@ -10,12 +10,12 @@ export function jsonToHTML(json: any, uri: string) {
 
 /** Convert a whole JSON value / JSONP response into an HTML body, without title and scripts */
 function jsonToHTMLBody(json: any) {
-  return `<div id="json">${valueToHTML(json, '<root>')}</div>`;
+  return `<div id="json">${valueToHTML(json, "<root>")}</div>`;
 }
 
 /** Produce an error document for when parsing fails. */
 export function errorPage(error: Error, data: string, uri: string) {
-  return toHTML(errorPageBody(error, data), uri + ' - Error');
+  return toHTML(errorPageBody(error, data), uri + " - Error");
 }
 
 /** Produce an error content for when parsing fails. */
@@ -25,7 +25,7 @@ function errorPageBody(error: Error, data: string) {
 
   const errorInfo = massageError(error);
 
-  let output = `<div id="error">${chrome.i18n.getMessage('errorParsing')}`;
+  let output = `<div id="error">${chrome.i18n.getMessage("errorParsing")}`;
   if (errorInfo.message) {
     output += `<div class="errormessage">${errorInfo.message}</div>`;
   }
@@ -37,13 +37,15 @@ function errorPageBody(error: Error, data: string) {
  * Encode a string to be used in HTML
  */
 function htmlEncode(t: any): string {
-  return (typeof t !== "undefined" && t !== null) ? t.toString()
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    : '';
+  return typeof t !== "undefined" && t !== null
+    ? t
+        .toString()
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&apos;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+    : "";
 }
 
 /**
@@ -74,59 +76,61 @@ function valueToHTML(value: any, path: string) {
   const valueType = typeof value;
 
   if (value === null) {
-    return decorateWithSpan('null', 'null');
+    return decorateWithSpan("null", "null");
   } else if (Array.isArray(value)) {
     return arrayToHTML(value, path);
-  } else if (valueType === 'object') {
+  } else if (valueType === "object") {
     return objectToHTML(value, path);
-  } else if (valueType === 'number') {
-    return decorateWithSpan(value, 'num');
-  } else if (valueType === 'string' &&
-            value.charCodeAt(0) === 8203 &&
-            !isNaN(value.slice(1))) {
-    return decorateWithSpan(value.slice(1), 'num');
-  } else if (valueType === 'string') {
+  } else if (valueType === "number") {
+    return decorateWithSpan(value, "num");
+  } else if (valueType === "string" && value.charCodeAt(0) === 8203 && !isNaN(value.slice(1))) {
+    return decorateWithSpan(value.slice(1), "num");
+  } else if (valueType === "string") {
     if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
-      return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(value)}<span class="q">&quot;</span></a>`;
+      return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(
+        value
+      )}<span class="q">&quot;</span></a>`;
     } else {
       return `<span class="string">&quot;${jsString(value)}&quot;</span>`;
     }
-  } else if (valueType === 'boolean') {
-    return decorateWithSpan(value, 'bool');
+  } else if (valueType === "boolean") {
+    return decorateWithSpan(value, "bool");
   }
 
-  return '';
+  return "";
 }
 
 // Convert an array into an HTML fragment
 function arrayToHTML(json: any, path: string) {
   if (json.length === 0) {
-    return '[ ]';
+    return "[ ]";
   }
 
-  let output = '';
+  let output = "";
   for (let i = 0; i < json.length; i++) {
     const subPath = `${path}[${i}]`;
-    output += '<li>' + valueToHTML(json[i], subPath);
+    output += "<li>" + valueToHTML(json[i], subPath);
     if (i < json.length - 1) {
-      output += ',';
+      output += ",";
     }
-    output += '</li>';
+    output += "</li>";
   }
-  return (json.length === 0 ? '' : '<span class="collapser"></span>') +
-    `[<ul class="array collapsible">${output}</ul>]`;
+  return (
+    (json.length === 0 ? "" : '<span class="collapser"></span>') +
+    `[<ul class="array collapsible">${output}</ul>]`
+  );
 }
 
 // Convert a JSON object to an HTML fragment
 function objectToHTML(json: any, path: string) {
   let numProps = Object.keys(json).length;
   if (numProps === 0) {
-    return '{ }';
+    return "{ }";
   }
 
-  let output = '';
+  let output = "";
   for (const prop in json) {
-    let subPath = '';
+    let subPath = "";
     let escapedProp = JSON.stringify(prop).slice(1, -1);
     const bare = isBareProp(prop);
     if (bare) {
@@ -134,11 +138,15 @@ function objectToHTML(json: any, path: string) {
     } else {
       escapedProp = `"${escapedProp}"`;
     }
-    output += `<li><span class="prop${(bare ? '' : ' quoted')}" title="${htmlEncode(subPath)}"><span class="q">&quot;</span>${jsString(prop)}<span class="q">&quot;</span></span>: ${valueToHTML(json[prop], subPath)}`;
+    output += `<li><span class="prop${bare ? "" : " quoted"}" title="${htmlEncode(
+      subPath
+    )}"><span class="q">&quot;</span>${jsString(
+      prop
+    )}<span class="q">&quot;</span></span>: ${valueToHTML(json[prop], subPath)}`;
     if (numProps > 1) {
-      output += ',';
+      output += ",";
     }
-    output += '</li>';
+    output += "</li>";
     numProps--;
   }
 
@@ -155,7 +163,7 @@ function massageError(error: Error): {
     return error;
   }
 
-  const message = error.message.replace(/^JSON.parse: /, '').replace(/of the JSON data/, '');
+  const message = error.message.replace(/^JSON.parse: /, "").replace(/of the JSON data/, "");
   const parts = /line (\d+) column (\d+)/.exec(message);
   if (!parts || parts.length !== 3) {
     return error;
@@ -164,7 +172,7 @@ function massageError(error: Error): {
   return {
     message: htmlEncode(message),
     line: Number(parts[1]),
-    column: Number(parts[2])
+    column: Number(parts[2]),
   };
 }
 
@@ -175,14 +183,18 @@ function highlightError(data: string, lineNum?: number, columnNum?: number) {
 
   const lines = data.match(/^.*((\r\n|\n|\r)|$)/gm)!;
 
-  let output = '';
+  let output = "";
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
     if (i === lineNum - 1) {
       output += '<span class="errorline">';
-      output += `${htmlEncode(line.substring(0, columnNum - 1))}<span class="errorcolumn">${htmlEncode(line[columnNum - 1])}</span>${htmlEncode(line.substring(columnNum))}`;
-      output += '</span>';
+      output += `${htmlEncode(
+        line.substring(0, columnNum - 1)
+      )}<span class="errorcolumn">${htmlEncode(line[columnNum - 1])}</span>${htmlEncode(
+        line.substring(columnNum)
+      )}`;
+      output += "</span>";
     } else {
       output += htmlEncode(line);
     }
