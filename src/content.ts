@@ -11,9 +11,8 @@ function setJsonAsGlobalVariable(jsonObj: JSON) {
 
   // log info message
   // with this queueMicrotask user can not see source file information in log
-  queueMicrotask(
-    console.log.bind(
-      console,
+  queueMicrotask(() =>
+    console.log(
       "%c%s%c%s",
       "color: green; font-size: 16px;",
       "JSON is exposed as variable called ",
@@ -33,16 +32,24 @@ chrome.runtime.sendMessage({}, (response: boolean) => {
   }
 
   // At least in chrome, the JSON is wrapped in a pre tag.
-  const content = document.getElementsByTagName("pre")[0].innerText;
+  const content = document.getElementsByTagName("pre")[0].textContent;
   let outputDoc = "";
 
-  try {
-    const jsonObj = JSON.parse(safeStringEncodeNums(content));
-    outputDoc = jsonToHTML(jsonObj, document.URL);
+  if (content === null) {
+    outputDoc = errorPage(new Error("No content"), "", document.URL);
+  } else {
+    try {
+      const jsonObj = JSON.parse(safeStringEncodeNums(content));
+      outputDoc = jsonToHTML(jsonObj, document.URL);
 
-    setJsonAsGlobalVariable(jsonObj);
-  } catch (e) {
-    outputDoc = errorPage(e, content, document.URL);
+      setJsonAsGlobalVariable(jsonObj);
+    } catch (e: any) {
+      outputDoc = errorPage(
+        e instanceof Error ? e : new Error(e.toString()),
+        content,
+        document.URL
+      );
+    }
   }
 
   document.documentElement.innerHTML = outputDoc;

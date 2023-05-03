@@ -1,0 +1,186 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:array-func/all",
+    "plugin:radar/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "array-func", "radar", "github"],
+  "reportUnusedDisableDirectives": true,
+  "rules": {
+    "no-alert": "error",
+    "no-console": "off",
+    "no-debugger": "error",
+    "no-empty": "off",
+    "no-implicit-coercion": "error",
+    "no-restricted-globals": [
+      "error",
+      "name",
+      "location",
+      "history",
+      "menubar",
+      "scrollbars",
+      "statusbar",
+      "toolbar",
+      "status",
+      "closed",
+      "frames",
+      "length",
+      "top",
+      "opener",
+      "parent",
+      "origin",
+      "external",
+      "screen",
+      "defaultstatus",
+      "crypto",
+      "close",
+      "find",
+      "focus",
+      "open",
+      "print",
+      "scroll",
+      "stop",
+      "caches",
+      "scheduler"
+    ],
+    "no-restricted-properties": [
+      1,
+      {
+        "object": "_",
+        "property": "forEach",
+        "message": "Please use a for in loop."
+      },
+      {
+        "object": "_",
+        "property": "filter",
+        "message": "Please use the native js filter."
+      },
+      {
+        "object": "_",
+        "property": "map",
+        "message": "Please use the native js map."
+      },
+      {
+        "object": "_",
+        "property": "uniq",
+        "message": "Please use Array.from(new Set(foo)) or [...new Set(foo)] instead."
+      },
+      {
+        "object": "_",
+        "property": "uniqBy",
+        "message": "Please use the uniqBy from app/utils/util instead"
+      },
+      {
+        "object": "_",
+        "property": "forIn",
+        "message": "Please use Object.values or Object.entries instead"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["testing/*"],
+            "message": "You cannot use test helpers in regular code."
+          }
+        ]
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always",
+      { "exceptions": ["@__INLINE__"], "block": { "balanced": true } }
+    ],
+    "arrow-body-style": ["error", "as-needed"],
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "always"],
+    "no-return-await": "off",
+    "@typescript-eslint/return-await": ["error", "in-try-catch"],
+    "prefer-regex-literals": "error",
+    "prefer-promise-reject-errors": "error",
+    "require-atomic-updates": "off",
+    "class-methods-use-this": ["error", { "exceptMethods": ["render"] }],
+    "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "BigInt": "BigInt isn't supported in old versions (pre-14) of Safari",
+          "bigint": "BigInt isn't supported in old versions (pre-14) of Safari"
+        },
+        "extendDefaults": false
+      }
+    ],
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/method-signature-style": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-use-before-define": ["error", { "functions": false }],
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/no-extraneous-class": "error",
+    "@typescript-eslint/no-this-alias": "error",
+    "@typescript-eslint/no-unnecessary-type-constraint": "error",
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+    "@typescript-eslint/no-unnecessary-qualifier": "error",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/no-unnecessary-type-arguments": "error",
+    "@typescript-eslint/prefer-function-type": "error",
+    "@typescript-eslint/prefer-for-of": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/prefer-as-const": "error",
+    "@typescript-eslint/prefer-reduce-type-parameter": "error",
+    "@typescript-eslint/prefer-includes": "error",
+    "@typescript-eslint/prefer-string-starts-ends-with": "error",
+    "@typescript-eslint/prefer-ts-expect-error": "error",
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+    "@typescript-eslint/unified-signatures": "error",
+    "@typescript-eslint/no-base-to-string": "error",
+    "@typescript-eslint/non-nullable-type-assertion-style": "error",
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "@typescript-eslint/consistent-type-definitions": "error",
+    "@typescript-eslint/consistent-generic-constructors": "error",
+    "@typescript-eslint/no-duplicate-enum-values": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_.",
+        "argsIgnorePattern": "^_.",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/no-for-in-array": "error",
+    "no-implied-eval": "off",
+    "@typescript-eslint/no-implied-eval": "error",
+    "array-func/prefer-array-from": "off",
+    "radar/cognitive-complexity": "off",
+    "radar/no-small-switch": "off",
+    "radar/no-duplicate-string": "off",
+    "radar/prefer-immediate-return": "off",
+    "github/array-foreach": "error",
+    "github/async-currenttarget": "error",
+    "github/async-preventdefault": "error",
+    "github/no-innerText": "error"
+  }
+}

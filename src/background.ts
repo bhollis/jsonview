@@ -1,5 +1,5 @@
-import { jsonToHTML, errorPage } from './jsonformatter';
-import { safeStringEncodeNums } from './safe-encode-numbers';
+import { jsonToHTML, errorPage } from "./jsonformatter";
+import { safeStringEncodeNums } from "./safe-encode-numbers";
 
 /**
  * This is the background script that runs independent of any document. It listens to main frame requests
@@ -27,19 +27,17 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
   const enc = new TextEncoder();
   let content = "";
 
-  filter.ondata = (event: Event & {
-    data: ArrayBuffer;
-  }) => {
+  filter.ondata = (event) => {
     content = content + dec.decode(event.data);
   };
 
   filter.onstop = (_event: Event) => {
-    let outputDoc = '';
+    let outputDoc = "";
 
     try {
       const jsonObj = JSON.parse(safeStringEncodeNums(content));
       outputDoc = jsonToHTML(jsonObj, details.url);
-    } catch (e) {
+    } catch (e: any) {
       outputDoc = errorPage(e, content, details.url);
     }
 
@@ -54,8 +52,12 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
     return;
   }
   for (const header of event.responseHeaders) {
-    if (header.name.toLowerCase() === "content-type" && header.value && jsonContentType.test(header.value)) {
-      if (typeof browser !== 'undefined' && 'filterResponseData' in browser.webRequest) {
+    if (
+      header.name.toLowerCase() === "content-type" &&
+      header.value &&
+      jsonContentType.test(header.value)
+    ) {
+      if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
         header.value = "text/html";
         transformResponseToJSON(event);
       } else {
@@ -75,16 +77,18 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["blocking", "responseHeaders"]
 );
 
-chrome.runtime.onMessage.addListener((_message: any, sender: { url: string }, sendResponse: (response: boolean) => void) => {
-  if (sender.url.startsWith("file://") && sender.url.endsWith(".json")) {
+chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
+  if (sender.url?.startsWith("file://") && sender.url.endsWith(".json")) {
     sendResponse(true);
     return;
   }
   // If we support this API, we don't need to invoke the content script.
-  if ('filterResponseData' in chrome.webRequest) {
+  if ("filterResponseData" in chrome.webRequest) {
     sendResponse(false);
     return;
   }
-  sendResponse(jsonUrls.has(sender.url));
-  jsonUrls.delete(sender.url);
+  sendResponse(sender.url && jsonUrls.has(sender.url));
+  if (sender.url) {
+    jsonUrls.delete(sender.url);
+  }
 });

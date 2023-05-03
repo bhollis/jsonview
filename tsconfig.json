@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "strict": true,
     "outDir": "./ts-out/",
     "sourceMap": true,
     "strictNullChecks": true,
@@ -9,6 +10,7 @@
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "checkJs": true,
     "typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
