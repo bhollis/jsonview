@@ -10,7 +10,7 @@ export function jsonToHTML(json: any, uri: string) {
 
 /** Convert a whole JSON value / JSONP response into an HTML body, without title and scripts */
 function jsonToHTMLBody(json: any) {
-  return `<div id="json">${valueToHTML(json, "<root>")}</div>`;
+  return `<div id="json">${valueToHTML(json, "<root>", 0)}</div>`;
 }
 
 /** Produce an error document for when parsing fails. */
@@ -72,15 +72,15 @@ function decorateWithSpan(value: any, className: string) {
 }
 
 // Convert a basic JSON datatype (number, string, boolean, null, object, array) into an HTML fragment.
-function valueToHTML(value: any, path: string) {
+function valueToHTML(value: any, path: string, indent: number) {
   const valueType = typeof value;
 
   if (value === null) {
     return decorateWithSpan("null", "null");
   } else if (Array.isArray(value)) {
-    return arrayToHTML(value, path);
+    return arrayToHTML(value, path, indent);
   } else if (valueType === "object") {
-    return objectToHTML(value, path);
+    return objectToHTML(value, path, indent);
   } else if (valueType === "number") {
     return decorateWithSpan(value, "num");
   } else if (valueType === "string" && value.charCodeAt(0) === 8203 && !isNaN(value.slice(1))) {
@@ -101,7 +101,7 @@ function valueToHTML(value: any, path: string) {
 }
 
 // Convert an array into an HTML fragment
-function arrayToHTML(json: any, path: string) {
+function arrayToHTML(json: any, path: string, indent: number) {
   if (json.length === 0) {
     return "[ ]";
   }
@@ -109,7 +109,7 @@ function arrayToHTML(json: any, path: string) {
   let output = "";
   for (let i = 0; i < json.length; i++) {
     const subPath = `${path}[${i}]`;
-    output += "<li>" + valueToHTML(json[i], subPath);
+    output += "<li>" + addIndent(indent + 1) + valueToHTML(json[i], subPath, indent + 1);
     if (i < json.length - 1) {
       output += ",";
     }
@@ -117,12 +117,16 @@ function arrayToHTML(json: any, path: string) {
   }
   return (
     (json.length === 0 ? "" : '<span class="collapser"></span>') +
-    `[<ul class="array collapsible">${output}</ul>]`
+    `[<ul class="array collapsible">${output}</ul>${addIndent(indent)}]`
   );
 }
 
+function addIndent(indent: number) {
+  return `<span class="spacer">${"&nbsp;&nbsp;".repeat(indent)}</span>`;
+}
+
 // Convert a JSON object to an HTML fragment
-function objectToHTML(json: any, path: string) {
+function objectToHTML(json: any, path: string, indent: number) {
   let numProps = Object.keys(json).length;
   if (numProps === 0) {
     return "{ }";
@@ -138,11 +142,11 @@ function objectToHTML(json: any, path: string) {
     } else {
       escapedProp = `"${escapedProp}"`;
     }
-    output += `<li><span class="prop${bare ? "" : " quoted"}" title="${htmlEncode(
-      subPath
-    )}"><span class="q">&quot;</span>${jsString(
+    output += `<li>${addIndent(indent + 1)}<span class="prop${
+      bare ? "" : " quoted"
+    }" title="${htmlEncode(subPath)}"><span class="q">&quot;</span>${jsString(
       prop
-    )}<span class="q">&quot;</span></span>: ${valueToHTML(json[prop], subPath)}`;
+    )}<span class="q">&quot;</span></span>: ${valueToHTML(json[prop], subPath, indent + 1)}`;
     if (numProps > 1) {
       output += ",";
     }
@@ -150,7 +154,9 @@ function objectToHTML(json: any, path: string) {
     numProps--;
   }
 
-  return `<span class="collapser"></span>{<ul class="obj collapsible">${output}</ul>}`;
+  return `<span class="collapser"></span>{<ul class="obj collapsible">${output}</ul>${addIndent(
+    indent
+  )}}`;
 }
 
 // Clean up a JSON parsing error message

@@ -36,7 +36,7 @@ body {
 
 .collapser:before {
   content: "▸";
-  -moz-user-select: none;
+  user-select: none;
 }
 
 .collapsible.collapsed {
@@ -178,4 +178,9 @@ h1 {
   .errorline {
       background-color: rgb(32, 29, 29);
   }
+}
+
+.spacer {
+  display: inline-block;
+  width: 0px;
 }
