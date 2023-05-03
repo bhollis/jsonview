@@ -17,21 +17,27 @@ function isRedirect(status: number) {
   return status >= 300 && status < 400;
 }
 
-/** Use the filterResponseData API to transform a JSON document to HTML. */
+/**
+ * Use the filterResponseData API to transform a JSON document to HTML. This
+ * converts to the same HTML that Chrome does by default - it's only used in
+ * Firefox.
+ */
 function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDetails) {
   const filter = browser.webRequest.filterResponseData(details.requestId);
 
   const dec = new TextDecoder("utf-8");
   const enc = new TextEncoder();
-  let content = "";
+
+  filter.onstart = (_event) => {
+    filter.write(enc.encode("<!DOCTYPE html><html><body><pre>"));
+  };
 
   filter.ondata = (event) => {
-    content = content + dec.decode(event.data);
+    filter.write(enc.encode(dec.decode(event.data)));
   };
 
   filter.onstop = (_event: Event) => {
-    const outputDoc = `<!DOCTYPE html><html><body><pre>${content}</pre></body></html>`;
-    filter.write(enc.encode(outputDoc));
+    filter.write(enc.encode("</pre></body></html>"));
     filter.disconnect();
   };
 }
@@ -65,10 +71,9 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["blocking", "responseHeaders"]
 );
 
-// Listen for a message from the content script to decide whether to
-// operate on the page. This is only necessary when the browser does
-// not support filterResponseData. Calls sendResponse with a boolean
-// that's true if the content script should run, and false otherwise.
+// Listen for a message from the content script to decide whether to operate on
+// the page. Calls sendResponse with a boolean that's true if the content script
+// should run, and false otherwise.
 chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
   if (sender.url?.startsWith("file://") && sender.url.endsWith(".json")) {
     sendResponse(true);
