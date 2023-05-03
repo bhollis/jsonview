@@ -43,7 +43,8 @@
     "Mikael Hiort af Ornäs (sv-SE)",
     "Zhouck (uk-UA)",
     "Kishu Agarwal (hi-IN)",
-    "hiyaku0317 (ko)"
+    "hiyaku0317 (ko)",
+    "Nur Muhlis (id)"
   ],
   "locales": {
     "bg-BG": {
@@ -72,6 +73,9 @@
     },
     "hu-HU": {
       "description": "JSON dokumentumok megtekintése a böngészőben."
+    },
+    "id": {
+      "description": "Lihat dokumen JSON di browser."
     },
     "it": {
       "description": "Permette di visualizzare i file JSON nel browser."
