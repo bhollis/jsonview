@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "JSONView",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "__MSG_extensionDescription__",
   "author": "Benjamin Hollis",
   "homepage_url": "https://jsonview.com/",
@@ -21,19 +21,12 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": [
-    "<all_urls>",
-    "webRequest",
-    "webRequestBlocking"
-  ],
+  "permissions": ["<all_urls>", "webRequest", "webRequestBlocking"],
   "applications": {
     "gecko": {
       "id": "jsonview@brh.numbera.com"
     }
   },
-  "web_accessible_resources": [
-    "viewer.css",
-    "viewer.js"
-  ],
+  "web_accessible_resources": ["viewer.css", "viewer.js"],
   "default_locale": "en"
 }
