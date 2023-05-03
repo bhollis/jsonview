@@ -8,9 +8,6 @@
 
 import { isJSONContentType } from "./content-type";
 
-// Keep track globally of URLs that contain JSON content.
-const jsonUrls = new Set<string>();
-
 function isRedirect(status: number) {
   return status >= 300 && status < 400;
 }
@@ -25,7 +22,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
       header.value &&
       isJSONContentType(header.value)
     ) {
-      jsonUrls.add(event.url);
+      addJsonUrl(event.url);
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
         header.value = "text/plain";
       }
@@ -47,12 +44,26 @@ chrome.webRequest.onHeadersReceived.addListener(
 // the page. Calls sendResponse with a boolean that's true if the content script
 // should run, and false otherwise.
 chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
-  if (sender.url?.startsWith("file://") && sender.url.endsWith(".json")) {
+  if (!sender.url) {
+    sendResponse(false);
+    return;
+  }
+
+  if (sender.url.startsWith("file://") && sender.url.endsWith(".json")) {
     sendResponse(true);
     return;
   }
-  sendResponse(sender.url && jsonUrls.has(sender.url));
-  if (sender.url) {
-    jsonUrls.delete(sender.url);
-  }
+  const isKnownJsonUrl = hasJsonUrl(sender.url);
+  sendResponse(isKnownJsonUrl);
 });
+
+async function addJsonUrl(url: string) {
+  await chrome.storage.session.set({ [url]: true });
+}
+
+async function hasJsonUrl(url: string) {
+  const stored = await chrome.storage.session.get(url);
+  const present = url in stored;
+  await chrome.storage.session.remove(url);
+  return present;
+}
