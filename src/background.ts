@@ -27,17 +27,15 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
 
   const dec = new TextDecoder("utf-8");
   const enc = new TextEncoder();
-
-  filter.onstart = (_event) => {
-    filter.write(enc.encode("<!DOCTYPE html><html><body><pre>"));
-  };
+  let content = "";
 
   filter.ondata = (event) => {
-    filter.write(enc.encode(dec.decode(event.data)));
+    content = content + dec.decode(event.data);
   };
 
   filter.onstop = (_event: Event) => {
-    filter.write(enc.encode("</pre></body></html>"));
+    const outputDoc = `<!DOCTYPE html><html><body><pre>${content}</pre></body></html>`;
+    filter.write(enc.encode(outputDoc));
     filter.disconnect();
   };
 }

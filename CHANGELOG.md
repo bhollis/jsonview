@@ -1,3 +1,7 @@
+## JSONView 2.4.1
+
+- Fix mangled arrows
+
 ## JSONView 2.4.0
 
 - Preserve indentation when copying JSON.
