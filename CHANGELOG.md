@@ -1,3 +1,7 @@
+## JSONView 2.4.2
+
+- Fix mangled encoding in Firefox
+
 ## JSONView 2.4.1
 
 - Fix mangled arrows
