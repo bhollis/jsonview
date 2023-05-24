@@ -30,11 +30,12 @@ function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDe
   let content = "";
 
   filter.ondata = (event) => {
-    content = content + dec.decode(event.data);
+    content += dec.decode(event.data, { stream: true });
   };
 
   filter.onstop = (_event: Event) => {
-    const outputDoc = `<!DOCTYPE html><html><body><pre>${content}</pre></body></html>`;
+    content += dec.decode();
+    const outputDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre>${content}</pre></body></html>`;
     filter.write(enc.encode(outputDoc));
     filter.disconnect();
   };
