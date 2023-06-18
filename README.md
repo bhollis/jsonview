@@ -6,11 +6,11 @@ JSONView
 * [Install for Firefox](https://addons.mozilla.org/en-US/firefox/addon/jsonview/)
 * [Install for Chrome](https://chrome.google.com/webstore/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd)
 
-Normally when encountering a [JSON](http://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
+Normally, when encountering a [JSON](http://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
 
 Once you've got JSONView installed, check out [this example JSON file](http://jsonview.com/example.json) to see the extension in action!
 
-If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `src/_locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There's not many strings to translate!
+If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `src/_locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There are not many strings to translate!
 
 Keyboard Shortcuts
 ----------------
@@ -43,7 +43,7 @@ Common Issues
   the JSON with the "application/json" MIME type.
 * **Opening a local .json file uses the Firefox default JSON viewer**: You need to disable the built-in JSON viewer to use JSONView. Go to "about:config" and set "devtools.jsonview.enabled" to "false".
 
-JSONView is open source software under the MIT licence.
+JSONView is open source software under the MIT license.
 
 Publishing
 ----------
