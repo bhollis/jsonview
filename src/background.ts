@@ -8,7 +8,7 @@
 
 // Look for JSON if the content type is "application/json",
 // or "application/whatever+json" or "application/json; charset=utf-8"
-const jsonContentType = /^application\/(\w!#$&\.-\^\+)?json($|;)/;
+const jsonContentType = /^application\/([\w!#$&.\-\+]+\+)?json($|;)/;
 
 // Keep track globally of URLs that contain JSON content.
 const jsonUrls = new Set<string>();
