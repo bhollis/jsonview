@@ -1,6 +1,10 @@
 #!/bin/bash -e
 
+rm -rf ts-out
+
 tsc
+
+node --test
 
 rm -rf build
 mkdir -p build
