@@ -1,3 +1,7 @@
+## JSONView 2.4.3
+
+- Fix recognizing content types like application/hal+json
+
 ## JSONView 2.4.2
 
 - Fix mangled encoding in Firefox
