@@ -6,9 +6,7 @@
  * content script reformats the page.
  */
 
-// Look for JSON if the content type is "application/json",
-// or "application/whatever+json" or "application/json; charset=utf-8"
-const jsonContentType = /^application\/([\w!#$&.\-^+]+\+)?json($|;)/;
+import { isJSONContentType } from "./content-type";
 
 // Keep track globally of URLs that contain JSON content.
 const jsonUrls = new Set<string>();
@@ -49,7 +47,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
     if (
       header.name.toLowerCase() === "content-type" &&
       header.value &&
-      jsonContentType.test(header.value)
+      isJSONContentType(header.value)
     ) {
       jsonUrls.add(event.url);
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {

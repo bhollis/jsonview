@@ -8,6 +8,7 @@
   "author": "Benjamin Hollis",
   "repository": "https://github.com/bhollis/jsonview",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "./build.sh",
     "startWindows": "Powershell.exe -File ./buildWindows.ps1",
@@ -115,6 +116,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.235",
+    "@types/node": "^20.4.0",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
     "eslint": "^8.39.0",
