@@ -1,3 +1,7 @@
+## JSONView 2.5.0
+
+- Fix a cross-site scripting vulnerability in the Firefox version of the extension.
+
 ## JSONView 2.4.3
 
 - Fix recognizing content types like application/hal+json

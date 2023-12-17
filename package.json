@@ -14,7 +14,8 @@
     "startWindows": "Powershell.exe -File ./buildWindows.ps1",
     "lint": "eslint src --ext .js,.ts --fix",
     "watch": "npm-watch",
-    "rollup": "rollup"
+    "rollup": "rollup",
+    "tests": "http-server ./tests/"
   },
   "watch": {
     "start": {
@@ -124,6 +125,7 @@
     "eslint-plugin-array-func": "^3.1.8",
     "eslint-plugin-github": "^4.7.0",
     "eslint-plugin-radar": "^0.2.1",
+    "http-server": "^14.1.1",
     "npm-watch": "^0.11.0",
     "rollup": "^3.21.3",
     "typescript": "^5.0.4",

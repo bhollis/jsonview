@@ -1,0 +1,1 @@
+{"status":"success","message":"User Input received","userInput":"XSS<img src=x onerror=alert(origin)>"}

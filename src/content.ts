@@ -25,7 +25,14 @@ chrome.runtime.sendMessage({}, (response: boolean) => {
   }
 
   // At least in chrome, the JSON is wrapped in a pre tag.
-  const content = document.getElementsByTagName("pre")[0].textContent;
+  const jsonElems = document.getElementsByTagName("pre");
+  let content: string | null = null;
+  if (jsonElems.length >= 1) {
+    content = jsonElems[0].textContent;
+  } else {
+    // Sometimes there's no pre? I'm not sure why this would happen
+    content = document.body.textContent;
+  }
   let outputDoc = "";
   let jsonObj = null;
 

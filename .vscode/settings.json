@@ -7,7 +7,7 @@
   "eslint.packageManager": "yarn",
   "eslint.validate": ["javascript", "typescript"],
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "jest.jestCommandLine": "yarn test",
   "[javascript]": {
@@ -18,6 +18,11 @@
   "[typescript]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": false
+    }
+  },
+  "[javascript][typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "never"
     }
   }
 }
