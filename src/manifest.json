@@ -21,7 +21,7 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["<all_urls>", "webRequest", "webRequestBlocking"],
+  "permissions": ["<all_urls>", "webRequest"],
   "applications": {
     "gecko": {
       "id": "jsonview@brh.numbera.com"

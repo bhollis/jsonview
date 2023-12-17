@@ -33,11 +33,10 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
 }
 
 // Listen for onHeaderReceived for the target page.
-// Set "blocking" and "responseHeaders".
 chrome.webRequest.onHeadersReceived.addListener(
   detectJSON,
   { urls: ["<all_urls>"], types: ["main_frame"] },
-  ["blocking", "responseHeaders"]
+  ["responseHeaders"]
 );
 
 // Listen for a message from the content script to decide whether to operate on
