@@ -13,20 +13,21 @@
     "256": "icon256.png"
   },
   "background": {
-    "scripts": ["background-script.js"],
+    "scripts": ["background.js"],
     "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_end"
     }
   ],
-  "permissions": ["webRequest"],
+  "permissions": ["webRequest", "storage", "webRequestBlocking"],
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
     {
-      "resources": ["viewer.css", "viewer.js"],
+      "resources": ["viewer.css"],
       "matches": ["*://*/*"]
     }
   ],

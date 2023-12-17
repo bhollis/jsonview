@@ -43,7 +43,11 @@ chrome.webRequest.onHeadersReceived.addListener(
 // Listen for a message from the content script to decide whether to operate on
 // the page. Calls sendResponse with a boolean that's true if the content script
 // should run, and false otherwise.
-chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message !== "jsonview-is-json") {
+    return;
+  }
+
   if (!sender.url) {
     sendResponse(false);
     return;
@@ -53,8 +57,9 @@ chrome.runtime.onMessage.addListener((_message, sender, sendResponse) => {
     sendResponse(true);
     return;
   }
-  const isKnownJsonUrl = hasJsonUrl(sender.url);
-  sendResponse(isKnownJsonUrl);
+
+  hasJsonUrl(sender.url).then(sendResponse);
+  return true; // this means "we're going to sendResponse asynchronously"
 });
 
 async function addJsonUrl(url: string) {

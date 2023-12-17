@@ -1,3 +1,8 @@
+## JSONView 3.0.0
+
+- JSONView is now compatible with Manifest V3 in Chrome-based browsers.
+- The JSON object is *no longer available* from the console via the global "data" property in Chrome, due to Manifest V3 changes.
+
 ## JSONView 2.6.1
 
 - Restore JSONView's ability to work in Firefox without having to manually disable the built-in JSON viewer.
