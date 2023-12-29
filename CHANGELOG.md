@@ -1,4 +1,4 @@
-## JSONView 2.6.0
+## JSONView 2.6.1
 
 - Restore JSONView's ability to work in Firefox without having to manually disable the built-in JSON viewer.
 

@@ -15,44 +15,6 @@ function isRedirect(status: number) {
   return status >= 300 && status < 400;
 }
 
-/**
- * Use the filterResponseData API to transform a JSON document to HTML. This
- * converts to the same HTML that Chrome does by default - it's only used in
- * Firefox.
- */
-function transformResponseToJSON(details: chrome.webRequest.WebResponseHeadersDetails) {
-  const filter = browser.webRequest.filterResponseData(details.requestId);
-
-  const dec = new TextDecoder("utf-8");
-  const enc = new TextEncoder();
-  let content = "";
-
-  filter.ondata = (event) => {
-    content += dec.decode(event.data, { stream: true });
-  };
-
-  filter.onstop = (_event: Event) => {
-    content += dec.decode();
-    const outputDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><pre>${escape(
-      content
-    )}</pre></body></html>`;
-
-    filter.write(enc.encode(outputDoc));
-    filter.disconnect();
-  };
-}
-
-function escape(s: string) {
-  const lookup = {
-    "&": "&amp;",
-    '"': "&quot;",
-    "'": "&apos;",
-    "<": "&lt;",
-    ">": "&gt;",
-  } as { [key: string]: string };
-  return s.replace(/[&"'<>]/g, (c) => lookup[c]);
-}
-
 function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
   if (!event.responseHeaders || isRedirect(event.statusCode)) {
     return;
@@ -65,8 +27,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
     ) {
       jsonUrls.add(event.url);
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
-        header.value = "text/html";
-        transformResponseToJSON(event);
+        header.value = "text/plain";
       }
     }
   }
