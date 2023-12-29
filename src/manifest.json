@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "JSONView",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "__MSG_extensionDescription__",
   "author": "Benjamin Hollis",
   "homepage_url": "https://jsonview.com/",
@@ -21,7 +21,7 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["<all_urls>", "webRequest"],
+  "permissions": ["<all_urls>", "webRequest", "webRequestBlocking"],
   "applications": {
     "gecko": {
       "id": "jsonview@brh.numbera.com"

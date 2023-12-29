@@ -1,3 +1,7 @@
+## JSONView 2.6.0
+
+- Restore JSONView's ability to work in Firefox without having to manually disable the built-in JSON viewer.
+
 ## JSONView 2.5.0
 
 - Fix a cross-site scripting vulnerability in the Firefox version of the extension.
