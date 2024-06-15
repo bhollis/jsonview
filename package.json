@@ -18,7 +18,7 @@
   },
   "watch": {
     "start": {
-      "patterns": "lib/*.ts",
+      "patterns": "src/*.ts",
       "extensions": "js,ts"
     }
   },
@@ -116,7 +116,7 @@
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
-    "@types/chrome": "^0.0.235",
+    "@types/chrome": "^0.0.268",
     "@types/node": "^20.4.0",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
@@ -126,8 +126,8 @@
     "eslint-plugin-sonarjs": "^1.0.3",
     "globals": "^15.4.0",
     "http-server": "^14.1.1",
-    "npm-watch": "^0.11.0",
-    "rollup": "^3.21.3",
+    "npm-watch": "^0.13.0",
+    "rollup": "^4.18.0",
     "typescript": "^5.0.4",
     "typescript-eslint": "^7.13.0",
     "web-ext-types": "^3.2.1"
