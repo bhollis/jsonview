@@ -3,8 +3,6 @@ import { errorPage, jsonToHTML } from "./jsonformatter";
 import { installCollapseEventListeners } from "./collapse";
 import { safeStringEncodeNums } from "./safe-encode-numbers";
 
-import "@types/chrome";
-
 /**
  * This script runs on every page. It communicates with the background script
  * to help decide whether to treat the contents of the page as JSON.

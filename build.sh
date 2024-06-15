@@ -20,7 +20,7 @@ cp src/icon*.png build-chrome
 
 rm -f jsonview-chrome.zip
 pushd build-chrome
-zip -r ../jsonview-chrome.zip *
+zip -r -q ../jsonview-chrome.zip *
 popd
 
 
@@ -38,5 +38,5 @@ cp src/icon*.png build-firefox
 
 rm -f jsonview-firefox.zip
 pushd build-firefox
-zip -r ../jsonview-firefox.zip *
+zip -r -q ../jsonview-firefox.zip *
 popd

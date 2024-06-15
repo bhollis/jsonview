@@ -13,7 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "checkJs": true,
-    "typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
+    "typeRoots": ["node_modules/@types", "node_modules/web-ext-types", "node_modules/@types/chrome"]
   },
   "include": ["./src/*.ts"]
 }
