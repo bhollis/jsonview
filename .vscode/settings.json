@@ -4,12 +4,11 @@
   "files.trimTrailingWhitespace": true,
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.formatOnSave": true,
-  "eslint.packageManager": "yarn",
   "eslint.validate": ["javascript", "typescript"],
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "jest.jestCommandLine": "yarn test",
+  "jest.jestCommandLine": "pnpm test --",
   "[javascript]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "never"

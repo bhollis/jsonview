@@ -25,10 +25,10 @@ Use the GitHub [Issue tracker for JSONView](https://github.com/bhollis/jsonview/
 
 Before contributing to JSONView, make sure to read the [Contributing Guidelines](CONTRIBUTING.md). I appreciate contributions people make to JSONView, but the goal of the extension is to be simple and straightforward, so I frequently reject contributions that add complexity or unnecessary features. Please consider filing an issue before doing any work, so you don't waste time on something I won't accept.
 
-- Install [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/en/docs/install).
+- Install [NodeJS](https://nodejs.org/en/) and run `corepack enable`.
 - Check out jsonview.
-- Run `yarn` inside the jsonview repository.
-- Run `yarn start` to build the extension.
+- Run `pnpm i` inside the jsonview repository.
+- Run `pnpm start` to build the extension.
 - In Firefox, go to `about:debugging#addons` in the address bar, check "Enable add-on debugging", select "Load Temporary Add-on", and choose the `jsonview/build-firefox` folder.
 - In Chrome, go to `chrome://extensions/` in the address bar, select "Load Unpacked", and choose the `jsonview/build-chrome` folder.
 

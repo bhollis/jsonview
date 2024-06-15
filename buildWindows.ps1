@@ -5,8 +5,8 @@ tsc
 rm -r -fo ./build-chrome
 mkdir -p build-chrome
 
-yarn rollup ts-out/background.js --format iife --name 'background' --file build-chrome/background.js
-yarn rollup ts-out/content.js --format iife --name 'background' --file build-chrome/content.js
+pnpm exec rollup ts-out/background.js --format iife --name 'background' --file build-chrome/background.js
+pnpm exec rollup ts-out/content.js --format iife --name 'background' --file build-chrome/content.js
 cp src/viewer.css build-chrome/viewer.css
 cp src/manifest.json build-chrome/manifest.json
 cp license.txt build-chrome/license.txt
@@ -22,8 +22,8 @@ popd
 rm -r -fo ./build-firefox
 mkdir -p build-firefox
 
-yarn rollup ts-out/background.js --format iife --name 'background' --file build-firefox/background.js
-yarn rollup ts-out/content.js --format iife --name 'background' --file build-firefox/content.js
+pnpm exec rollup ts-out/background.js --format iife --name 'background' --file build-firefox/background.js
+pnpm exec rollup ts-out/content.js --format iife --name 'background' --file build-firefox/content.js
 cp src/viewer.css build-firefox/viewer.css
 cp src/manifest.json build-firefox/manifest.json
 cp license.txt build-firefox/license.txt
