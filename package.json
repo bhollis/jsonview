@@ -12,7 +12,7 @@
   "scripts": {
     "start": "./build.sh",
     "startWindows": "Powershell.exe -File ./buildWindows.ps1",
-    "lint": "eslint src --ext .js,.ts --fix",
+    "lint": "eslint src",
     "watch": "npm-watch",
     "rollup": "rollup",
     "tests": "http-server ./tests/"
@@ -116,19 +116,21 @@
     }
   },
   "devDependencies": {
+    "@eslint/compat": "^1.1.0",
     "@types/chrome": "^0.0.235",
     "@types/node": "^20.4.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
-    "@typescript-eslint/parser": "^5.59.2",
-    "eslint": "^8.39.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-array-func": "^3.1.8",
-    "eslint-plugin-github": "^4.7.0",
-    "eslint-plugin-radar": "^0.2.1",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^9.5.0",
+    "eslint-plugin-array-func": "^5.0.1",
+    "eslint-plugin-github": "^5.0.1",
+    "eslint-plugin-sonarjs": "^1.0.3",
+    "globals": "^15.4.0",
     "http-server": "^14.1.1",
     "npm-watch": "^0.11.0",
     "rollup": "^3.21.3",
     "typescript": "^5.0.4",
+    "typescript-eslint": "^7.13.0",
     "web-ext-types": "^3.2.1"
   },
   "packageManager": "pnpm@8.15.8+sha256.691fe176eea9a8a80df20e4976f3dfb44a04841ceb885638fe2a26174f81e65e"

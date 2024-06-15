@@ -6,6 +6,8 @@
  * content script reformats the page.
  */
 
+import "@types/chrome";
+
 import { isJSONContentType } from "./content-type";
 
 function isRedirect(status: number) {

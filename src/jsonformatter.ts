@@ -37,8 +37,8 @@ function errorPageBody(error: Error, data: string) {
  * Encode a string to be used in HTML
  */
 function htmlEncode(t: any): string {
-  return typeof t !== "undefined" && t !== null
-    ? t
+  return t !== undefined && t !== null
+    ? (t as string)
         .toString()
         .replace(/&/g, "&amp;")
         .replace(/"/g, "&quot;")
@@ -73,35 +73,36 @@ function decorateWithSpan(value: any, className: string) {
 
 // Convert a basic JSON datatype (number, string, boolean, null, object, array) into an HTML fragment.
 function valueToHTML(value: any, path: string, indent: number) {
-  const valueType = typeof value;
-
   if (value === null) {
     return decorateWithSpan("null", "null");
   } else if (Array.isArray(value)) {
     return arrayToHTML(value, path, indent);
-  } else if (valueType === "object") {
-    return objectToHTML(value, path, indent);
-  } else if (valueType === "number") {
-    return decorateWithSpan(value, "num");
-  } else if (valueType === "string" && value.charCodeAt(0) === 8203 && !isNaN(value.slice(1))) {
-    return decorateWithSpan(value.slice(1), "num");
-  } else if (valueType === "string") {
-    if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
-      return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(
-        value
-      )}<span class="q">&quot;</span></a>`;
-    } else {
-      return `<span class="string">&quot;${jsString(value)}&quot;</span>`;
-    }
-  } else if (valueType === "boolean") {
-    return decorateWithSpan(value, "bool");
   }
 
-  return "";
+  switch (typeof value) {
+    case "object":
+      return objectToHTML(value as Record<string, unknown>, path, indent);
+    case "number":
+      return decorateWithSpan(value, "num");
+    case "boolean":
+      return decorateWithSpan(value, "bool");
+    case "string":
+      if (value.charCodeAt(0) === 8203 && !isNaN(parseInt(value.slice(1), 10))) {
+        return decorateWithSpan(parseInt(value.slice(1), 10), "num");
+      } else if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
+        return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(
+          value
+        )}<span class="q">&quot;</span></a>`;
+      } else {
+        return `<span class="string">&quot;${jsString(value)}&quot;</span>`;
+      }
+    default:
+      return "";
+  }
 }
 
 // Convert an array into an HTML fragment
-function arrayToHTML(json: any, path: string, indent: number) {
+function arrayToHTML(json: any[], path: string, indent: number) {
   if (json.length === 0) {
     return "[ ]";
   }
@@ -126,7 +127,7 @@ function addIndent(indent: number) {
 }
 
 // Convert a JSON object to an HTML fragment
-function objectToHTML(json: any, path: string, indent: number) {
+function objectToHTML(json: Record<string, unknown>, path: string, indent: number) {
   let numProps = Object.keys(json).length;
   if (numProps === 0) {
     return "{ }";
