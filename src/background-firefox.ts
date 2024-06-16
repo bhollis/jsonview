@@ -24,6 +24,8 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
     ) {
       addJsonUrl(event.url);
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
+        // We need to change the content type to text/plain to prevent Firefox
+        // from using its built-in JSON viewer.
         header.value = "text/plain";
       }
     }
@@ -33,16 +35,13 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
 }
 
 // Listen for onHeaderReceived for the target page.
-// Set "blocking" and "responseHeaders".
 chrome.webRequest.onHeadersReceived.addListener(
   detectJSON,
+  // Firefox cannot fire onHeadersReceived for local files.
   { urls: ["<all_urls>"], types: ["main_frame"] },
   ["blocking", "responseHeaders"]
 );
 
-// Listen for a message from the content script to decide whether to operate on
-// the page. Calls sendResponse with a boolean that's true if the content script
-// should run, and false otherwise.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message !== "jsonview-is-json") {
     return;

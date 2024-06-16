@@ -28,7 +28,7 @@
   "web_accessible_resources": [
     {
       "resources": ["viewer.css"],
-      "matches": ["*://*/*"]
+      "matches": ["<all_urls>"]
     }
   ],
   "default_locale": "en"

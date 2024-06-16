@@ -19,7 +19,7 @@ chrome.runtime.sendMessage("jsonview-is-json", (response: boolean) => {
     content = jsonElems[0].textContent;
   } else {
     // Sometimes there's no pre? I'm not sure why this would happen
-    content = document.body.textContent;
+    content = (document.body.firstChild ?? document.body).textContent;
   }
   let outputDoc = "";
   let jsonObj: any = null;
