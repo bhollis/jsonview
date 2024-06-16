@@ -4,10 +4,10 @@
 export function installCollapseEventListeners() {
   // Click handler for collapsing and expanding objects and arrays
   function collapse(evt: Event) {
-    let collapser = evt.target as any;
+    let collapser = evt.target as Element;
 
     while (collapser && !collapser.classList?.contains("collapser")) {
-      collapser = collapser.nextSibling;
+      collapser = collapser.nextSibling as Element;
     }
     if (!collapser?.classList?.contains("collapser")) {
       return;
@@ -19,7 +19,7 @@ export function installCollapseEventListeners() {
 
     let collapsible = collapser;
     while (collapsible && !collapsible.classList?.contains("collapsible")) {
-      collapsible = collapsible.nextSibling;
+      collapsible = collapsible.nextSibling as Element;
     }
     collapsible.classList.toggle("collapsed");
   }

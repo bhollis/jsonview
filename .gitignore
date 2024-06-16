@@ -3,5 +3,6 @@
 .tern-port
 /ts-out
 /build
+/build-*
 /node_modules
 

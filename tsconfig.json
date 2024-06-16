@@ -5,17 +5,15 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "module": "ESNext",
-    "target": "es6",
-    "moduleResolution": "node",
+    "module": "ES2020",
+    "target": "ES2020",
+    "moduleResolution": "bundler",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
     "checkJs": true,
-    "typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
+    "typeRoots": ["node_modules/@types", "node_modules/web-ext-types", "node_modules/@types/chrome"]
   },
-  "include": [
-    "./src/*.ts"
-  ]
+  "include": ["./src/*.ts"]
 }
