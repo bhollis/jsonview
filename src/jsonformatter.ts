@@ -58,10 +58,12 @@ function jsString(s: string): string {
 }
 
 /**
- * Is this a valid "bare" property name?
+ * Is this a valid "bare" property name (e.g. a JS identifier name or a numeric
+ * literal)? See https://mathiasbynens.be/notes/javascript-properties, though we
+ * only support a subset of valid identifier names (no weird Unicode stuff).
  */
 function isBareProp(prop: string): boolean {
-  return /^[A-Za-z_$][A-Za-z0-9_\-$]*$/.test(prop);
+  return /^([0-9]+|[A-Za-z_$][A-Za-z0-9_$]*)$/.test(prop);
 }
 
 /**
