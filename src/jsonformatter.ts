@@ -74,7 +74,7 @@ function decorateWithSpan(value: any, className: string) {
 }
 
 // Convert a basic JSON datatype (number, string, boolean, null, object, array) into an HTML fragment.
-function valueToHTML(value: any, path: string, indent: number) {
+export function valueToHTML(value: any, path: string, indent: number) {
   if (value === null) {
     return decorateWithSpan("null", "null");
   } else if (Array.isArray(value)) {
@@ -89,8 +89,8 @@ function valueToHTML(value: any, path: string, indent: number) {
     case "boolean":
       return decorateWithSpan(value, "bool");
     case "string":
-      if (value.charCodeAt(0) === 8203 && !isNaN(parseInt(value.slice(1), 10))) {
-        return decorateWithSpan(parseInt(value.slice(1), 10), "num");
+      if (value.charCodeAt(0) === 8203 /* zero-width space */ && !isNaN(Number(value.slice(1)))) {
+        return decorateWithSpan(Number(value.slice(1)), "num");
       } else if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
         return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(
           value
