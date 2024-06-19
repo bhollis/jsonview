@@ -1,3 +1,7 @@
+## JSONView 3.0.1
+
+- Fixed a regression where floating-point numbers were truncated to integers.
+
 ## JSONView 3.0.0
 
 - JSONView is now compatible with Manifest V3, which is required in Chrome.

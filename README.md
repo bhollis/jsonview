@@ -5,6 +5,7 @@
 - [Install for Firefox](https://addons.mozilla.org/en-US/firefox/addon/jsonview/)
 - [Install for Chrome](https://chrome.google.com/webstore/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd)
 - [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/jsonview/kmpfgkgaimakokfhgdahhiaaiidiphco)
+- There is no version for Safari because it costs $100/year to publish a free extension to the Mac App Store.
 
 Normally, when encountering a [JSON](http://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
 
@@ -49,3 +50,7 @@ pnpm start
 ```
 
 `jsonview-chrome.zip` and `jsonview-firefox.zip` can then be manually uploaded to the extension sites.
+
+- Chrome: https://chrome.google.com/webstore/devconsole/
+- Firefox: https://addons.mozilla.org/en-US/developers/addons
+- Edge: https://partner.microsoft.com/en-us/dashboard/microsoftedge/overview
