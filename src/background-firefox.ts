@@ -26,7 +26,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
       if (typeof browser !== "undefined" && "filterResponseData" in browser.webRequest) {
         // We need to change the content type to text/plain to prevent Firefox
         // from using its built-in JSON viewer.
-        header.value = "text/plain";
+        header.value = "text/plain; charset=UTF-8";
       }
     }
   }
