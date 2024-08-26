@@ -1,3 +1,7 @@
+## JSONView 3.0.2
+
+- Fixed a regression in Firefox where JSON not served as UTF-8 (which is technically invalid) caused ugly characters to display in the formatted JSON.
+
 ## JSONView 3.0.1
 
 - Fixed a regression where floating-point numbers were truncated to integers.

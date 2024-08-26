@@ -1,6 +1,6 @@
 {
   "id": "jsonview@brh.numbera.com",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "name": "jsonview",
   "title": "JSONView",
   "description": "View JSON documents in the browser.",
