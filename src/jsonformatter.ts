@@ -217,6 +217,7 @@ function toHTML(content: string, title: string) {
   return `<!DOCTYPE html>
 <html><head><title>${htmlEncode(title)}</title>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" type="text/css" href="${chrome.runtime.getURL("viewer.css")}">
 </head><body>
 ${content}
