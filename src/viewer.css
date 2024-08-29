@@ -187,3 +187,7 @@ h1 {
   display: inline-block;
   width: 0px;
 }
+
+.string, :any-link {
+  word-break: break-all;
+}
