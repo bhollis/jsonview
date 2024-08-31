@@ -191,3 +191,7 @@ h1 {
 .string, :any-link {
   word-break: break-all;
 }
+
+:is(.spacer, :not(.quoted) > .q)::selection {
+  background-color: transparent;
+}
