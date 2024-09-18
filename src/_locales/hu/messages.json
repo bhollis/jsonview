@@ -8,7 +8,7 @@
     "description": "Longer description for the extension in the stores."
   },
   "errorParsing": {
-    "message": "Hiba keletkezett a JSON dkumentum feldolgozása közben. Lehetséges, hogy a dokumentum nincs jól formázva.",
+    "message": "Hiba keletkezett a JSON dokumentum feldolgozása közben. Lehetséges, hogy a dokumentum nincs jól formázva.",
     "description": "The message shown when there was an error parsing your JSON"
   }
 }
