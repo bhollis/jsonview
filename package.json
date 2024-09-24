@@ -127,7 +127,7 @@
     "globals": "^15.4.0",
     "http-server": "^14.1.1",
     "npm-watch": "^0.13.0",
-    "rollup": "^4.18.0",
+    "rollup": "^4.22.4",
     "typescript": "^5.0.4",
     "typescript-eslint": "^7.13.0",
     "web-ext-types": "^3.2.1"
