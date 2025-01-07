@@ -16,6 +16,12 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
   if (!event.responseHeaders || isRedirect(event.statusCode)) {
     return;
   }
+
+  if (event.tabId == -1) {
+    console.log("Ignoring response with application/json content-type because tabId == -1:", event.url);
+    return {};
+  }
+
   for (const header of event.responseHeaders) {
     if (
       header.name.toLowerCase() === "content-type" &&
