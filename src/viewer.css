@@ -11,7 +11,7 @@ body {
 }
 
 .null {
-  color: #A52A2A;
+  color: #a52a2a;
 }
 
 .bool {
@@ -30,10 +30,10 @@ body {
 .collapser {
   position: absolute;
   left: -1em;
-  top: -.2em;
+  top: -0.2em;
   cursor: pointer;
   transform: rotate(90deg);
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .collapser:before {
@@ -53,7 +53,7 @@ body {
 .collapsible.collapsed:before {
   content: "…";
   width: 1em;
-  margin-left: .2em;
+  margin-left: 0.2em;
 }
 
 .collapser.collapsed {
@@ -81,12 +81,12 @@ li {
   border-bottom: 1px solid rgb(212, 209, 209);
   background-color: rgb(239, 239, 239);
   margin-bottom: 1.5em;
-  padding: 1em .5em;
+  padding: 1em 0.5em;
 }
 
 .errormessage {
   font-family: monospace;
-  margin-top: .5em;
+  margin-top: 0.5em;
   color: rgb(167, 5, 5);
 }
 
@@ -96,14 +96,14 @@ li {
 }
 
 .errorline {
-    background-color: rgb(255, 226, 226);
+  background-color: rgb(255, 226, 226);
 }
 
 #json {
   font-family: monospace;
   font-size: 1.1em;
   white-space: pre-wrap;
-  margin: .5em;
+  margin: 0.5em;
 }
 
 ul {
@@ -123,14 +123,14 @@ h1 {
 
 .callback {
   font-family: monospace;
-  color: #A52A2A;
+  color: #a52a2a;
 }
 
 /* Tomorrow Night theme */
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #27292C;
-    color: #D7DAD8;
+    background-color: #27292c;
+    color: #d7dad8;
   }
 
   a {
@@ -141,35 +141,35 @@ h1 {
   }
 
   .bool {
-    color: #92B2CA;
+    color: #92b2ca;
   }
 
   .num {
-    color: #92B2CA;
+    color: #92b2ca;
   }
 
   .null {
-    color: #D77C78;
+    color: #d77c78;
   }
 
   .callback {
-    color: #D77C78;
+    color: #d77c78;
   }
 
   .string {
-    color: #C2C77B;
+    color: #c2c77b;
   }
 
   #error {
     border-bottom: 1px solid rgb(61, 61, 61);
     background-color: rgb(37, 37, 37);
     margin-bottom: 1.5em;
-    padding: 1em .5em;
+    padding: 1em 0.5em;
   }
 
   .errormessage {
     font-family: monospace;
-    margin-top: .5em;
+    margin-top: 0.5em;
     color: rgb(212, 10, 10);
   }
 
@@ -179,7 +179,7 @@ h1 {
   }
 
   .errorline {
-      background-color: rgb(32, 29, 29);
+    background-color: rgb(32, 29, 29);
   }
 }
 
@@ -188,10 +188,13 @@ h1 {
   width: 0px;
 }
 
-.string, :any-link {
+/* Allow long URLs to break */
+.string,
+:any-link {
   word-break: break-all;
 }
 
+/* Prevent double-highlighting of spacers */
 :is(.spacer, :not(.quoted) > .q)::selection {
   background-color: transparent;
 }

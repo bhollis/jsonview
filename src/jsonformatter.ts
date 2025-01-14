@@ -93,7 +93,7 @@ export function valueToHTML(value: any, path: string, indent: number) {
         return decorateWithSpan(Number(value.slice(1)), "num");
       } else if (/^(http|https|file):\/\/[^\s]+$/i.test(value)) {
         return `<a href="${htmlEncode(value)}"><span class="q">&quot;</span>${jsString(
-          value
+          value,
         )}<span class="q">&quot;</span></a>`;
       } else {
         return `<span class="string">&quot;${jsString(value)}&quot;</span>`;
@@ -148,7 +148,7 @@ function objectToHTML(json: Record<string, unknown>, path: string, indent: numbe
     output += `<li>${addIndent(indent + 1)}<span class="prop${
       bare ? "" : " quoted"
     }" title="${htmlEncode(subPath)}"><span class="q">&quot;</span>${jsString(
-      prop
+      prop,
     )}<span class="q">&quot;</span></span>: ${valueToHTML(json[prop], subPath, indent + 1)}`;
     if (numProps > 1) {
       output += ",";
@@ -158,7 +158,7 @@ function objectToHTML(json: Record<string, unknown>, path: string, indent: numbe
   }
 
   return `<span class="collapser"></span>{<ul class="obj collapsible">${output}</ul>${addIndent(
-    indent
+    indent,
   )}}`;
 }
 
@@ -199,9 +199,9 @@ function highlightError(data: string, lineNum?: number, columnNum?: number) {
     if (i === lineNum - 1) {
       output += '<span class="errorline">';
       output += `${htmlEncode(
-        line.substring(0, columnNum - 1)
+        line.substring(0, columnNum - 1),
       )}<span class="errorcolumn">${htmlEncode(line[columnNum - 1])}</span>${htmlEncode(
-        line.substring(columnNum)
+        line.substring(columnNum),
       )}`;
       output += "</span>";
     } else {
