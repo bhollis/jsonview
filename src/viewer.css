@@ -43,6 +43,7 @@ body {
 
 .collapsible.collapsed {
   height: 1.2em;
+  height: 1lh;
   width: 1em;
   display: inline-block;
   overflow: hidden;
@@ -185,4 +186,12 @@ h1 {
 .spacer {
   display: inline-block;
   width: 0px;
+}
+
+.string, :any-link {
+  word-break: break-all;
+}
+
+:is(.spacer, :not(.quoted) > .q)::selection {
+  background-color: transparent;
 }
