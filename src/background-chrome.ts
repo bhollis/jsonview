@@ -13,7 +13,7 @@ function isRedirect(status: number) {
 }
 
 function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
-  if (!event.responseHeaders || isRedirect(event.statusCode)) {
+  if (!event.responseHeaders || event.type !== "main_frame" || isRedirect(event.statusCode)) {
     return;
   }
   for (const header of event.responseHeaders) {
@@ -34,7 +34,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
 chrome.webRequest.onHeadersReceived.addListener(
   detectJSON,
   { urls: ["<all_urls>"], types: ["main_frame"] },
-  ["responseHeaders"]
+  ["responseHeaders"],
 );
 
 // Listen for a message from the content script to decide whether to operate on

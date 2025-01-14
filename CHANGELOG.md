@@ -1,3 +1,7 @@
+## JSONView 3.1.0
+
+- Restricted JSONView to only act on main frame loads - this should prevent it from doing weird things to pages loaded in frames or via fetch/XHR. This should fix reported issues of JSONView causing trouble on Sharepoint sites.
+
 ## JSONView 3.0.2
 
 - Fixed a regression in Firefox where JSON not served as UTF-8 (which is technically invalid) caused ugly characters to display in the formatted JSON.

@@ -32,6 +32,7 @@ Before contributing to JSONView, make sure to read the [Contributing Guidelines]
 - Run `pnpm start` to build the extension.
 - In Firefox, go to `about:debugging#addons` in the address bar, check "Enable add-on debugging", select "Load Temporary Add-on", and choose the `jsonview/build-firefox/manifest.json` file.
 - In Chrome, Edge, etc., go to `edge://extensions/`, in the address bar, enable "Developer mode", select "Load Unpacked", and choose the `jsonview/build-chrome` folder.
+- Run `pnpm tests` to start a little webserver that serves all the JSON files in `./tests`.
 
 JSONView makes use of [TypeScript](https://www.typescriptlang.org/). I recommend [VSCode](https://code.visualstudio.com/) for editing the code - it will automatically prompt to install the correct extensions, and will highlight errors. All of the code that makes up the extension itself are in `src/`.
 
