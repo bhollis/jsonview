@@ -27,8 +27,8 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
         // We need to change the content type to text/plain to prevent Firefox
         // from using its built-in JSON viewer.
         header.value = "text/plain; charset=UTF-8";
-        break;
       }
+      break;
     }
   }
 
@@ -40,7 +40,7 @@ chrome.webRequest.onHeadersReceived.addListener(
   detectJSON,
   // Firefox cannot fire onHeadersReceived for local files.
   { urls: ["<all_urls>"], types: ["main_frame"] },
-  ["blocking", "responseHeaders"]
+  ["blocking", "responseHeaders"],
 );
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
