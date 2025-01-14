@@ -23,6 +23,7 @@ function detectJSON(event: chrome.webRequest.WebResponseHeadersDetails) {
       isJSONContentType(header.value)
     ) {
       addJsonUrl(event.url);
+      break;
     }
   }
 
