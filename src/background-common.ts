@@ -15,17 +15,28 @@ export function isEventJSON(
   ) {
     return undefined;
   }
+  let contentTypeHeader: chrome.webRequest.HttpHeader | undefined = undefined;
   for (const header of event.responseHeaders) {
-    if (
-      header.name.toLowerCase() === "content-type" &&
-      header.value &&
-      isJSONContentType(header.value)
-    ) {
-      return header;
+    if (header.name.toLowerCase() === "content-type") {
+      if (header.value && isJSONContentType(header.value)) {
+        // It's JSON, but it might be a Sharepoint page which is not actually
+        // JSON. So save it, but don't return yet.
+        contentTypeHeader = header;
+      } else {
+        // It's not JSON
+        return undefined;
+      }
+    } else if (header.name.toLowerCase() === "microsoftsharepointteamservices") {
+      // This is a Sharepoint page. Sharepoint's service worker will fetch JSON
+      // page contents and turn it into HTML, but fails to change the
+      // content-type of the response to be text/html. We must special case this
+      // or else Sharepoint pages will be treated as JSON. See
+      // https://github.com/bhollis/jsonview/issues/210
+      return undefined;
     }
   }
 
-  return undefined;
+  return contentTypeHeader;
 }
 
 // Install a message listener that listens for messages from the content script.

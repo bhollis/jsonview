@@ -35,7 +35,7 @@ chrome.runtime.sendMessage("jsonview-is-json", (response: boolean) => {
       outputDoc = errorPage(
         e instanceof Error ? e : typeof e === "string" ? new Error(e) : new Error("Unknown error"),
         content,
-        document.URL
+        document.URL,
       );
     }
   }
