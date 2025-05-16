@@ -81,6 +81,7 @@ export function valueToHTML(value: any, path: string, indent: number) {
     return arrayToHTML(value, path, indent);
   }
 
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
   switch (typeof value) {
     case "object":
       return objectToHTML(value as Record<string, unknown>, path, indent);
