@@ -1,3 +1,7 @@
+## JSONView 3.2.0
+
+- Added a specific workaround for Microsoft SharePoint sites, which say they are returning JSON when they are really returning HTML from their service worker.
+
 ## JSONView 3.1.0
 
 - Restricted JSONView to only act on main frame loads - this should prevent it from doing weird things to pages loaded in frames or via fetch/XHR. This should fix reported issues of JSONView causing trouble on Sharepoint sites.
