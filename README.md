@@ -1,15 +1,15 @@
 # JSONView
 
-[JSONView](http://jsonview.com) is a Web extension compatible with Firefox and Google Chrome that helps you view JSON documents in the browser.
+[JSONView](https://jsonview.com) is a Web extension compatible with Firefox and Google Chrome that helps you view JSON documents in the browser.
 
 - [Install for Firefox](https://addons.mozilla.org/en-US/firefox/addon/jsonview/)
-- [Install for Chrome](https://chrome.google.com/webstore/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd)
+- [Install for Chrome](https://chromewebstore.google.com/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd)
 - [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/jsonview/kmpfgkgaimakokfhgdahhiaaiidiphco)
 - There is no version for Safari because it costs $100/year to publish a free extension to the Mac App Store.
 
-Normally, when encountering a [JSON](http://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
+Normally, when encountering a [JSON](https://json.org) document (content type `application/json`), Firefox simply prompts you to download the view. With the JSONView extension, JSON documents are shown in the browser similar to how XML documents are shown. The document is formatted, highlighted, and arrays and objects can be collapsed. Even if the JSON document contains errors, JSONView will still show the raw text.
 
-Once you've got JSONView installed, check out [this example JSON file](http://jsonview.com/example.json) to see the extension in action!
+Once you've got JSONView installed, check out [this example JSON file](https://jsonview.com/example.json) to see the extension in action!
 
 If you'd like to contribute to JSONView but don't want to code, consider contributing a translation. Copy the existing localization files from `src/_locale` and fill them in for your own language, then send a pull request. You can do it all from the GitHub interface. There are not many strings to translate!
 
